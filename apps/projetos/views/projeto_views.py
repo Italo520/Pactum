@@ -37,7 +37,7 @@ class ProjetoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return reverse_lazy('projetos:projeto_detail', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
-        form.instance.created_by = self.request.user
+        # Remove created_by pois não existe no modelo
         return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -58,7 +58,7 @@ class ProjetoUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SuccessMess
         return reverse_lazy('projetos:projeto_detail', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
-        form.instance.updated_by = self.request.user
+        # Remove updated_by pois não existe no modelo
         return super().form_valid(form)
 
     def form_invalid(self, form):

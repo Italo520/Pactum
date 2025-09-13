@@ -1,8 +1,9 @@
 <!-- templates/base/navbar.html -->
-<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background: linear-gradient(135deg, #089561 0%, #17BB94 100%);">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'dashboard:index' %}">
-            <i class="fas fa-building me-2"></i>
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'dashboard:index' %}">
+            <img src="{% static 'img/logo_funetec.jpg' %}" alt="FUNETEC" height="40" class="me-2" style="border-radius: 8px;">
             FUNETEC
         </a>
         

@@ -29,17 +29,59 @@ class ItemContratoCreateView(LoginRequiredMixin, CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         self.contrato = get_object_or_404(Contrato, pk=self.kwargs['contrato_pk'])
-        projeto = self.contrato.cod_ordem.cod_requisicao.cod_projeto
         
-        if not projeto.marcos.filter(status='aprovado').exists():
+        # Verificar se existe uma cadeia completa de relacionamentos
+        if not hasattr(self.contrato, 'cod_ordem') or not self.contrato.cod_ordem:
+            messages.error(request, "Contrato não possui ordem associada.")
+            return redirect('contratos:contrato_detail', pk=self.contrato.pk)
+            
+        if not hasattr(self.contrato.cod_ordem, 'cod_requisicao') or not self.contrato.cod_ordem.cod_requisicao:
+            messages.warning(request, "Ordem não possui requisição associada. Prosseguindo sem validação de marcos.")
+            return super().dispatch(request, *args, **kwargs)
+            
+        if not hasattr(self.contrato.cod_ordem.cod_requisicao, 'cod_projeto') or not self.contrato.cod_ordem.cod_requisicao.cod_projeto:
+            messages.warning(request, "Requisição não possui projeto associado. Prosseguindo sem validação de marcos.")
+            return super().dispatch(request, *args, **kwargs)
+            
+        projeto = self.contrato.cod_ordem.cod_requisicao.cod_projeto
+        if hasattr(projeto, 'marcos') and not projeto.marcos.filter(status='aprovado').exists():
             messages.error(request, "Não é possível criar parcelas sem um marco de projeto aprovado.")
             return redirect('contratos:contrato_detail', pk=self.contrato.pk)
             
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
+        from django.db import models, transaction
+        from ..models.item_contrato import ItemContrato
+        from django.utils import timezone
+        from django.db import IntegrityError
+        
+        # Definir o contrato
         form.instance.num_contrato = self.contrato
-        return super().form_valid(form)
+        form.instance.data_lancamento = timezone.now().date()
+        
+        # Usar transação para evitar condições de corrida
+        with transaction.atomic():
+            # Buscar valores com lock por contrato (não global)
+            itens_contrato = ItemContrato.objects.select_for_update().filter(num_contrato=self.contrato)
+            
+            # Calcular cod_lancamento baseado no contrato específico
+            ultimo_cod = itens_contrato.aggregate(max_cod=models.Max('cod_lancamento'))['max_cod']
+            form.instance.cod_lancamento = (ultimo_cod or 0) + 1
+            
+            # Calcular num_parcela baseado nas parcelas existentes do contrato
+            parcelas_existentes = itens_contrato.count()
+            form.instance.num_parcela = parcelas_existentes + 1
+            
+            try:
+                return super().form_valid(form)
+            except IntegrityError:
+                # Em caso raro de conflito, tentar novamente com novos valores
+                ultimo_cod = itens_contrato.aggregate(max_cod=models.Max('cod_lancamento'))['max_cod']
+                form.instance.cod_lancamento = (ultimo_cod or 0) + 1
+                parcelas_existentes = itens_contrato.count()
+                form.instance.num_parcela = parcelas_existentes + 1
+                return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('contratos:contrato_detail', kwargs={'pk': self.contrato.pk})

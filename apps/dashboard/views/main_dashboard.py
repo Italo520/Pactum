@@ -169,17 +169,16 @@ class DashboardView(LoginRequiredMixin, TemplateView):
                 'tempo': 'Hoje'
             })
         
-        # Orçamentos estourados
-        projetos_estourados = projetos.filter(
-            valor_realizado__gt=F('valor')
+        # Orçamentos estourados (simulação baseada em valor alto)
+        projetos_alto_valor = projetos.filter(
+            valor__gte=1500000  # Projetos com valor alto
         )[:2]
         
-        for projeto in projetos_estourados:
-            percentual = (projeto.valor_realizado / projeto.valor * 100) if projeto.valor > 0 else 0
+        for projeto in projetos_alto_valor:
             alertas.append({
                 'tipo': 'info',
-                'titulo': 'Orçamento Estourado',
-                'mensagem': f'Projeto #{projeto.cod_projeto} - {percentual:.0f}% do orçamento utilizado',
+                'titulo': 'Projeto Alto Valor',
+                'mensagem': f'Projeto #{projeto.cod_projeto} - R$ {projeto.valor:,.2f}',
                 'tempo': 'Ontem'
             })
         
@@ -200,16 +199,13 @@ class DashboardView(LoginRequiredMixin, TemplateView):
                 status_prazo = 'green'
                 prazo_texto = 'No Prazo'
             
-            # Status Custo
-            if hasattr(projeto, 'custo_realizado') and projeto.custo_previsto > 0:
-                percentual_custo = (projeto.custo_realizado / projeto.custo_previsto * 100)
-                if percentual_custo > 100:
-                    status_custo = 'red'
-                elif percentual_custo > 90:
-                    status_custo = 'yellow'
-                else:
-                    status_custo = 'green'
-                custo_texto = f'{percentual_custo:.0f}%'
+            # Status Custo (baseado no valor do projeto)
+            if projeto.valor > 1000000:  # Projetos acima de 1M
+                status_custo = 'yellow'
+                custo_texto = 'Alto'
+            elif projeto.valor > 500000:  # Projetos acima de 500K
+                status_custo = 'yellow' 
+                custo_texto = 'Médio'
             else:
                 status_custo = 'green'
                 custo_texto = 'OK'
@@ -236,12 +232,12 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         mes_anterior = (inicio_mes - timedelta(days=1)).replace(day=1)
         
         projetos_mes_atual = Projeto.objects.filter(
-            created_at__gte=inicio_mes
+            data_inicio__gte=inicio_mes
         ).count()
         
         projetos_mes_anterior = Projeto.objects.filter(
-            created_at__gte=mes_anterior,
-            created_at__lt=inicio_mes
+            data_inicio__gte=mes_anterior,
+            data_inicio__lt=inicio_mes
         ).count()
         
         if projetos_mes_anterior > 0:

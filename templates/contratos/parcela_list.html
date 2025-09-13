@@ -3,13 +3,18 @@
 {% block content %}
 <div class="container mt-4">
     <div class="card">
-        <div class="card-header">
-            <h3>Parcelas do Contrato: {{ contrato.numero }}</h3>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Todas as Parcelas</h3>
+            <a href="{% url 'contratos:contrato_list' %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i>Voltar aos Contratos
+            </a>
         </div>
         <div class="card-body">
+            {% if parcelas %}
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>Contrato</th>
                         <th>Nº da Parcela</th>
                         <th>Data de Vencimento</th>
                         <th>Valor Previsto</th>
@@ -21,29 +26,44 @@
                 <tbody>
                     {% for parcela in parcelas %}
                     <tr>
-                        <td>{{ parcela.numero_parcela }}</td>
-                        <td>{{ parcela.data_vencimento|date:"d/m/Y" }}</td>
-                        <td>R$ {{ parcela.valor_previsto }}</td>
-                        <td>R$ {{ parcela.valor_pago|default:"0.00" }}</td>
-                        <td><span class="badge bg-warning">{{ parcela.get_status_display }}</span></td>
                         <td>
-                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalPagamento-{{ parcela.id }}">
-                                Registrar Pagamento
-                            </button>
+                            <a href="{% url 'contratos:contrato_detail' parcela.num_contrato.pk %}" class="text-decoration-none">
+                                {{ parcela.num_contrato.num_contrato }}
+                            </a>
+                        </td>
+                        <td>{{ parcela.cod_lancamento }}</td>
+                        <td>{{ parcela.data_vencimento|date:"d/m/Y" }}</td>
+                        <td>R$ {{ parcela.valor_previsto|floatformat:2 }}</td>
+                        <td>R$ {{ parcela.valor_pago|default:"0.00"|floatformat:2 }}</td>
+                        <td>
+                            <span class="badge bg-{% if parcela.valor_pago %}success{% else %}warning{% endif %}">
+                                {% if parcela.valor_pago %}Pago{% else %}Pendente{% endif %}
+                            </span>
+                        </td>
+                        <td>
+                            {% if not parcela.valor_pago %}
+                            <a href="{% url 'contratos:registrar-pagamento' parcela.pk %}" class="btn btn-success btn-sm">
+                                <i class="fas fa-money-bill me-1"></i>Registrar Pagamento
+                            </a>
+                            {% else %}
+                            <span class="text-success">
+                                <i class="fas fa-check-circle me-1"></i>Pago
+                            </span>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
-        <div class="card-footer">
-             <a href="{% url 'contratos:contrato_detail' contrato.pk %}" class="btn btn-secondary">Voltar ao Contrato</a>
+            {% else %}
+            <div class="text-center py-4">
+                <i class="fas fa-receipt fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Nenhuma parcela encontrada</h5>
+                <p class="text-muted">Não há parcelas cadastradas no sistema.</p>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
-
-{% for parcela in parcelas %}
-    {% include 'contratos/partials/modal_pagamento.html' with parcela=parcela %}
-{% endfor %}
 
 {% endblock %}

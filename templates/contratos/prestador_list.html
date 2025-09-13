@@ -5,7 +5,9 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h2>Prestadores de Serviço</h2>
-            <a href="#" class="btn btn-success">Cadastrar Novo Prestador</a>
+            <a href="{% url 'contratos:prestador_create' %}" class="btn btn-success">
+                <i class="fas fa-plus me-2"></i>Cadastrar Novo Prestador
+            </a>
         </div>
         <div class="card-body">
             <table class="table table-striped">
@@ -22,11 +24,13 @@
                     {% for p in prestadores %}
                     <tr>
                         <td>{{ p.nome }}</td>
-                        <td>{{ p.cpf_cnpj }}</td>
+                        <td>{{ p.cpf|default:p.cnpj|default:"-" }}</td>
                         <td>{{ p.get_tipo_pessoa_display }}</td>
                         <td><span class="badge bg-success">Ativo</span></td>
                         <td>
-                            <a href="{% url 'contratos:prestador_detail' p.pk %}" class="btn btn-info btn-sm">Ver Detalhes</a>
+                            <a href="{% url 'contratos:prestador_detail' p.pk %}" class="btn btn-info btn-sm">
+                                <i class="fas fa-eye me-1"></i>Ver Detalhes
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}

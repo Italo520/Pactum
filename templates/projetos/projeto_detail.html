@@ -23,16 +23,13 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
-                <p><strong>Código:</strong> #{{ projeto.codProjeto }}</p>
-                <p><strong>Responsável:</strong> {{ projeto.responsavel.get_full_name|default:projeto.responsavel.username }}</p>
+                <p><strong>Código:</strong> #{{ projeto.cod_projeto }}</p>
                 <p><strong>Situação:</strong> <span class="badge bg-primary">{{ projeto.get_situacao_display }}</span></p>
             </div>
             <div class="col-md-6">
                 <p><strong>Data de Início:</strong> {{ projeto.data_inicio|date:"d/m/Y" }}</p>
                 <p><strong>Data de Encerramento:</strong> {{ projeto.data_encerramento|date:"d/m/Y" }}</p>
                 <p><strong>Valor Orçado:</strong> R$ {{ projeto.valor|floatformat:2 }}</p>
-                <p><strong>Custo Previsto:</strong> R$ {{ projeto.custo_previsto|floatformat:2 }}</p>
-                <p><strong>Custo Realizado:</strong> R$ {{ projeto.custo_realizado|floatformat:2 }}</p>
             </div>
         </div>
         

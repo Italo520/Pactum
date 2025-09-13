@@ -19,6 +19,25 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ['*']  # Allow all hosts for Replit proxy
 
+# CSRF Settings for Replit
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.replit.dev',
+    'https://*.replit.app',
+    'https://*.replit.co',
+    'https://4d50ff18-fea4-4879-b827-f71b763009b9-00-28wrtx6r4yw5s.picard.replit.dev',
+]
+
+# Get Replit domain from environment
+REPLIT_DOMAIN = os.getenv('REPLIT_DEV_DOMAIN')
+if REPLIT_DOMAIN:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{REPLIT_DOMAIN}')
+
+# Additional CSRF settings for Replit
+CSRF_COOKIE_SECURE = False  # Replit handles HTTPS
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SECURE = False  # Replit handles HTTPS
+SESSION_COOKIE_SAMESITE = 'Lax'
+
 # Application definition
 DJANGO_APPS = [
     'django.contrib.admin',

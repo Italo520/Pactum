@@ -4,7 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from ..models.contrato import Contrato
-from ..forms.contrato_forms import ContratoForm
+from ..models.prestador import Prestador
+from ..forms.contrato_forms import ContratoForm, PrestadorForm
 from apps.projetos.models.ordem import Ordem
 
 
@@ -58,19 +59,35 @@ class ContratoUpdateView(LoginRequiredMixin, UpdateView):
 
 
 # Temporarily commented out until Prestador model is created
-# class PrestadorListView(LoginRequiredMixin, ListView):
-#     model = Prestador
-#     template_name = 'contratos/prestador_list.html'
-#     context_object_name = 'prestadores'
-#     paginate_by = 10
+class PrestadorListView(LoginRequiredMixin, ListView):
+    model = Prestador
+    template_name = 'contratos/prestador_list.html'
+    context_object_name = 'prestadores'
+    paginate_by = 10
 
-# class PrestadorDetailView(LoginRequiredMixin, DetailView):
-#     model = Prestador
-#     template_name = 'contratos/prestador_detail.html'
-#     context_object_name = 'prestador'
+class PrestadorCreateView(LoginRequiredMixin, CreateView):
+    model = Prestador
+    form_class = PrestadorForm
+    template_name = 'contratos/prestador_form.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('contratos:prestador_list')
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         prestador = self.get_object()
-#         # context['contratos'] = Contrato.objects.filter(cpf_cnpj=prestador.cpf_cnpj)  # Temporarily disabled
-#         return context
+class PrestadorUpdateView(LoginRequiredMixin, UpdateView):
+    model = Prestador
+    form_class = PrestadorForm
+    template_name = 'contratos/prestador_form.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('contratos:prestador_detail', kwargs={'pk': self.object.pk})
+
+class PrestadorDetailView(LoginRequiredMixin, DetailView):
+    model = Prestador
+    template_name = 'contratos/prestador_detail.html'
+    context_object_name = 'prestador'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        prestador = self.get_object()
+        # context['contratos'] = Contrato.objects.filter(cpf_cnpj=prestador.cpf_cnpj)  # Temporarily disabled
+        return context
