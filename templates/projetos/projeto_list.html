@@ -38,7 +38,35 @@
                         </td>
                         <td>#{{ projeto.cod_projeto }}</td>
                         <td>
-                            <span class="badge bg-primary">{{ projeto.get_situacao_display }}</span>
+                            {% if projeto.situacao == '1' %}
+                                <span class="badge bg-secondary">
+                                    <i class="fas fa-clock me-1"></i>{{ projeto.get_situacao_display }}
+                                </span>
+                            {% elif projeto.situacao == '2' %}
+                                <span class="badge bg-primary">
+                                    <i class="fas fa-play me-1"></i>{{ projeto.get_situacao_display }}
+                                </span>
+                            {% elif projeto.situacao == '3' %}
+                                <span class="badge bg-warning">
+                                    <i class="fas fa-pause me-1"></i>{{ projeto.get_situacao_display }}
+                                </span>
+                            {% elif projeto.situacao == '4' %}
+                                <span class="badge bg-info">
+                                    <i class="fas fa-hand me-1"></i>{{ projeto.get_situacao_display }}
+                                </span>
+                            {% elif projeto.situacao == '5' %}
+                                <span class="badge bg-danger">
+                                    <i class="fas fa-times me-1"></i>{{ projeto.get_situacao_display }}
+                                </span>
+                            {% elif projeto.situacao == '6' %}
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check me-1"></i>{{ projeto.get_situacao_display }}
+                                </span>
+                            {% else %}
+                                <span class="badge bg-light text-dark">
+                                    {{ projeto.get_situacao_display }}
+                                </span>
+                            {% endif %}
                         </td>
                         <td>R$ {{ projeto.valor|floatformat:2 }}</td>
                         <td>{{ projeto.data_encerramento|date:"d/m/Y" }}</td>
@@ -71,21 +99,55 @@
             <nav class="mt-4">
                 <ul class="pagination justify-content-center">
                     {% if page_obj.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">Primeira</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                        </li>
                     {% else %}
-                        <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+                        <li class="page-item disabled">
+                            <span class="page-link">Primeira</span>
+                        </li>
+                        <li class="page-item disabled">
+                            <span class="page-link">Anterior</span>
+                        </li>
                     {% endif %}
 
                     {% for i in paginator.page_range %}
-                        <li class="page-item {% if page_obj.number == i %}active{% endif %}">
-                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-                        </li>
+                        {% if forloop.first and i > 1 %}
+                            <li class="page-item disabled">
+                                <span class="page-link">…</span>
+                            </li>
+                        {% endif %}
+                        
+                        {% if i >= page_obj.number|add:"-2" and i <= page_obj.number|add:"2" %}
+                            <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+                                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                            </li>
+                        {% endif %}
+                        
+                        {% if forloop.last and i < paginator.num_pages %}
+                            <li class="page-item disabled">
+                                <span class="page-link">…</span>
+                            </li>
+                        {% endif %}
                     {% endfor %}
                     
                     {% if page_obj.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última</a>
+                        </li>
                     {% else %}
-                        <li class="page-item disabled"><span class="page-link">Próximo</span></li>
+                        <li class="page-item disabled">
+                            <span class="page-link">Próximo</span>
+                        </li>
+                        <li class="page-item disabled">
+                            <span class="page-link">Última</span>
+                        </li>
                     {% endif %}
                 </ul>
             </nav>

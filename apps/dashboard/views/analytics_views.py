@@ -440,8 +440,8 @@ class ContratosAnalyticsService(BaseService):
         return {
             'total_contratos': contratos.count(),
             'valor_total': contratos.aggregate(Sum('valor'))['valor__sum'] or 0,
-            'valor_pago': contratos.aggregate(Sum('valor_pago'))['valor_pago__sum'] or 0,
-            'valor_pendente': contratos.aggregate(Sum('valor_pendente'))['valor_pendente__sum'] or 0,
+            'valor_pago': 0,
+            'valor_pendente': 0,
             'contratos_pf': contratos.filter(tipo_pessoa=1).count(),
             'contratos_pj': contratos.filter(tipo_pessoa=2).count(),
             'ticket_medio': contratos.aggregate(Avg('valor'))['valor__avg'] or 0,
@@ -453,8 +453,7 @@ class ContratosAnalyticsService(BaseService):
             'contratado', 'cpf_cnpj'
         ).annotate(
             total_contratos=Count('num_contrato'),
-            valor_total=Sum('valor'),
-            valor_pago=Sum('valor_pago')
+            valor_total=Sum('valor')
         ).order_by('-valor_total')[:10]
     
     def get_analise_pagamentos(self):
