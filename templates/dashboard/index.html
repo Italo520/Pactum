@@ -20,6 +20,17 @@
     .metric-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        cursor: pointer;
+    }
+
+    /* Estilo para links dos cartões */
+    a.text-decoration-none:hover .metric-card {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    a.text-decoration-none .metric-card * {
+        color: inherit !important;
     }
 
     .metric-value {
@@ -65,68 +76,76 @@
 {% block content %}
 <!-- KPIs Principais -->
 <div class="kpi-grid">
-    <div class="metric-card">
-        <div class="d-flex justify-content-between align-items-start">
-            <div>
-                <div class="text-muted small text-uppercase">Projetos Ativos</div>
-                <div class="metric-value">{{ kpis.projetos_ativos }}</div>
-                {% if kpis.projetos_crescimento > 0 %}
-                <small class="text-success">
-                    <i class="fas fa-arrow-up"></i> {{ kpis.projetos_crescimento }}% este mês
-                </small>
-                {% else %}
-                <small class="text-danger">
-                    <i class="fas fa-arrow-down"></i> {{ kpis.projetos_crescimento|floatformat:0 }}% este mês
-                </small>
-                {% endif %}
-            </div>
-            <i class="fas fa-project-diagram fa-3x text-primary opacity-25"></i>
-        </div>
-    </div>
-
-    <div class="metric-card">
-        <div class="d-flex justify-content-between align-items-start">
-            <div>
-                <div class="text-muted small text-uppercase">Contratos PF</div>
-                <div class="metric-value">{{ kpis.contratos_pf_total }}</div>
-                <div class="mt-2">
-                    <span class="status-badge status-green">{{ kpis.contratos_pf_ativos }} Ativos</span>
-                    <span class="status-badge status-yellow">{{ kpis.contratos_pf_pendentes }} Pendentes</span>
-                </div>
-            </div>
-            <i class="fas fa-user-tie fa-3x text-info opacity-25"></i>
-        </div>
-    </div>
-
-    <div class="metric-card">
-        <div class="d-flex justify-content-between align-items-start">
-            <div>
-                <div class="text-muted small text-uppercase">Contratos PJ</div>
-                <div class="metric-value">{{ kpis.contratos_pj_total }}</div>
-                <div class="mt-2">
-                    <span class="status-badge status-green">{{ kpis.contratos_pj_ativos }} Ativos</span>
-                    {% if kpis.contratos_pj_vencidos > 0 %}
-                    <span class="status-badge status-red">{{ kpis.contratos_pj_vencidos }} Vencidos</span>
+    <a href="{% url 'projetos:projeto_list' %}" class="text-decoration-none">
+        <div class="metric-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="text-muted small text-uppercase">Projetos Ativos</div>
+                    <div class="metric-value">{{ kpis.projetos_ativos }}</div>
+                    {% if kpis.projetos_crescimento > 0 %}
+                    <small class="text-success">
+                        <i class="fas fa-arrow-up"></i> {{ kpis.projetos_crescimento }}% este mês
+                    </small>
+                    {% else %}
+                    <small class="text-danger">
+                        <i class="fas fa-arrow-down"></i> {{ kpis.projetos_crescimento|floatformat:0 }}% este mês
+                    </small>
                     {% endif %}
                 </div>
+                <i class="fas fa-project-diagram fa-3x text-primary opacity-25"></i>
             </div>
-            <i class="fas fa-building fa-3x text-primary opacity-25"></i>
         </div>
-    </div>
+    </a>
 
-    <div class="metric-card {% if kpis.percentual_inadimplencia > 20 %}pulse{% endif %}">
-        <div class="d-flex justify-content-between align-items-start">
-            <div>
-                <div class="text-muted small text-uppercase">Inadimplência</div>
-                <div class="metric-value text-danger">R$ {{ kpis.valor_inadimplencia|floatformat:2 }}</div>
-                <div class="progress mt-2" style="height: 10px;">
-                    <div class="progress-bar bg-danger" style="width: {{ kpis.percentual_inadimplencia }}%"></div>
+    <a href="{% url 'contratos:contrato_list' %}?tipo_pessoa=1" class="text-decoration-none">
+        <div class="metric-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="text-muted small text-uppercase">Contratos PF</div>
+                    <div class="metric-value">{{ kpis.contratos_pf_total }}</div>
+                    <div class="mt-2">
+                        <span class="status-badge status-green">{{ kpis.contratos_pf_ativos }} Ativos</span>
+                        <span class="status-badge status-yellow">{{ kpis.contratos_pf_pendentes }} Pendentes</span>
+                    </div>
                 </div>
-                <small class="text-muted">{{ kpis.percentual_inadimplencia|floatformat:1 }}% do total</small>
+                <i class="fas fa-user-tie fa-3x text-info opacity-25"></i>
             </div>
-            <i class="fas fa-exclamation-triangle fa-3x text-warning opacity-25"></i>
         </div>
-    </div>
+    </a>
+
+    <a href="{% url 'contratos:contrato_list' %}?tipo_pessoa=2" class="text-decoration-none">
+        <div class="metric-card">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="text-muted small text-uppercase">Contratos PJ</div>
+                    <div class="metric-value">{{ kpis.contratos_pj_total }}</div>
+                    <div class="mt-2">
+                        <span class="status-badge status-green">{{ kpis.contratos_pj_ativos }} Ativos</span>
+                        {% if kpis.contratos_pj_vencidos > 0 %}
+                        <span class="status-badge status-red">{{ kpis.contratos_pj_vencidos }} Vencidos</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <i class="fas fa-building fa-3x text-primary opacity-25"></i>
+            </div>
+        </div>
+    </a>
+
+    <a href="{% url 'contratos:contrato_list' %}?inadimplencia=true" class="text-decoration-none">
+        <div class="metric-card {% if kpis.percentual_inadimplencia > 20 %}pulse{% endif %}">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="text-muted small text-uppercase">Inadimplência</div>
+                    <div class="metric-value text-danger">R$ {{ kpis.valor_inadimplencia|floatformat:2 }}</div>
+                    <div class="progress mt-2" style="height: 10px;">
+                        <div class="progress-bar bg-danger" style="width: {{ kpis.percentual_inadimplencia }}%"></div>
+                    </div>
+                    <small class="text-muted">{{ kpis.percentual_inadimplencia|floatformat:1 }}% do total</small>
+                </div>
+                <i class="fas fa-exclamation-triangle fa-3x text-warning opacity-25"></i>
+            </div>
+        </div>
+    </a>
 </div>
 
 <!-- Gráficos -->

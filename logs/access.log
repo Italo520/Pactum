@@ -9831,3 +9831,181 @@ INFO 2025-09-13 04:36:53,423 basehttp 22795 140520560862912 "GET /static/img/log
 INFO 2025-09-13 04:36:53,560 basehttp 22795 140520560862912 "GET /static/js/base.js HTTP/1.1" 200 5844
 WARNING 2025-09-13 04:36:54,002 log 22795 140520560862912 Not Found: /favicon.ico
 WARNING 2025-09-13 04:36:54,003 basehttp 22795 140520560862912 "GET /favicon.ico HTTP/1.1" 404 3401
+ERROR 2025-09-13 04:37:02,854 log 22864 140570542554304 Internal Server Error: /dashboard/analytics/contratos/
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/contrib/auth/mixins.py", line 109, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/views/generic/base.py", line 226, in get
+    context = self.get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/apps/dashboard/views/analytics_views.py", line 46, in get_context_data
+    'metricas_contratos': analytics_service.get_metricas_contratos(),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/apps/dashboard/views/analytics_views.py", line 443, in get_metricas_contratos
+    'valor_pago': contratos.aggregate(Sum('valor_pago'))['valor_pago__sum'] or 0,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/query.py", line 592, in aggregate
+    return self.query.chain().get_aggregation(self.db, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/sql/query.py", line 398, in get_aggregation
+    aggregate = aggregate_expr.resolve_expression(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/expressions.py", line 950, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/expressions.py", line 829, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1976, in resolve_ref
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1823, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1724, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'valor_pago' into field. Choices are: cod_ordem, contratado, cpf_cnpj, data_fim, data_inicio, data_parcela_inicial, descricao, itens, num_contrato, parcelas, situacao, tipo_pessoa, valor
+INFO 2025-09-13 04:41:55,438 basehttp 22795 140520560862912 "GET /dashboard/ HTTP/1.1" 200 34618
+INFO 2025-09-13 04:41:55,647 basehttp 22795 140520560862912 "GET /static/css/base.css HTTP/1.1" 304 0
+INFO 2025-09-13 04:41:55,814 basehttp 22795 140520560862912 "GET /static/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-09-13 04:41:55,844 basehttp 22795 140520560862912 "GET /static/img/logo_funetec.jpg HTTP/1.1" 304 0
+INFO 2025-09-13 04:46:57,459 basehttp 22795 140520560862912 "GET /dashboard/ HTTP/1.1" 200 34618
+INFO 2025-09-13 04:46:57,676 basehttp 22795 140520560862912 "GET /static/css/base.css HTTP/1.1" 304 0
+INFO 2025-09-13 04:46:57,838 basehttp 22795 140520560862912 "GET /static/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-09-13 13:49:03,996 autoreload 249 140196855172288 Watching for file changes with StatReloader
+INFO 2025-09-13 13:49:10,266 basehttp 249 140196703278784 "GET / HTTP/1.1" 302 0
+INFO 2025-09-13 13:49:10,702 basehttp 249 140196703278784 "GET /dashboard/ HTTP/1.1" 200 34618
+INFO 2025-09-13 13:49:11,077 basehttp 249 140196703278784 "GET /static/css/base.css HTTP/1.1" 304 0
+INFO 2025-09-13 13:49:11,252 basehttp 249 140196703278784 "GET /static/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-09-13 13:49:11,422 basehttp 249 140196703278784 "GET /static/img/logo_funetec.jpg HTTP/1.1" 304 0
+INFO 2025-09-13 13:49:11,423 basehttp 249 140196703278784 "GET /static/js/base.js HTTP/1.1" 304 0
+INFO 2025-09-13 13:51:13,485 basehttp 249 140196703278784 "GET /contratos/ HTTP/1.1" 200 23368
+INFO 2025-09-13 13:51:27,231 basehttp 249 140196703278784 "GET /contratos/prestadores/ HTTP/1.1" 200 18176
+INFO 2025-09-13 13:51:33,479 basehttp 249 140196703278784 "GET /contratos/prestadores/create/ HTTP/1.1" 200 38366
+INFO 2025-09-13 13:51:46,511 basehttp 249 140196703278784 "GET /dashboard/ HTTP/1.1" 200 34618
+INFO 2025-09-13 13:56:51,782 basehttp 249 140196703278784 "GET /dashboard/ HTTP/1.1" 200 34627
+INFO 2025-09-13 14:01:56,869 basehttp 249 140196703278784 "GET /dashboard/ HTTP/1.1" 200 34630
+INFO 2025-09-13 14:03:32,104 basehttp 249 140196703278784 "GET /contratos/ HTTP/1.1" 200 23508
+INFO 2025-09-13 14:03:54,668 basehttp 249 140196703278784 "GET /projetos/create/ HTTP/1.1" 200 20877
+INFO 2025-09-13 14:04:58,018 basehttp 249 140196703278784 "GET /dashboard/ HTTP/1.1" 200 34630
+INFO 2025-09-13 14:06:41,370 basehttp 249 140196703278784 "GET /dashboard/ HTTP/1.1" 200 34631
+INFO 2025-09-13 14:07:31,357 basehttp 249 140196703278784 "GET /projetos/4/ HTTP/1.1" 200 18915
+INFO 2025-09-13 14:07:49,245 basehttp 249 140196703278784 "GET /projetos/ HTTP/1.1" 200 39586
+INFO 2025-09-13 14:07:57,842 basehttp 249 140196703278784 "GET /contratos/ HTTP/1.1" 200 23508
+INFO 2025-09-13 14:08:01,033 basehttp 249 140196703278784 "GET /contratos/prestadores/ HTTP/1.1" 200 18176
+INFO 2025-09-13 14:08:11,275 basehttp 249 140196703278784 "GET /contratos/parcelas/all/ HTTP/1.1" 200 32538
+INFO 2025-09-13 14:09:12,804 basehttp 249 140196703278784 "GET /pagamentos/history/ HTTP/1.1" 200 44060
+INFO 2025-09-13 14:09:41,839 basehttp 249 140196703278784 "GET /pagamentos/history/ HTTP/1.1" 200 44060
+INFO 2025-09-13 14:09:47,056 basehttp 249 140196703278784 "GET /relatorios/ HTTP/1.1" 200 24039
+INFO 2025-09-13 14:10:10,545 basehttp 249 140196703278784 "GET /relatorios/custom/ HTTP/1.1" 200 28184
+INFO 2025-09-13 14:10:10,908 basehttp 249 140196703278784 "GET /static/css/base.css HTTP/1.1" 304 0
+INFO 2025-09-13 14:10:11,084 basehttp 249 140196703278784 "GET /static/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-09-13 14:10:11,260 basehttp 249 140196703278784 "GET /static/img/logo_funetec.jpg HTTP/1.1" 304 0
+INFO 2025-09-13 14:10:11,436 basehttp 249 140196703278784 "GET /static/js/base.js HTTP/1.1" 304 0
+WARNING 2025-09-13 14:10:11,687 log 249 140196703278784 Not Found: /favicon.ico
+WARNING 2025-09-13 14:10:11,688 basehttp 249 140196703278784 "GET /favicon.ico HTTP/1.1" 404 3401
+INFO 2025-09-13 14:10:25,530 basehttp 249 140196703278784 "GET /clientes/ HTTP/1.1" 200 18371
+INFO 2025-09-13 14:10:27,545 basehttp 249 140196703278784 "GET /contratos/parcelas/all/ HTTP/1.1" 200 32538
+INFO 2025-09-13 14:10:29,151 basehttp 249 140196703278784 "GET /dashboard/ HTTP/1.1" 200 34631
+INFO 2025-09-13 14:12:11,714 basehttp 249 140196703278784 "GET /dashboard/ HTTP/1.1" 200 34631
+INFO 2025-09-13 14:12:58,717 basehttp 249 140196703278784 "GET /relatorios/ HTTP/1.1" 200 24039
+INFO 2025-09-13 14:13:04,244 basehttp 249 140196703278784 "GET /pagamentos/history/ HTTP/1.1" 200 44060
+INFO 2025-09-13 14:13:07,975 basehttp 249 140196703278784 "GET /contratos/parcelas/all/ HTTP/1.1" 200 32538
+INFO 2025-09-13 14:13:28,866 basehttp 249 140196703278784 "GET / HTTP/1.1" 302 0
+INFO 2025-09-13 14:13:29,074 basehttp 249 140196703278784 "GET /dashboard/ HTTP/1.1" 200 34631
+INFO 2025-09-13 14:15:33,684 basehttp 249 140196703278784 "GET /dashboard/ HTTP/1.1" 200 34631
+INFO 2025-09-13 14:16:50,442 autoreload 249 140196855172288 /home/runner/workspace/apps/contratos/views/contrato_views.py changed, reloading.
+INFO 2025-09-13 14:16:51,406 autoreload 1924 139930350570688 Watching for file changes with StatReloader
+INFO 2025-09-13 14:16:52,373 basehttp 1924 139930266867392 "GET / HTTP/1.1" 302 0
+INFO 2025-09-13 14:16:52,605 basehttp 1924 139930266867392 "GET /dashboard/ HTTP/1.1" 200 35442
+INFO 2025-09-13 14:17:00,679 basehttp 1924 139930266867392 "GET /projetos/ HTTP/1.1" 200 39586
+INFO 2025-09-13 14:17:05,862 basehttp 1924 139930266867392 "GET /dashboard/ HTTP/1.1" 200 35442
+INFO 2025-09-13 14:17:09,178 basehttp 1924 139930266867392 "GET /contratos/?tipo_pessoa=1 HTTP/1.1" 200 23508
+ERROR 2025-09-13 14:17:13,449 log 1943 139641252203712 Internal Server Error: /contratos/
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/views/generic/list.py", line 154, in get
+    self.object_list = self.get_queryset()
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/apps/contratos/views/contrato_views.py", line 38, in get_queryset
+    queryset = queryset.filter(id__in=contratos_inadimplentes)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1545, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1576, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1426, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1236, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1724, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'id' into field. Choices are: cod_ordem, contratado, cpf_cnpj, data_fim, data_inicio, data_parcela_inicial, descricao, itens, num_contrato, parcelas, situacao, tipo_pessoa, valor
+INFO 2025-09-13 14:17:21,811 basehttp 1924 139930266867392 "GET /dashboard/ HTTP/1.1" 200 35442
+INFO 2025-09-13 14:17:25,436 basehttp 1924 139930266867392 "GET /contratos/?tipo_pessoa=2 HTTP/1.1" 200 23508
+INFO 2025-09-13 14:17:26,887 autoreload 1924 139930350570688 /home/runner/workspace/apps/contratos/views/contrato_views.py changed, reloading.
+INFO 2025-09-13 14:17:27,595 autoreload 1968 139765117308096 Watching for file changes with StatReloader
+INFO 2025-09-13 14:17:28,565 basehttp 1968 139765033604800 "GET / HTTP/1.1" 302 0
+INFO 2025-09-13 14:17:28,811 basehttp 1968 139765033604800 "GET /dashboard/ HTTP/1.1" 200 35442
+INFO 2025-09-13 14:17:32,800 basehttp 1968 139765033604800 "GET /contratos/?tipo_pessoa=2 HTTP/1.1" 200 23508
+INFO 2025-09-13 14:17:45,914 basehttp 1968 139765033604800 "GET /contratos/ HTTP/1.1" 200 23508
+INFO 2025-09-13 14:18:39,754 autoreload 1968 139765117308096 /home/runner/workspace/apps/contratos/views/contrato_views.py changed, reloading.
+INFO 2025-09-13 14:18:40,394 autoreload 2019 140531243228352 Watching for file changes with StatReloader
+INFO 2025-09-13 14:18:41,291 basehttp 2019 140531159525056 "GET / HTTP/1.1" 302 0
+INFO 2025-09-13 14:18:41,531 basehttp 2019 140531159525056 "GET /dashboard/ HTTP/1.1" 200 35442
+INFO 2025-09-13 14:18:57,033 basehttp 2019 140531159525056 "GET /contratos/?inadimplencia=true HTTP/1.1" 200 20493
+INFO 2025-09-13 14:19:00,648 basehttp 2019 140531159525056 "GET /contratos/?inadimplencia=true HTTP/1.1" 200 20493
+INFO 2025-09-13 14:20:35,161 basehttp 2019 140531159525056 "GET /dashboard/ HTTP/1.1" 200 35772
+INFO 2025-09-13 14:24:57,814 basehttp 2019 140531159525056 "GET /contratos/?inadimplencia=true HTTP/1.1" 200 15936
+INFO 2025-09-13 14:25:39,667 basehttp 2019 140531159525056 "GET /dashboard/ HTTP/1.1" 200 30891
+INFO 2025-09-13 14:26:46,463 basehttp 2019 140531159525056 "GET /contratos/?inadimplencia=true HTTP/1.1" 200 15936
+INFO 2025-09-13 14:27:06,082 basehttp 2019 140531159525056 "GET /contratos/?inadimplencia=true HTTP/1.1" 200 15936
+INFO 2025-09-13 14:27:20,781 basehttp 2019 140531159525056 "GET /dashboard/ HTTP/1.1" 200 30891
+INFO 2025-09-13 14:27:25,855 basehttp 2019 140531159525056 "GET / HTTP/1.1" 302 0
+INFO 2025-09-13 14:27:26,062 basehttp 2019 140531159525056 "GET /dashboard/ HTTP/1.1" 200 30891
+INFO 2025-09-13 14:28:05,713 basehttp 2019 140531159525056 "GET /dashboard/ HTTP/1.1" 200 30891
+INFO 2025-09-13 14:28:41,207 basehttp 2019 140531159525056 "GET /projetos/ HTTP/1.1" 200 35029

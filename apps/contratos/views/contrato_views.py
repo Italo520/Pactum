@@ -14,6 +14,50 @@ class ContratoListView(LoginRequiredMixin, ListView):
     template_name = 'contratos/contrato_list.html'
     context_object_name = 'contratos'
     paginate_by = 10
+    ordering = ['-data_inicio', 'num_contrato']  # Fix UnorderedObjectListWarning
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        
+        # Filtro por tipo de pessoa (PF/PJ)
+        tipo_pessoa = self.request.GET.get('tipo_pessoa')
+        if tipo_pessoa:
+            queryset = queryset.filter(tipo_pessoa=tipo_pessoa)
+        
+        # Filtro por inadimplência
+        inadimplencia = self.request.GET.get('inadimplencia')
+        if inadimplencia == 'true':
+            # Filtra contratos com parcelas vencidas
+            from ..models.item_contrato import ItemContrato
+            from django.utils import timezone
+            
+            contratos_inadimplentes = ItemContrato.objects.filter(
+                situacao='1',  # Pendente
+                data_vencimento__lt=timezone.now().date()
+            ).values_list('num_contrato', flat=True)
+            
+            queryset = queryset.filter(num_contrato__in=contratos_inadimplentes)
+        
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Adiciona informações sobre filtros ativos
+        context['tipo_pessoa_filtro'] = self.request.GET.get('tipo_pessoa')
+        context['inadimplencia_filtro'] = self.request.GET.get('inadimplencia')
+        
+        # Labels para os filtros
+        if context['tipo_pessoa_filtro'] == '1':
+            context['filtro_label'] = 'Contratos Pessoa Física (PF)'
+        elif context['tipo_pessoa_filtro'] == '2':
+            context['filtro_label'] = 'Contratos Pessoa Jurídica (PJ)'
+        elif context['inadimplencia_filtro'] == 'true':
+            context['filtro_label'] = 'Contratos em Inadimplência'
+        else:
+            context['filtro_label'] = 'Todos os Contratos'
+            
+        return context
 
 class ContratoDetailView(LoginRequiredMixin, DetailView):
     model = Contrato

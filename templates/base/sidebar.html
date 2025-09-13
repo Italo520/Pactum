@@ -7,7 +7,7 @@
                 <a class="nav-link {% if 'dashboard' in request.resolver_match.url_name %}active{% endif %}" 
                    href="{% url 'dashboard:index' %}">
                     <i class="fas fa-tachometer-alt me-2"></i>
-                    Dashboard
+                    <span>Dashboard</span>
                 </a>
             </li>
         </ul>
@@ -22,14 +22,14 @@
                     <a class="nav-link {% if 'projeto' in request.resolver_match.url_name %}active{% endif %}" 
                        href="{% url 'projetos:projeto_list' %}">
                         <i class="fas fa-list me-2"></i>
-                        Listar Projetos
+                        <span>Listar Projetos</span>
                     </a>
                 </li>
                 {% if user.can_manage_projects %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'projetos:projeto_create' %}">
                             <i class="fas fa-plus me-2"></i>
-                            Novo Projeto
+                            <span>Novo Projeto</span>
                         </a>
                     </li>
                 {% endif %}
@@ -46,19 +46,19 @@
                     <a class="nav-link {% if 'contrato' in request.resolver_match.url_name %}active{% endif %}" 
                        href="{% url 'contratos:contrato_list' %}">
                         <i class="fas fa-file-contract me-2"></i>
-                        Contratos
+                        <span>Contratos</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'contratos:prestador_list' %}">
                         <i class="fas fa-users me-2"></i>
-                        Prestadores
+                        <span>Prestadores</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'contratos:parcela_list' %}">
                         <i class="fas fa-money-bill-wave me-2"></i>
-                        Parcelas
+                        <span>Parcelas</span>
                     </a>
                 </li>
             </ul>
@@ -74,7 +74,7 @@
                     <a class="nav-link {% if 'cliente' in request.resolver_match.url_name %}active{% endif %}" 
                        href="{% url 'clientes:cliente-list' %}">
                         <i class="fas fa-users me-2"></i>
-                        Listar Clientes
+                        <span>Listar Clientes</span>
                     </a>
                 </li>
             </ul>
@@ -89,13 +89,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'dashboard:analytics_financeiro' %}">
                         <i class="fas fa-chart-line me-2"></i>
-                        Analytics
+                        <span>Analytics</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'pagamentos:payment_history' %}">
                         <i class="fas fa-credit-card me-2"></i>
-                        Pagamentos
+                        <span>Pagamentos</span>
                     </a>
                 </li>
             </ul>
@@ -110,13 +110,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'relatorios:relatorio_list' %}">
                         <i class="fas fa-file-alt me-2"></i>
-                        Relatórios
+                        <span>Relatórios</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'relatorios:relatorio_custom' %}">
                         <i class="fas fa-chart-bar me-2"></i>
-                        Relatório Customizado
+                        <span>Relatório Customizado</span>
                     </a>
                 </li>
             </ul>
@@ -131,7 +131,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'dashboard:analytics_projetos' %}">
                         <i class="fas fa-project-diagram me-2"></i>
-                        Projetos
+                        <span>Projetos</span>
                     </a>
                 </li>
             {% endif %}
@@ -139,7 +139,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'dashboard:analytics_contratos' %}">
                         <i class="fas fa-handshake me-2"></i>
-                        Contratos
+                        <span>Contratos</span>
                     </a>
                 </li>
             {% endif %}
