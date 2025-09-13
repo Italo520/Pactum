@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h3>Parcelas do Contrato: {{ contrato.numero }}</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nº da Parcela</th>
+                        <th>Data de Vencimento</th>
+                        <th>Valor Previsto</th>
+                        <th>Valor Pago</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for parcela in parcelas %}
+                    <tr>
+                        <td>{{ parcela.numero_parcela }}</td>
+                        <td>{{ parcela.data_vencimento|date:"d/m/Y" }}</td>
+                        <td>R$ {{ parcela.valor_previsto }}</td>
+                        <td>R$ {{ parcela.valor_pago|default:"0.00" }}</td>
+                        <td><span class="badge bg-warning">{{ parcela.get_status_display }}</span></td>
+                        <td>
+                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalPagamento-{{ parcela.id }}">
+                                Registrar Pagamento
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+             <a href="{% url 'contratos:contrato_detail' contrato.pk %}" class="btn btn-secondary">Voltar ao Contrato</a>
+        </div>
+    </div>
+</div>
+
+{% for parcela in parcelas %}
+    {% include 'contratos/partials/modal_pagamento.html' with parcela=parcela %}
+{% endfor %}
+
+{% endblock %}

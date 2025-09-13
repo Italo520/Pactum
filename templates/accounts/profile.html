@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2>Meu Perfil</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Nome de Usuário:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Papel:</strong> {{ user.get_role_display }}</p>
+            <hr>
+            <p><strong>Telefone:</strong> {{ userprofile.telefone }}</p>
+            <!-- Adicionar outros campos do userprofile aqui -->
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'accounts:profile_edit' %}" class="btn btn-primary">Editar Perfil</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
