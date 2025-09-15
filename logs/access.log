@@ -12013,3 +12013,18 @@ INFO 2025-09-15 17:18:58,882 basehttp 1754 139761935963840 "GET /dashboard/api/c
 INFO 2025-09-15 17:21:20,089 basehttp 1754 139761935963840 "GET /accounts/logout/ HTTP/1.1" 302 0
 INFO 2025-09-15 17:21:20,320 basehttp 1754 139761935963840 "GET /accounts/login/ HTTP/1.1" 200 11123
 INFO 2025-09-15 17:21:20,560 basehttp 1754 139761935963840 "GET /static/img/logo_pactum.png HTTP/1.1" 304 0
+INFO 2025-09-15 17:37:43,076 autoreload 1091 140400440667328 Watching for file changes with StatReloader
+INFO 2025-09-15 17:37:44,908 basehttp 1091 140400355915456 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 17:37:45,135 basehttp 1091 140400355915456 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 17:37:45,569 basehttp 1091 140400355915456 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11123
+INFO 2025-09-15 17:37:46,572 basehttp 1091 140400355915456 "GET /static/img/logo_pactum.png HTTP/1.1" 200 1463340
+INFO 2025-09-15 17:39:47,731 autoreload 1091 140400440667328 /home/runner/workspace/Pactum/settings.py changed, reloading.
+INFO 2025-09-15 17:39:48,267 autoreload 1403 140030995963072 Watching for file changes with StatReloader
+INFO 2025-09-15 17:39:56,476 autoreload 1403 140030995963072 /home/runner/workspace/Pactum/settings.py changed, reloading.
+INFO 2025-09-15 17:39:57,050 autoreload 1405 140680931294400 Watching for file changes with StatReloader
+INFO 2025-09-15 17:40:21,808 autoreload 1456 140502419954880 Watching for file changes with StatReloader
+INFO 2025-09-15 17:41:46,914 autoreload 1619 139765093698752 Watching for file changes with StatReloader
+INFO 2025-09-15 17:41:48,164 basehttp 1619 139764942501568 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 17:41:48,393 basehttp 1619 139764942501568 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 17:41:48,627 basehttp 1619 139764942501568 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11123
+INFO 2025-09-15 17:41:49,080 basehttp 1619 139764942501568 "GET /static/img/logo_pactum.png HTTP/1.1" 304 0

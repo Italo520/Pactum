@@ -3,6 +3,7 @@ from pathlib import Path
 from decouple import config
 import environ
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent  # ← Deve apontar para Hackaton_Project/
@@ -110,37 +111,29 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Pactum.wsgi.application'
 
 # Database
-# Detect Replit environment and force SQLite
-REPLIT = bool(os.getenv('REPLIT_DEV_DOMAIN') or os.getenv('REPL_ID'))
-USE_POSTGRES = config('USE_POSTGRES', default=False, cast=bool)
+# Use PostgreSQL when DATABASE_URL is available, fallback to SQLite for development
 DATABASE_URL = os.getenv('DATABASE_URL')
 
-if REPLIT:
-    # Always use SQLite on Replit
+if DATABASE_URL:
+    # Use PostgreSQL via DATABASE_URL (production and when Postgres is configured)
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=not DEBUG  # Require SSL in production
+        )
+    }
+elif DEBUG:
+    # Use SQLite for development when DATABASE_URL is not available
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
-    }
-elif DATABASE_URL and (DATABASE_URL.startswith('postgres://') or DATABASE_URL.startswith('postgresql://')):
-    # Use PostgreSQL when DATABASE_URL is set with postgres scheme
-    DATABASES = {
-        'default': dj_database_url.config(default=DATABASE_URL)
-    }
-elif USE_POSTGRES:
-    # Use PostgreSQL when explicitly enabled
-    DATABASES = {
-        'default': dj_database_url.config(default=DATABASE_URL)
     }
 else:
-    # Fallback to SQLite for local development
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+    # In production, DATABASE_URL is required
+    raise ImproperlyConfigured("DATABASE_URL environment variable is required in production")
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
