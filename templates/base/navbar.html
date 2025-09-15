@@ -10,9 +10,14 @@
             </button>
         {% endif %}
         
-        <a class="navbar-brand d-flex align-items-center" href="{% url 'dashboard:index' %}">
-            <img src="{% static 'img/logo_pactum.png' %}" alt="Pactum" height="40" class="me-2" style="border-radius: 8px;">
-            Pactum
+        <a class="navbar-brand d-flex align-items-center logo-brand-enhanced" href="{% url 'dashboard:index' %}">
+            <div class="logo-container me-3">
+                <img src="{% static 'img/logo_pactum.png' %}" alt="Pactum - Gestão de Projetos e Contratos" height="50" class="logo-img">
+            </div>
+            <div class="brand-text-container">
+                <div class="brand-title">Pactum</div>
+                <div class="brand-subtitle d-none d-lg-block">Gestão de Projetos e Contratos</div>
+            </div>
         </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

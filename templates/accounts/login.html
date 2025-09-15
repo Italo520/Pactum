@@ -43,12 +43,32 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
+            position: relative;
+            border-radius: 20px;
+            background: rgba(8, 149, 97, 0.05);
+            border: 2px solid rgba(8, 149, 97, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .login-header .logo:hover {
+            transform: scale(1.02);
+            background: rgba(8, 149, 97, 0.1);
+            border-color: rgba(8, 149, 97, 0.2);
+            box-shadow: 0 5px 20px rgba(8, 149, 97, 0.15);
         }
         
         .login-header .logo img {
             width: 100%;
             height: auto;
             object-fit: contain;
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            filter: brightness(1.05) contrast(1.05);
+        }
+        
+        .login-header .logo:hover img {
+            filter: brightness(1.1) contrast(1.1);
+            transform: scale(1.02);
         }
         
         .login-header h2 {

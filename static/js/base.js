@@ -1,5 +1,13 @@
 // static/js/base.js
 
+// Function to sync navbar height
+function syncNavbarHeight(){
+    const nav = document.querySelector('.navbar.fixed-top');
+    if(!nav) return;
+    const h = nav.offsetHeight;
+    document.documentElement.style.setProperty('--navbar-height', h+'px');
+}
+
 class BaseSystem {
     constructor() {
         this.init();
@@ -11,6 +19,20 @@ class BaseSystem {
         this.setupFormValidations();
         this.setupAjaxSetup();
         this.setupSidebarToggle();
+        this.setupNavbarHeightSync();
+    }
+    
+    setupNavbarHeightSync() {
+        // Set up navbar height synchronization
+        window.addEventListener('load', syncNavbarHeight);
+        window.addEventListener('resize', () => { 
+            window.requestAnimationFrame(syncNavbarHeight); 
+        });
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(syncNavbarHeight);
+        }
+        // Initial sync
+        syncNavbarHeight();
     }
     
     setupTooltips() {
