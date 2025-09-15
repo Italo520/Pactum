@@ -29,7 +29,7 @@ COPY . /app/
 RUN python manage.py collectstatic --noinput
 
 # Expor a porta que o Gunicorn vai rodar
-EXPOSE 8000
+EXPOSE 5000
 
 # Comando para rodar a aplicação
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "Pactum.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "Pactum.wsgi:application"]

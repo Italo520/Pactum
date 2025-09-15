@@ -11422,3 +11422,100 @@ INFO 2025-09-15 15:21:54,085 basehttp 1883 139847123166912 "GET /pagamentos/hist
 INFO 2025-09-15 15:22:13,587 basehttp 1883 139847123166912 "GET /pagamentos/history/ HTTP/1.1" 200 92883
 INFO 2025-09-15 15:22:26,338 basehttp 1883 139847123166912 "GET /pagamentos/history/ HTTP/1.1" 200 92883
 INFO 2025-09-15 15:22:35,497 basehttp 1883 139847123166912 "GET /relatorios/ HTTP/1.1" 200 19490
+INFO 2025-09-15 16:07:37,106 autoreload 1031 140519051099328 Watching for file changes with StatReloader
+ERROR 2025-09-15 16:07:38,881 exception 1031 140518900274880 Invalid HTTP_HOST header: '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev'. You may need to add '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev'. You may need to add '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev' to ALLOWED_HOSTS.
+WARNING 2025-09-15 16:07:38,953 log 1031 140518900274880 Bad Request: /
+WARNING 2025-09-15 16:07:38,955 basehttp 1031 140518900274880 "GET / HTTP/1.1" 400 168227
+INFO 2025-09-15 16:07:53,675 basehttp 1031 140518900274880 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 16:07:53,685 basehttp 1031 140518900274880 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 16:07:53,751 basehttp 1031 140518900274880 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 10439
+INFO 2025-09-15 16:07:53,810 basehttp 1031 140518900274880 "GET /static/img/logo_funetec.jpg HTTP/1.1" 200 90672
+WARNING 2025-09-15 16:08:00,079 log 1031 140518900274880 Not Found: /favicon.ico
+WARNING 2025-09-15 16:08:00,079 basehttp 1031 140518900274880 "GET /favicon.ico HTTP/1.1" 404 3336
+ERROR 2025-09-15 16:11:06,554 exception 1031 140518889785024 Invalid HTTP_HOST header: '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev'. You may need to add '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev'. You may need to add '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev' to ALLOWED_HOSTS.
+WARNING 2025-09-15 16:11:06,576 log 1031 140518889785024 Bad Request: /
+WARNING 2025-09-15 16:11:06,576 basehttp 1031 140518889785024 "GET / HTTP/1.1" 400 168227
+INFO 2025-09-15 16:14:15,283 autoreload 1925 140480999910592 Watching for file changes with StatReloader
+ERROR 2025-09-15 16:14:16,347 exception 1925 140480848955072 Invalid HTTP_HOST header: '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev'. You may need to add '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev'. You may need to add '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev' to ALLOWED_HOSTS.
+WARNING 2025-09-15 16:14:16,382 log 1925 140480848955072 Bad Request: /
+WARNING 2025-09-15 16:14:16,383 basehttp 1925 140480848955072 "GET / HTTP/1.1" 400 168227
+ERROR 2025-09-15 16:14:50,928 exception 1925 140480848955072 Invalid HTTP_HOST header: '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev'. You may need to add '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev'. You may need to add '9bb5f8cf-fbc8-490b-852a-2629324a2afe-00-32v8ywixpitzq.worf.replit.dev' to ALLOWED_HOSTS.
+WARNING 2025-09-15 16:14:50,953 log 1925 140480848955072 Bad Request: /
+WARNING 2025-09-15 16:14:50,954 basehttp 1925 140480848955072 "GET / HTTP/1.1" 400 168227
+INFO 2025-09-15 16:15:45,234 autoreload 2206 140054055537856 Watching for file changes with StatReloader
+INFO 2025-09-15 16:15:46,342 basehttp 2206 140053904459456 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 16:15:46,569 basehttp 2206 140053904459456 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 16:15:46,760 basehttp 2206 140053904459456 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 10439
+INFO 2025-09-15 16:15:47,115 basehttp 2206 140053904459456 "GET /static/img/logo_funetec.jpg HTTP/1.1" 200 90672
+INFO 2025-09-15 16:17:50,698 autoreload 2551 140253180230848 Watching for file changes with StatReloader
+INFO 2025-09-15 16:17:51,849 basehttp 2551 140253028415168 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 16:17:52,053 basehttp 2551 140253028415168 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 16:17:52,188 basehttp 2551 140253020022464 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 16:17:52,191 basehttp 2551 140253020022464 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 16:17:52,260 basehttp 2551 140253020022464 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 10438
+INFO 2025-09-15 16:17:52,261 basehttp 2551 140253028415168 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 10438
+INFO 2025-09-15 16:17:52,356 basehttp 2551 140253020022464 "GET /static/img/logo_pactum.png HTTP/1.1" 200 1463340
+INFO 2025-09-15 16:17:52,745 basehttp 2551 140253028415168 "GET /static/img/logo_pactum.png HTTP/1.1" 200 1463340
+WARNING 2025-09-15 16:18:00,094 log 2551 140253020022464 Not Found: /favicon.ico
+WARNING 2025-09-15 16:18:00,095 basehttp 2551 140253020022464 "GET /favicon.ico HTTP/1.1" 404 3336
+INFO 2025-09-15 16:19:29,479 basehttp 2551 140253020022464 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 16:19:29,482 basehttp 2551 140253020022464 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 16:19:29,526 basehttp 2551 140253020022464 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 10438
+INFO 2025-09-15 16:19:29,583 basehttp 2551 140253020022464 "GET /static/img/logo_pactum.png HTTP/1.1" 304 0
+INFO 2025-09-15 16:20:35,119 autoreload 3136 140374793395392 Watching for file changes with StatReloader
+INFO 2025-09-15 16:20:36,239 basehttp 3136 140374709692096 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 16:20:36,435 basehttp 3136 140374709692096 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 16:20:36,632 basehttp 3136 140374709692096 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 10438
+INFO 2025-09-15 16:20:37,116 basehttp 3136 140374709692096 "GET /static/img/logo_pactum.png HTTP/1.1" 304 0

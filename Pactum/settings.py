@@ -20,6 +20,14 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost').split(',')
 
+# Add Replit domain to ALLOWED_HOSTS
+REPLIT_DOMAIN = os.getenv('REPLIT_DEV_DOMAIN')
+if REPLIT_DOMAIN:
+    ALLOWED_HOSTS.append(REPLIT_DOMAIN)
+
+# Add wildcard for all replit domains
+ALLOWED_HOSTS.extend(['*.replit.dev', '*.replit.app', '*.replit.co'])
+
 # CSRF Settings for Replit
 CSRF_TRUSTED_ORIGINS = [
     'https://*.replit.dev',
@@ -28,8 +36,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://4d50ff18-fea4-4879-b827-f71b763009b9-00-28wrtx6r4yw5s.picard.replit.dev',
 ]
 
-# Get Replit domain from environment
-REPLIT_DOMAIN = os.getenv('REPLIT_DEV_DOMAIN')
+# Get Replit domain from environment for CSRF
 if REPLIT_DOMAIN:
     CSRF_TRUSTED_ORIGINS.append(f'https://{REPLIT_DOMAIN}')
 
