@@ -25,29 +25,7 @@
                         <td><strong>{{ contrato.num_contrato }}</strong></td>
                         <td>{{ contrato.contratado }}</td>
                         <td>R$ {{ contrato.valor|floatformat:2 }}</td>
-                        <td>
-                            {% if contrato.situacao == '1' %}
-                                <span class="badge bg-secondary">
-                                    <i class="fas fa-file-alt me-1"></i>{{ contrato.get_situacao_display }}
-                                </span>
-                            {% elif contrato.situacao == '2' %}
-                                <span class="badge bg-primary">
-                                    <i class="fas fa-handshake me-1"></i>{{ contrato.get_situacao_display }}
-                                </span>
-                            {% elif contrato.situacao == '3' %}
-                                <span class="badge bg-danger">
-                                    <i class="fas fa-times-circle me-1"></i>{{ contrato.get_situacao_display }}
-                                </span>
-                            {% elif contrato.situacao == '4' %}
-                                <span class="badge bg-success">
-                                    <i class="fas fa-check-circle me-1"></i>{{ contrato.get_situacao_display }}
-                                </span>
-                            {% else %}
-                                <span class="badge bg-light text-dark">
-                                    {{ contrato.get_situacao_display }}
-                                </span>
-                            {% endif %}
-                        </td>
+                        <td><span class="badge bg-success">{{ contrato.get_situacao_display }}</span></td>
                         <td>{{ contrato.data_inicio|date:"d/m/y" }} a {{ contrato.data_fim|date:"d/m/y" }}</td>
                         <td>
                             <a href="{% url 'contratos:contrato_detail' contrato.pk %}" class="btn btn-sm btn-outline-info" title="Ver Detalhes">
@@ -63,64 +41,6 @@
                 </tbody>
             </table>
         </div>
-
-        {% if is_paginated %}
-            <nav class="mt-4">
-                <ul class="pagination justify-content-center">
-                    {% if page_obj.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page=1">Primeira</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <span class="page-link">Primeira</span>
-                        </li>
-                        <li class="page-item disabled">
-                            <span class="page-link">Anterior</span>
-                        </li>
-                    {% endif %}
-
-                    {% for i in paginator.page_range %}
-                        {% if forloop.first and i > 1 %}
-                            <li class="page-item disabled">
-                                <span class="page-link">…</span>
-                            </li>
-                        {% endif %}
-                        
-                        {% if i >= page_obj.number|add:"-2" and i <= page_obj.number|add:"2" %}
-                            <li class="page-item {% if page_obj.number == i %}active{% endif %}">
-                                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-                            </li>
-                        {% endif %}
-                        
-                        {% if forloop.last and i < paginator.num_pages %}
-                            <li class="page-item disabled">
-                                <span class="page-link">…</span>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                    
-                    {% if page_obj.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item disabled">
-                            <span class="page-link">Próximo</span>
-                        </li>
-                        <li class="page-item disabled">
-                            <span class="page-link">Última</span>
-                        </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        {% endif %}
     </div>
 </div>
 {% endblock %}

@@ -17,7 +17,7 @@
                         <th>Contrato</th>
                         <th>Nº da Parcela</th>
                         <th>Data de Vencimento</th>
-                        <th>Valor da Parcela</th>
+                        <th>Valor Previsto</th>
                         <th>Valor Pago</th>
                         <th>Status</th>
                         <th>Ações</th>
@@ -31,45 +31,23 @@
                                 {{ parcela.num_contrato.num_contrato }}
                             </a>
                         </td>
-                        <td>{{ parcela.num_parcela }}</td>
+                        <td>{{ parcela.cod_lancamento }}</td>
                         <td>{{ parcela.data_vencimento|date:"d/m/Y" }}</td>
-                        <td>R$ {{ parcela.valor_parcela|floatformat:2 }}</td>
+                        <td>R$ {{ parcela.valor_previsto|floatformat:2 }}</td>
                         <td>R$ {{ parcela.valor_pago|default:"0.00"|floatformat:2 }}</td>
                         <td>
-                            {% if parcela.situacao == '1' %}
-                                <span class="badge bg-warning text-dark">
-                                    <i class="fas fa-clock me-1"></i>{{ parcela.get_situacao_display }}
-                                </span>
-                            {% elif parcela.situacao == '2' %}
-                                <span class="badge bg-danger">
-                                    <i class="fas fa-times me-1"></i>{{ parcela.get_situacao_display }}
-                                </span>
-                            {% elif parcela.situacao == '3' %}
-                                <span class="badge bg-success">
-                                    <i class="fas fa-check-circle me-1"></i>{{ parcela.get_situacao_display }}
-                                </span>
-                            {% elif parcela.situacao == '4' %}
-                                <span class="badge bg-info">
-                                    <i class="fas fa-coins me-1"></i>{{ parcela.get_situacao_display }}
-                                </span>
-                            {% else %}
-                                <span class="badge bg-secondary">
-                                    {{ parcela.get_situacao_display }}
-                                </span>
-                            {% endif %}
+                            <span class="badge bg-{% if parcela.valor_pago %}success{% else %}warning{% endif %}">
+                                {% if parcela.valor_pago %}Pago{% else %}Pendente{% endif %}
+                            </span>
                         </td>
                         <td>
-                            {% if parcela.situacao == '1' or parcela.situacao == '4' %}
+                            {% if not parcela.valor_pago %}
                             <a href="{% url 'contratos:registrar-pagamento' parcela.pk %}" class="btn btn-success btn-sm">
                                 <i class="fas fa-money-bill me-1"></i>Registrar Pagamento
                             </a>
-                            {% elif parcela.situacao == '3' %}
+                            {% else %}
                             <span class="text-success">
                                 <i class="fas fa-check-circle me-1"></i>Pago
-                            </span>
-                            {% else %}
-                            <span class="text-muted">
-                                <i class="fas fa-minus-circle me-1"></i>Cancelado
                             </span>
                             {% endif %}
                         </td>
@@ -77,65 +55,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-
-            {% if is_paginated %}
-                <nav class="mt-4">
-                    <ul class="pagination justify-content-center">
-                        {% if page_obj.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page=1">Primeira</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <span class="page-link">Primeira</span>
-                            </li>
-                            <li class="page-item disabled">
-                                <span class="page-link">Anterior</span>
-                            </li>
-                        {% endif %}
-
-                        {% for i in paginator.page_range %}
-                            {% if forloop.first and i > 1 %}
-                                <li class="page-item disabled">
-                                    <span class="page-link">…</span>
-                                </li>
-                            {% endif %}
-                            
-                            {% if i >= page_obj.number|add:"-2" and i <= page_obj.number|add:"2" %}
-                                <li class="page-item {% if page_obj.number == i %}active{% endif %}">
-                                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-                                </li>
-                            {% endif %}
-                            
-                            {% if forloop.last and i < paginator.num_pages %}
-                                <li class="page-item disabled">
-                                    <span class="page-link">…</span>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                        
-                        {% if page_obj.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última</a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <span class="page-link">Próximo</span>
-                            </li>
-                            <li class="page-item disabled">
-                                <span class="page-link">Última</span>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            {% endif %}
-
             {% else %}
             <div class="text-center py-4">
                 <i class="fas fa-receipt fa-3x text-muted mb-3"></i>
