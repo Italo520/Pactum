@@ -32,4 +32,4 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 
 # Comando para rodar a aplicação
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "funetec_system.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "Pactum.wsgi:application"]

@@ -82,7 +82,7 @@ MIDDLEWARE = [
     'apps.core.middleware.AuditMiddleware',  # Custom middleware para logs
 ]
 
-ROOT_URLCONF = 'funetec_system.urls'
+ROOT_URLCONF = 'Pactum.urls'
 
 TEMPLATES = [
     {
@@ -100,7 +100,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'funetec_system.wsgi.application'
+WSGI_APPLICATION = 'Pactum.wsgi.application'
 
 # Database
 # Force SQLite for development in Replit environment

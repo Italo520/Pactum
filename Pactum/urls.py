@@ -1,4 +1,4 @@
-# Substitua o conteúdo de funetec_system/urls.py por:
+# Substitua o conteúdo de Pactum/urls.py por:
 
 from django.contrib import admin
 from django.urls import path, include
