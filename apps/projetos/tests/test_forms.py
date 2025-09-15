@@ -12,13 +12,11 @@ class ProjetoFormTest(TestCase):
 
     def test_projeto_form_valid(self):
         form_data = {
+            'cod_projeto': 3,
             'nome': 'Test Project',
             'data_inicio': date(2025, 1, 1),
             'data_encerramento': date(2025, 12, 31),
             'valor': 10000.00,
-            'responsavel': self.responsavel.id,
-            'cliente_nome': 'Test Client',
-            'cliente_email': 'client@test.com',
             'situacao': '1',
         }
         form = ProjetoForm(data=form_data)

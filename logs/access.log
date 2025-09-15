@@ -12028,3 +12028,586 @@ INFO 2025-09-15 17:41:48,164 basehttp 1619 139764942501568 "GET / HTTP/1.1" 302 
 INFO 2025-09-15 17:41:48,393 basehttp 1619 139764942501568 "GET /dashboard/ HTTP/1.1" 302 0
 INFO 2025-09-15 17:41:48,627 basehttp 1619 139764942501568 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11123
 INFO 2025-09-15 17:41:49,080 basehttp 1619 139764942501568 "GET /static/img/logo_pactum.png HTTP/1.1" 304 0
+ERROR 2025-09-15 15:41:56,846 log 8 139796076301184 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:41:56,936 log 8 139796076301184 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:45:47,346 log 9 139634410892160 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:45:47,422 log 9 139634410892160 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:45:50,918 log 9 139634410892160 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:45:50,957 log 9 139634410892160 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:51:14,750 log 9 140297480407936 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:51:14,793 log 9 140297480407936 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:51:16,764 log 9 140297480407936 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:51:16,806 log 9 140297480407936 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:51:21,400 log 9 140297480407936 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:51:21,480 log 9 140297480407936 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:51:28,380 log 9 140297480407936 Internal Server Error: /admin
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:51:28,411 log 9 140297480407936 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:51:42,469 log 9 140297480407936 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:51:42,502 log 9 140297480407936 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:53:48,863 log 9 140297480407936 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:53:48,916 log 9 140297480407936 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:54:03,857 log 9 140297480407936 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:54:03,897 log 9 140297480407936 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:54:04,754 log 9 140297480407936 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:54:04,785 log 9 140297480407936 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:56:04,656 log 9 140333792418688 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:56:04,736 log 9 140333792418688 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:56:09,340 log 9 140333792418688 Internal Server Error: /
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 15:56:09,378 log 9 140333792418688 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/middleware.py", line 12, in process_request
+    request._messages = default_storage(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/__init__.py", line 12, in default_storage
+    return import_string(settings.MESSAGE_STORAGE)(request)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 16, in __init__
+    self.storages = [
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/fallback.py", line 17, in <listcomp>
+    storage_class(*args, **kwargs) for storage_class in self.storage_classes
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/messages/storage/cookie.py", line 77, in __init__
+    self.signer = signing.get_cookie_signer(salt=self.key_salt)
+  File "/usr/local/lib/python3.10/site-packages/django/core/signing.py", line 114, in get_cookie_signer
+    key=_cookie_signer_key(settings.SECRET_KEY),
+  File "/usr/local/lib/python3.10/site-packages/django/conf/__init__.py", line 111, in __getattr__
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be empty.
+ERROR 2025-09-15 16:23:06,392 log 9 139677711530880 Internal Server Error: /dashboard/analytics/contratos/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/auth/mixins.py", line 73, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/django/contrib/auth/mixins.py", line 109, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/django/views/generic/base.py", line 226, in get
+    context = self.get_context_data(**kwargs)
+  File "/app/apps/dashboard/views/analytics_views.py", line 46, in get_context_data
+    'metricas_contratos': analytics_service.get_metricas_contratos(),
+  File "/app/apps/dashboard/views/analytics_views.py", line 443, in get_metricas_contratos
+    'valor_pago': contratos.aggregate(Sum('valor_pago'))['valor_pago__sum'] or 0,
+  File "/usr/local/lib/python3.10/site-packages/django/db/models/query.py", line 592, in aggregate
+    return self.query.chain().get_aggregation(self.db, kwargs)
+  File "/usr/local/lib/python3.10/site-packages/django/db/models/sql/query.py", line 398, in get_aggregation
+    aggregate = aggregate_expr.resolve_expression(
+  File "/usr/local/lib/python3.10/site-packages/django/db/models/aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+  File "/usr/local/lib/python3.10/site-packages/django/db/models/expressions.py", line 950, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+  File "/usr/local/lib/python3.10/site-packages/django/db/models/expressions.py", line 829, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+  File "/usr/local/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1976, in resolve_ref
+    join_info = self.setup_joins(
+  File "/usr/local/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1823, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+  File "/usr/local/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1724, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'valor_pago' into field. Choices are: cod_ordem, contratado, cpf_cnpj, data_fim, data_inicio, data_parcela_inicial, descricao, itens, num_contrato, parcelas, situacao, tipo_pessoa, valor

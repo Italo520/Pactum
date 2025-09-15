@@ -14,13 +14,11 @@ class ProjetoViewsTest(TestCase):
         self.client.login(username='testuser', password='12345')
         self.responsavel = self.user
         self.projeto = Projeto.objects.create(
+            cod_projeto=2,
             nome='Test Project',
             data_inicio=date(2025, 1, 1),
             data_encerramento=date(2025, 12, 31),
             valor=10000.00,
-            responsavel=self.responsavel,
-            cliente_nome='Test Client',
-            cliente_email='client@test.com',
         )
 
     def test_projeto_list_view(self):

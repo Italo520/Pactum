@@ -53,3 +53,4 @@ ERROR 2025-09-15 16:39:39,848 middleware 842 139784101017280 EXCEPTION /dashboar
 ERROR 2025-09-15 16:40:01,382 middleware 842 139784101017280 EXCEPTION /dashboard/ - TemplateSyntaxError: Invalid block tag on line 9: 'static'. Did you forget to register or load this tag?
 ERROR 2025-09-15 16:40:04,385 middleware 842 139784101017280 EXCEPTION /dashboard/ - TemplateSyntaxError: Invalid block tag on line 9: 'static'. Did you forget to register or load this tag?
 ERROR 2025-09-15 16:40:33,982 middleware 842 139784101017280 EXCEPTION /dashboard/ - TemplateSyntaxError: Invalid block tag on line 9: 'static'. Did you forget to register or load this tag?
+ERROR 2025-09-15 16:23:06,361 middleware 9 139677711530880 EXCEPTION /dashboard/analytics/contratos/ - FieldError: Cannot resolve keyword 'valor_pago' into field. Choices are: cod_ordem, contratado, cpf_cnpj, data_fim, data_inicio, data_parcela_inicial, descricao, itens, num_contrato, parcelas, situacao, tipo_pessoa, valor

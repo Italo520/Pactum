@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 
 # Coletar arquivos estáticos
-RUN python manage.py collectstatic --noinput
+RUN DEBUG=True python manage.py collectstatic --noinput
 
 # Expor a porta que o Gunicorn vai rodar
 EXPOSE 5000
