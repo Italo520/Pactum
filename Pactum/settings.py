@@ -65,7 +65,7 @@ LOCAL_APPS = [
     'apps.dashboard.apps.DashboardConfig',
     'apps.pagamentos.apps.PagamentosConfig',
     'apps.relatorios.apps.RelatoriosConfig',
-    'apps.clientes',
+    'apps.clientes.apps.ClientesConfig',
 ]
 
 
@@ -171,7 +171,7 @@ LOGOUT_REDIRECT_URL = 'accounts:login'
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='sistema@funetec.org.br')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='sistema@pactum.org.br')
 
 
 LOGGING = {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - FUNETEC</title>
+    <title>Login - Pactum</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -154,9 +154,9 @@
         <div class="login-header">
             <div class="logo">
                 {% load static %}
-                <img src="{% static 'img/logo_funetec.jpg' %}" alt="FUNETEC">
+                <img src="{% static 'img/logo_funetec.jpg' %}" alt="Pactum">
             </div>
-            <h2>FUNETEC</h2>
+            <h2>Pactum</h2>
             <p>Sistema de Gestão de Projetos e Contratos</p>
         </div>
         
@@ -236,7 +236,7 @@
         <div class="text-center">
             <p class="mb-0 small">
                 Precisa de acesso? 
-                <a href="mailto:contato@funetec.org.br" class="text-decoration-none">
+                <a href="mailto:contato@pactum.org.br" class="text-decoration-none">
                     Entre em contato
                 </a>
             </p>
@@ -244,7 +244,7 @@
         
         <div class="footer-text">
             <p class="mb-0">
-                © {{ current_year|default:2025 }} FUNETEC-PB. Todos os direitos reservados.
+                © {{ current_year|default:2025 }} Pactum. Todos os direitos reservados.
             </p>
         </div>
     </div>
@@ -260,7 +260,7 @@
                 <div class="modal-body">
                     <p>Para recuperar sua senha, entre em contato com o administrador do sistema:</p>
                     <ul>
-                        <li>Email: <a href="mailto:ti@funetec.org.br">ti@funetec.org.br</a></li>
+                        <li>Email: <a href="mailto:ti@pactum.org.br">ti@pactum.org.br</a></li>
                         <li>Telefone: (83) 3000-0000</li>
                     </ul>
                     <p class="small text-muted">
@@ -307,7 +307,7 @@
             
             // Remover loading se houver erro (depois de 5 segundos)
             setTimeout(function() {
-                if (form.classList.contains('loading')) {.
+                if (form.classList.contains('loading')) {
                     form.classList.remove('loading');
                     buttonText.textContent = 'Entrar';
                     button.disabled = false;
