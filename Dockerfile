@@ -8,6 +8,16 @@ ENV PYTHONUNBUFFERED 1
 # Definir o diretório de trabalho
 WORKDIR /app
 
+# Instalar dependências do sistema
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    libpango-1.0-0 \
+    libharfbuzz0b \
+    libpangoft2-1.0-0 \
+    libpangocairo-1.0-0 \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
 # Instalar dependências
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
