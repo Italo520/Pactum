@@ -11966,3 +11966,50 @@ INFO 2025-09-15 16:44:46,181 basehttp 1814 139880709486272 "GET /dashboard/ HTTP
 INFO 2025-09-15 16:44:46,953 basehttp 1814 139880709486272 "GET /static/js/base.js HTTP/1.1" 304 0
 INFO 2025-09-15 16:44:56,039 basehttp 1814 139880709486272 "GET /projetos/ HTTP/1.1" 200 35713
 INFO 2025-09-15 16:44:56,290 basehttp 1814 139880709486272 "GET /static/css/base.css HTTP/1.1" 304 0
+INFO 2025-09-15 16:58:35,821 autoreload 893 139634131582144 Watching for file changes with StatReloader
+INFO 2025-09-15 16:59:22,507 autoreload 965 139881630416064 Watching for file changes with StatReloader
+INFO 2025-09-15 17:00:07,770 autoreload 977 140153433881792 Watching for file changes with StatReloader
+INFO 2025-09-15 17:03:17,978 autoreload 1044 139865510665408 Watching for file changes with StatReloader
+INFO 2025-09-15 17:03:19,981 basehttp 1044 139865425913536 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 17:03:20,331 basehttp 1044 139865425913536 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 17:03:20,583 basehttp 1044 139865425913536 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11160
+INFO 2025-09-15 17:03:21,489 basehttp 1044 139865425913536 "GET /static/img/logo_pactum.png HTTP/1.1" 200 1463340
+INFO 2025-09-15 17:03:24,907 basehttp 1044 139865341556416 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 17:03:24,909 basehttp 1044 139865341556416 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 17:03:24,955 basehttp 1044 139865341556416 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11160
+INFO 2025-09-15 17:03:25,021 basehttp 1044 139865341556416 "GET /static/img/logo_pactum.png HTTP/1.1" 200 1463340
+INFO 2025-09-15 17:03:25,343 basehttp 1044 139865341556416 "GET /favicon.ico HTTP/1.1" 301 0
+INFO 2025-09-15 17:03:25,386 basehttp 1044 139865341556416 "GET /static/favicon.ico HTTP/1.1" 200 55
+INFO 2025-09-15 17:04:08,346 basehttp 1044 139865341556416 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 17:04:08,355 basehttp 1044 139865341556416 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 17:04:08,399 basehttp 1044 139865341556416 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11160
+INFO 2025-09-15 17:06:27,288 autoreload 1044 139865510665408 /home/runner/workspace/Pactum/settings.py changed, reloading.
+INFO 2025-09-15 17:06:28,062 autoreload 1573 139955723881664 Watching for file changes with StatReloader
+INFO 2025-09-15 17:06:29,121 basehttp 1573 139955640178368 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 17:06:29,347 basehttp 1573 139955640178368 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 17:06:29,582 basehttp 1573 139955640178368 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11160
+INFO 2025-09-15 17:06:30,021 basehttp 1573 139955640178368 "GET /static/img/logo_pactum.png HTTP/1.1" 304 0
+INFO 2025-09-15 17:08:00,680 autoreload 1754 139762019667136 Watching for file changes with StatReloader
+INFO 2025-09-15 17:08:01,550 basehttp 1754 139761935963840 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 17:08:01,558 basehttp 1754 139761935963840 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 17:08:01,614 basehttp 1754 139761935963840 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11160
+INFO 2025-09-15 17:08:01,668 basehttp 1754 139761935963840 "GET /static/img/logo_pactum.png HTTP/1.1" 304 0
+INFO 2025-09-15 17:08:01,853 basehttp 1754 139761859688128 "GET / HTTP/1.1" 302 0
+INFO 2025-09-15 17:08:01,865 basehttp 1754 139761935963840 "GET /static/favicon.ico HTTP/1.1" 304 0
+INFO 2025-09-15 17:08:02,075 basehttp 1754 139761859688128 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 17:08:02,297 basehttp 1754 139761859688128 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11160
+INFO 2025-09-15 17:08:02,783 basehttp 1754 139761859688128 "GET /static/img/logo_pactum.png HTTP/1.1" 304 0
+INFO 2025-09-15 17:18:14,300 basehttp 1754 139761935963840 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11130
+INFO 2025-09-15 17:18:15,300 basehttp 1754 139761935963840 "GET /static/img/logo_pactum.png HTTP/1.1" 304 0
+INFO 2025-09-15 17:18:56,485 basehttp 1754 139761935963840 "POST /accounts/login/?next=/dashboard/ HTTP/1.1" 302 0
+INFO 2025-09-15 17:18:56,818 basehttp 1754 139761935963840 "GET /dashboard/analytics/financeiro/ HTTP/1.1" 200 20913
+INFO 2025-09-15 17:18:57,102 basehttp 1754 139761935963840 "GET /static/css/base.css HTTP/1.1" 200 9665
+INFO 2025-09-15 17:18:57,327 basehttp 1754 139761935963840 "GET /static/css/dashboard.css HTTP/1.1" 200 3613
+INFO 2025-09-15 17:18:57,329 basehttp 1754 139761859688128 "GET /static/js/base.js HTTP/1.1" 200 8814
+INFO 2025-09-15 17:18:58,834 basehttp 1754 139761859688128 "GET /dashboard/api/chart-data/financeiro/?type=fluxo_caixa HTTP/1.1" 200 479
+INFO 2025-09-15 17:18:58,863 basehttp 1754 139761859688128 "GET /dashboard/api/chart-data/financeiro/?type=receitas HTTP/1.1" 200 579
+INFO 2025-09-15 17:18:58,865 basehttp 1754 139761849198272 "GET /dashboard/api/chart-data/financeiro/?type=impostos HTTP/1.1" 200 203
+INFO 2025-09-15 17:18:58,882 basehttp 1754 139761935963840 "GET /dashboard/api/chart-data/financeiro/?type=inadimplencia HTTP/1.1" 200 141
+INFO 2025-09-15 17:21:20,089 basehttp 1754 139761935963840 "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-09-15 17:21:20,320 basehttp 1754 139761935963840 "GET /accounts/login/ HTTP/1.1" 200 11123
+INFO 2025-09-15 17:21:20,560 basehttp 1754 139761935963840 "GET /static/img/logo_pactum.png HTTP/1.1" 304 0

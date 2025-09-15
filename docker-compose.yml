@@ -1,15 +1,38 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-pactum_db}
+      POSTGRES_USER: ${POSTGRES_USER:-pactum_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pactum_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-pactum_user} -d ${POSTGRES_DB:-pactum_db}"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
   web:
     build: .
-    command: gunicorn --bind 0.0.0.0:5000 Pactum.wsgi:application
+    command: bash -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn --bind 0.0.0.0:5000 Pactum.wsgi:application"
     volumes:
       - .:/app
     ports:
       - "5000:5000"
     environment:
-      - SECRET_KEY=mg4rs6v_s6r4_yg*+c(oy$*+4lljn!!svt4ryj*@bm!m3d5i$&
-      - DEBUG=True
-      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,*.replit.dev,*.replit.app,*.replit.co
-      - DATABASE_URL=sqlite:///./db.sqlite3
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=${DEBUG:-False}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1,0.0.0.0}
+      - DATABASE_URL=postgres://${POSTGRES_USER:-pactum_user}:${POSTGRES_PASSWORD:-pactum_password}@db:5432/${POSTGRES_DB:-pactum_db}
+      - USE_POSTGRES=True
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

@@ -110,13 +110,37 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Pactum.wsgi.application'
 
 # Database
-# Force SQLite for development in Replit environment
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Detect Replit environment and force SQLite
+REPLIT = bool(os.getenv('REPLIT_DEV_DOMAIN') or os.getenv('REPL_ID'))
+USE_POSTGRES = config('USE_POSTGRES', default=False, cast=bool)
+DATABASE_URL = os.getenv('DATABASE_URL')
+
+if REPLIT:
+    # Always use SQLite on Replit
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+elif DATABASE_URL and (DATABASE_URL.startswith('postgres://') or DATABASE_URL.startswith('postgresql://')):
+    # Use PostgreSQL when DATABASE_URL is set with postgres scheme
+    DATABASES = {
+        'default': dj_database_url.config(default=DATABASE_URL)
+    }
+elif USE_POSTGRES:
+    # Use PostgreSQL when explicitly enabled
+    DATABASES = {
+        'default': dj_database_url.config(default=DATABASE_URL)
+    }
+else:
+    # Fallback to SQLite for local development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
