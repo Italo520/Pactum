@@ -1,0 +1,1 @@
+Garantir a qualidade e a robustez do projeto Pactum através da criação e execução de testes. Este agente é responsável por identificar, documentar e reportar bugs para garantir que o software funcione conforme o esperado.

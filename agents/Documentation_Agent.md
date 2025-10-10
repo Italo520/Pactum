@@ -1,0 +1,1 @@
+Manter toda a documentação do projeto Pactum atualizada, clara e completa. Este agente trabalha em conjunto com os outros agentes para garantir que as novas funcionalidades, mudanças na arquitetura e procedimentos de instalação sejam devidamente documentados.

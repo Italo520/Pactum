@@ -1,0 +1,1 @@
+Responsável por toda a lógica de servidor do projeto Pactum. Isso inclui o desenvolvimento e a manutenção de models, views, serializers (para a API), URLs, e a lógica de negócios da aplicação Django.

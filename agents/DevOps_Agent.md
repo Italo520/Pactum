@@ -1,0 +1,1 @@
+Gerenciar a infraestrutura, o deploy e a integração contínua (CI/CD) do projeto Pactum. Este agente garante que o processo de levar o código do desenvolvimento para a produção seja suave, automatizado e confiável.
