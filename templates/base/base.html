@@ -1,4 +1,5 @@
 {% load static %}
+{% load class_tags %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,36 +18,38 @@
 
     {% block extra_css %}{% endblock %}
 </head>
-<body>
-    {% include 'base/navbar.html' %}
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
-    <div class="container-fluid">
-        <div class="row">
-            {% include 'base/sidebar.html' %}
+    <div class="flex flex-col md:flex-row">
+        {% include 'base/sidebar.html' %}
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">{% block page_title %}Dashboard{% endblock %}</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="flex-1 flex flex-col">
+            {% include 'base/navbar.html' %}
+
+            <main class="flex-1 p-6">
+                <div class="flex justify-between items-center pb-2 mb-4 border-b border-gray-300">
+                    <h1 class="text-3xl font-bold text-gray-800">{% block page_title %}Dashboard{% endblock %}</h1>
+                    <div class="flex items-center space-x-2">
                         {% block page_actions %}{% endblock %}
                     </div>
                 </div>
 
                 {% if messages %}
+                    <div class="mb-4">
                     {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <div class="p-4 rounded-md {{ message.tags|get_alert_class }}" role="alert">
                             {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     {% endfor %}
+                    </div>
                 {% endif %}
 
                 {% block content %}{% endblock %}
+
+                {% include 'base/footer.html' %}
             </main>
         </div>
     </div>
-
-    {% include 'base/footer.html' %}
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
