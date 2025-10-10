@@ -1,13 +1,13 @@
-# Sistema FUNETEC - Análise e Guia de Melhorias
+# Análise do Sistema Legado - Guia de Melhorias para o Pactum
 
 ## 📋 Visão Geral do Sistema
 
-O Sistema FUNETEC é uma aplicação Django para gestão de projetos e contratos, desenvolvido para a Fundação de Apoio à Pesquisa e ao Desenvolvimento Tecnológico da Paraíba.
+O sistema legado é uma aplicação Django para gestão de projetos e contratos. Esta análise serve como base para as melhorias implementadas no **Pactum**.
 
 ### Arquitetura Principal
 
 ```
-funetec_system/
+pactum_system/
 ├── apps/
 │   ├── accounts/        # Gestão de usuários e perfis
 │   ├── core/           # Funcionalidades base e mixins
@@ -18,7 +18,7 @@ funetec_system/
 │   └── relatorios/     # Sistema de relatórios
 ├── templates/          # Templates HTML
 ├── static/            # Arquivos estáticos (CSS, JS)
-└── funetec_system/    # Configurações Django
+└── pactum_system/    # Configurações Django
 ```
 
 ## 🏗️ Modelos de Dados
@@ -115,7 +115,7 @@ from django.utils import timezone  # Adicionar import
 
 #### Settings Modulares
 ```python
-# funetec_system/settings/
+# pactum_system/settings/
 ├── __init__.py
 ├── base.py
 ├── development.py
