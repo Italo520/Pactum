@@ -1,0 +1,1 @@
+Este documento centraliza o backlog de desenvolvimento do projeto Pactum e descreve o fluxo de trabalho para a equipe de agentes de IA. O Project_Manager_Agent é o principal responsável por manter este arquivo atualizado.
