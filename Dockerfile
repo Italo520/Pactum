@@ -2,8 +2,8 @@
 FROM python:3.10-slim
 
 # Definir variáveis de ambiente
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Definir o diretório de trabalho
 WORKDIR /app
@@ -25,9 +25,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiar o código do projeto
 COPY . /app/
 
-# Coletar arquivos estáticos
-RUN DEBUG=True python manage.py collectstatic --noinput
-
+# Criar diretório de logs
+RUN mkdir -p /app/logs
 # Expor a porta que o Gunicorn vai rodar
 EXPOSE 5000
 
