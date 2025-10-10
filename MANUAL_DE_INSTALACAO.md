@@ -17,7 +17,7 @@
 ### Requisitos de Sistema
 - **Python**: 3.10 ou superior
 - **Django**: 4.2.7
-- **Banco de Dados**: SQLite (desenvolvimento) / PostgreSQL (produção)
+- **Banco de Dados**: PostgreSQL
 - **Memória RAM**: Mínimo 2GB (recomendado 4GB)
 - **Espaço em Disco**: Mínimo 1GB livre
 
@@ -33,7 +33,6 @@ gunicorn==23.0.0
 psycopg2-binary==2.9.10
 pillow==10.1.0
 reportlab==4.0.7
-mercadopago==2.2.1
 ```
 
 ---
@@ -68,9 +67,6 @@ Crie um arquivo `.env` na raiz do projeto:
 SECRET_KEY=sua-chave-secreta-aqui
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
-DATABASE_URL=sqlite:///db.sqlite3
-MERCADOPAGO_ACCESS_TOKEN=seu-token-mp
-MERCADOPAGO_PUBLIC_KEY=sua-chave-publica-mp
 ```
 
 ### 5. Executar Migrações
@@ -93,60 +89,11 @@ python manage.py createsuperuser
 python manage.py runserver 0.0.0.0:8000
 ```
 
----
 
-## 🌐 Instalação no Replit
-
-### 1. Importar do GitHub
-1. Acesse [Replit.com](https://replit.com)
-2. Clique em **"Create Repl"**
-3. Selecione **"Import from GitHub"**
-4. Cole a URL do repositório
-5. Aguarde a importação
-
-### 2. Configuração Automática
-O Replit detecta automaticamente:
-- **Linguagem**: Python
-- **Dependências**: requirements.txt
-- **Configuração**: Já otimizada para o ambiente
-
-### 3. Executar Setup
-```bash
-# O sistema automaticamente:
-# 1. Instala as dependências
-# 2. Executa migrações
-# 3. Popula o banco de dados
-# 4. Inicia o servidor na porta 5000
-```
-
-### 4. Acessar o Sistema
-- **URL**: Fornecida automaticamente pelo Replit
-- **Porta**: 5000 (configurada automaticamente)
-- **HTTPS**: Habilitado por padrão
-
-### 5. Usuário Padrão
-```
-Usuário: admin
-Email: admin@funetec.org.br
-Senha: admin123
-```
-
----
 
 ## 🗄️ Configuração do Banco de Dados
 
-### SQLite (Desenvolvimento)
-```python
-# settings.py
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-```
-
-### PostgreSQL (Produção)
+### PostgreSQL 
 ```python
 # settings.py
 DATABASES = {
@@ -233,16 +180,6 @@ EMAIL_HOST_USER=seu-email@gmail.com
 EMAIL_HOST_PASSWORD=sua-senha-de-app
 ```
 
-### Configurações do MercadoPago
-```env
-# Produção
-MERCADOPAGO_ACCESS_TOKEN=APP_USR-xxxxxxxx-xxxxxxxx
-MERCADOPAGO_PUBLIC_KEY=APP_USR-xxxxxxxx-xxxxxxxx
-
-# Sandbox (testes)
-MERCADOPAGO_ACCESS_TOKEN=TEST-xxxxxxxx-xxxxxxxx
-MERCADOPAGO_PUBLIC_KEY=TEST-xxxxxxxx-xxxxxxxx
-```
 
 ### Configurações Opcionais
 ```env
@@ -261,12 +198,6 @@ BACKUP_SCHEDULE=0 2 * * *  # Todo dia às 2h
 ---
 
 ## 📦 Deploy e Monitoramento
-
-### Deploy no Replit
-1. **Automatic**: O sistema já está configurado para deploy automático
-2. **Manual**: Use o botão "Deploy" no painel do Replit
-3. **URL**: Acesse através da URL fornecida
-4. **Domínio**: Configure domínio customizado se necessário
 
 ### Deploy com Docker
 ```dockerfile
@@ -405,8 +336,6 @@ X_FRAME_OPTIONS = 'DENY'
 
 ### 3. Backup do Banco
 ```bash
-# Backup SQLite
-cp db.sqlite3 backup/db_$(date +%Y%m%d_%H%M%S).sqlite3
 
 # Backup PostgreSQL
 pg_dump funetec_db > backup/funetec_$(date +%Y%m%d_%H%M%S).sql
@@ -425,10 +354,7 @@ Ao relatar problemas, inclua:
 - **Passos para reproduzir** o problema
 
 ### Contatos
-- **Email**: ti@funetec.org.br
-- **Telefone**: (83) 3000-0000
-- **GitHub Issues**: Para bugs e sugestões
-- **Documentação**: https://docs.funetec.org.br
+- **GitHub **: https://github.com/Italo520
 
 ---
 
@@ -458,5 +384,4 @@ Ao relatar problemas, inclua:
 ---
 
 *Documento gerado em: Setembro 2025*  
-*Versão do Sistema: 1.0*  
-*FUNETEC-PB - Fundação de Educação, Tecnologia e Cultura da Paraíba*
+*Versão do Sistema: 1.0* 
