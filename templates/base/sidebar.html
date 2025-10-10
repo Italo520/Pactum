@@ -1,155 +1,132 @@
 <!-- templates/base/sidebar.html -->
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-    <div class="position-sticky pt-3">
-        <!-- Dashboard -->
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link {% if 'dashboard' in request.resolver_match.url_name %}active{% endif %}" 
-                   href="{% url 'dashboard:index' %}">
-                    <i class="fas fa-tachometer-alt me-2"></i>
-                    <span>Dashboard</span>
+{% load static %}
+<aside id="sidebarMenu" class="w-64 bg-gray-800 text-white min-h-screen p-4 md:block hidden">
+    <!-- Logo -->
+    <div class="flex items-center justify-center mb-6">
+        <a href="{% url 'dashboard:index' %}" class="flex items-center">
+            <img src="{% static 'img/logo_pactum.png' %}" alt="Pactum Logo" class="h-12 w-auto">
+            <span class="text-2xl font-bold ml-2">Pactum</span>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <!-- Dashboard -->
+            <li>
+                <a href="{% url 'dashboard:index' %}" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700 {% if 'dashboard' in request.resolver_match.url_name %}bg-gray-700{% endif %}">
+                    <i class="fas fa-tachometer-alt w-6"></i>
+                    <span class="ml-3">Dashboard</span>
                 </a>
             </li>
-        </ul>
-        
-        <!-- Projetos -->
-        {% if user.can_manage_projects or user.is_cliente %}
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Projetos</span>
-            </h6>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link {% if 'projeto' in request.resolver_match.url_name %}active{% endif %}" 
-                       href="{% url 'projetos:projeto_list' %}">
-                        <i class="fas fa-list me-2"></i>
-                        <span>Listar Projetos</span>
-                    </a>
-                </li>
-                {% if user.can_manage_projects %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'projetos:projeto_create' %}">
-                            <i class="fas fa-plus me-2"></i>
-                            <span>Novo Projeto</span>
+
+            <!-- Projetos -->
+            {% if user.can_manage_projects or user.is_cliente %}
+            <li class="mt-4">
+                <h5 class="px-4 text-sm font-semibold text-gray-400 uppercase tracking-wider">Projetos</h5>
+                <ul class="mt-2">
+                    <li>
+                        <a href="{% url 'projetos:projeto_list' %}" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700 {% if 'projeto' in request.resolver_match.url_name %}bg-gray-700{% endif %}">
+                            <i class="fas fa-list w-6"></i>
+                            <span class="ml-3">Listar Projetos</span>
                         </a>
                     </li>
-                {% endif %}
-            </ul>
-        {% endif %}
-        
-        <!-- Contratos -->
-        {% if user.can_manage_contracts %}
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Contratos</span>
-            </h6>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link {% if 'contrato' in request.resolver_match.url_name %}active{% endif %}" 
-                       href="{% url 'contratos:contrato_list' %}">
-                        <i class="fas fa-file-contract me-2"></i>
-                        <span>Contratos</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contratos:prestador_list' %}">
-                        <i class="fas fa-users me-2"></i>
-                        <span>Prestadores</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contratos:parcela_list' %}">
-                        <i class="fas fa-money-bill-wave me-2"></i>
-                        <span>Parcelas</span>
-                    </a>
-                </li>
-            </ul>
-        {% endif %}
-        
-        <!-- Clientes -->
-        {% if user.can_manage_contracts %}
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Clientes</span>
-            </h6>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link {% if 'cliente' in request.resolver_match.url_name %}active{% endif %}" 
-                       href="{% url 'clientes:cliente-list' %}">
-                        <i class="fas fa-users me-2"></i>
-                        <span>Listar Clientes</span>
-                    </a>
-                </li>
-            </ul>
-        {% endif %}
-        
-        <!-- Financeiro -->
-        {% if user.can_view_financial_data %}
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Financeiro</span>
-            </h6>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dashboard:analytics_financeiro' %}">
-                        <i class="fas fa-chart-line me-2"></i>
-                        <span>Analytics</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'pagamentos:payment_history' %}">
-                        <i class="fas fa-credit-card me-2"></i>
-                        <span>Pagamentos</span>
-                    </a>
-                </li>
-            </ul>
-        {% endif %}
-        
-        <!-- Relatórios -->
-        {% if user.can_generate_reports %}
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Relatórios</span>
-            </h6>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'relatorios:relatorio_list' %}">
-                        <i class="fas fa-file-alt me-2"></i>
-                        <span>Relatórios</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'relatorios:relatorio_custom' %}">
-                        <i class="fas fa-chart-bar me-2"></i>
-                        <span>Relatório Customizado</span>
-                    </a>
-                </li>
-            </ul>
-        {% endif %}
-        
-        <!-- Analytics -->
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Analytics</span>
-        </h6>
-        <ul class="nav flex-column">
-            {% if user.can_manage_projects %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dashboard:analytics_projetos' %}">
-                        <i class="fas fa-project-diagram me-2"></i>
-                        <span>Projetos</span>
-                    </a>
-                </li>
+                    {% if user.can_manage_projects %}
+                    <li>
+                        <a href="{% url 'projetos:projeto_create' %}" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-plus w-6"></i>
+                            <span class="ml-3">Novo Projeto</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </li>
             {% endif %}
+
+            <!-- Contratos -->
+            {% if user.can_manage_contracts %}
+            <li class="mt-4">
+                <h5 class="px-4 text-sm font-semibold text-gray-400 uppercase tracking-wider">Contratos</h5>
+                <ul class="mt-2">
+                    <li>
+                        <a href="{% url 'contratos:contrato_list' %}" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700 {% if 'contrato' in request.resolver_match.url_name %}bg-gray-700{% endif %}">
+                            <i class="fas fa-file-contract w-6"></i>
+                            <span class="ml-3">Contratos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'contratos:prestador_list' %}" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-users w-6"></i>
+                            <span class="ml-3">Prestadores</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'contratos:parcela_list' %}" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-money-bill-wave w-6"></i>
+                            <span class="ml-3">Parcelas</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+
+            <!-- Clientes -->
+            {% if user.can_manage_contracts %}
+            <li class="mt-4">
+                <h5 class="px-4 text-sm font-semibold text-gray-400 uppercase tracking-wider">Clientes</h5>
+                <ul class="mt-2">
+                    <li>
+                        <a href="{% url 'clientes:cliente-list' %}" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700 {% if 'cliente' in request.resolver_match.url_name %}bg-gray-700{% endif %}">
+                            <i class="fas fa-users w-6"></i>
+                            <span class="ml-3">Listar Clientes</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+
+            <!-- Financeiro -->
             {% if user.can_view_financial_data %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dashboard:analytics_contratos' %}">
-                        <i class="fas fa-handshake me-2"></i>
-                        <span>Contratos</span>
-                    </a>
-                </li>
+            <li class="mt-4">
+                <h5 class="px-4 text-sm font-semibold text-gray-400 uppercase tracking-wider">Financeiro</h5>
+                <ul class="mt-2">
+                    <li>
+                        <a href="{% url 'dashboard:analytics_financeiro' %}" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-chart-line w-6"></i>
+                            <span class="ml-3">Analytics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'pagamentos:payment_history' %}" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-credit-card w-6"></i>
+                            <span class="ml-3">Pagamentos</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             {% endif %}
+
+            <!-- Relatórios -->
+            {% if user.can_generate_reports %}
+            <li class="mt-4">
+                <h5 class="px-4 text-sm font-semibold text-gray-400 uppercase tracking-wider">Relatórios</h5>
+                <ul class="mt-2">
+                    <li>
+                        <a href="{% url 'relatorios:relatorio_list' %}" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-file-alt w-6"></i>
+                            <span class="ml-3">Relatórios</span>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="{% url 'relatorios:relatorio_custom' %}" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-chart-bar w-6"></i>
+                            <span class="ml-3">Relatório Customizado</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+
         </ul>
-        
-        <!-- Alertas -->
-        <div class="mt-4">
-            <div id="sidebar-alerts" class="px-3">
-                <!-- Carregado via AJAX -->
-            </div>
-        </div>
-    </div>
-</nav>
+    </nav>
+</aside>

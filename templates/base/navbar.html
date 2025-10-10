@@ -1,111 +1,83 @@
 <!-- templates/base/navbar.html -->
 {% load static %}
-<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background: linear-gradient(135deg, #089561 0%, #17BB94 100%);">
-    <div class="container-fluid">
-        <!-- Botão Toggle Sidebar -->
-        {% if user.is_authenticated %}
-            <button class="btn btn-outline-light me-2" type="button" id="sidebarToggle" title="Recolher/Expandir Menu"
-                    aria-label="Toggle sidebar" aria-pressed="false">
-                <i class="fas fa-bars"></i>
-            </button>
-        {% endif %}
-        
-        <a class="navbar-brand d-flex align-items-center logo-brand-enhanced" href="{% url 'dashboard:index' %}">
-            <div class="logo-container me-3">
-                <img src="{% static 'img/logo_pactum.png' %}" alt="Pactum - Gestão de Projetos e Contratos" height="50" class="logo-img">
-            </div>
-            <div class="brand-text-container">
-                <div class="brand-title">Pactum</div>
-                <div class="brand-subtitle d-none d-lg-block">Gestão de Projetos e Contratos</div>
-            </div>
-        </a>
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarNav">
-            {% if user.is_authenticated %}
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'dashboard:index' %}">
-                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
-                        </a>
-                    </li>
-                    {% if user.can_manage_projects %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'projetos:projeto_list' %}">
-                                <i class="fas fa-project-diagram me-1"></i>Projetos
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% if user.can_manage_contracts %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contratos:contrato_list' %}">
-                                <i class="fas fa-file-contract me-1"></i>Contratos
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% if user.can_view_financial_data %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'relatorios:relatorio_list' %}">
-                                <i class="fas fa-chart-bar me-1"></i>Relatórios
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
-                
-                <!-- Search -->
-                <form class="d-flex me-3" method="get" action="{% url 'dashboard:index' %}">
-                    <input class="form-control me-2" type="search" placeholder="Buscar..." name="q" 
-                           value="{{ request.GET.q }}" style="width: 250px;">
-                    <button class="btn btn-outline-light" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-                
-                <!-- User Menu -->
-                <div class="dropdown">
-                    <a class="nav-link dropdown-toggle text-light d-flex align-items-center" href="#" 
-                       id="userDropdown" role="button" data-bs-toggle="dropdown">
-                        {% if user.avatar %}
-                            <img src="{{ user.avatar.url }}" class="rounded-circle me-2" width="32" height="32">
-                        {% else %}
-                            <i class="fas fa-user-circle me-2 fs-4"></i>
-                        {% endif %}
-                        {{ user.get_full_name|default:user.username }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">
-                            <i class="fas fa-user me-2"></i>Perfil
-                        </a></li>
-                        <li><a class="dropdown-item" href="{% url 'accounts:change_password' %}">
-                            <i class="fas fa-key me-2"></i>Alterar Senha
-                        </a></li>
-                        {% if user.is_admin %}
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'accounts:user_list' %}">
-                                <i class="fas fa-users me-2"></i>Gerenciar Usuários
-                            </a></li>
-                            <li><a class="dropdown-item" href="/admin/">
-                                <i class="fas fa-cog me-2"></i>Admin
-                            </a></li>
-                        {% endif %}
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">
-                            <i class="fas fa-sign-out-alt me-2"></i>Sair
-                        </a></li>
-                    </ul>
-                </div>
-            {% else %}
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:login' %}">
-                            <i class="fas fa-sign-in-alt me-1"></i>Entrar
-                        </a>
-                    </li>
-                </ul>
-            {% endif %}
-        </div>
+<header class="bg-white shadow-md p-4 flex justify-between items-center">
+    <!-- Mobile Menu Toggle -->
+    <button class="text-gray-600 focus:outline-none md:hidden" id="sidebarToggle">
+        <i class="fas fa-bars fa-lg"></i>
+    </button>
+
+    <!-- Search Bar -->
+    <div class="relative hidden md:block">
+        <form class="relative" method="get" action="{% url 'dashboard:index' %}">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                <i class="fas fa-search text-gray-400"></i>
+            </span>
+            <input class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                   type="search" placeholder="Buscar..." name="q" value="{{ request.GET.q }}">
+        </form>
     </div>
-</nav>
+
+    <!-- User Menu -->
+    <div class="relative">
+        {% if user.is_authenticated %}
+            <button class="flex items-center space-x-2 focus:outline-none" id="userMenuButton">
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" class="rounded-full h-8 w-8 object-cover">
+                {% else %}
+                    <span class="inline-block h-8 w-8 rounded-full overflow-hidden bg-gray-200">
+                        <svg class="h-full w-full text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 20.993V24H0v-2.993A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </span>
+                {% endif %}
+                <span class="hidden md:inline text-gray-700 font-medium">{{ user.get_full_name|default:user.username }}</span>
+                <i class="fas fa-chevron-down text-gray-500 text-xs"></i>
+            </button>
+            <!-- Dropdown Menu -->
+            <div id="userMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 hidden">
+                <a href="{% url 'accounts:profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-user w-6"></i>Perfil
+                </a>
+                <a href="{% url 'accounts:change_password' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-key w-6"></i>Alterar Senha
+                </a>
+                {% if user.is_admin %}
+                    <div class="border-t border-gray-200 my-1"></div>
+                    <a href="{% url 'accounts:user_list' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-users w-6"></i>Gerenciar Usuários
+                    </a>
+                    <a href="/admin/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-cog w-6"></i>Admin
+                    </a>
+                {% endif %}
+                <div class="border-t border-gray-200 my-1"></div>
+                <a href="{% url 'accounts:logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-sign-out-alt w-6"></i>Sair
+                </a>
+            </div>
+        {% else %}
+            <a href="{% url 'accounts:login' %}" class="text-gray-700 font-medium hover:text-green-600">
+                <i class="fas fa-sign-in-alt mr-2"></i>Entrar
+            </a>
+        {% endif %}
+    </div>
+</header>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const userMenuButton = document.getElementById('userMenuButton');
+        const userMenu = document.getElementById('userMenu');
+
+        if (userMenuButton) {
+            userMenuButton.addEventListener('click', function(event) {
+                userMenu.classList.toggle('hidden');
+                event.stopPropagation();
+            });
+        }
+
+        document.addEventListener('click', function(event) {
+            if (userMenu && !userMenu.contains(event.target) && !userMenuButton.contains(event.target)) {
+                userMenu.classList.add('hidden');
+            }
+        });
+    });
+</script>
