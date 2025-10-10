@@ -331,9 +331,7 @@ Cada contrato gera **parcelas automáticas** conforme a modalidade:
 - Tente **filtros mais específicos**
 
 ### Contato de Suporte
-- **Email**: suporte@funetec.org.br
-- **Telefone**: (83) 3000-0000
-- **Horário**: Segunda a sexta, 8h às 17h
+- **Github**: https://github.com/Italo520
 
 ---
 
@@ -352,4 +350,3 @@ Cada contrato gera **parcelas automáticas** conforme a modalidade:
 
 *Documento gerado em: Setembro 2025*  
 *Versão do Sistema: 1.0*  
-*FUNETEC-PB - Fundação de Educação, Tecnologia e Cultura da Paraíba*
