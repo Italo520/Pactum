@@ -79,7 +79,7 @@ The system uses Django's ORM with SQLite for development (PostgreSQL support con
 
 - Bootstrap 5 for responsive UI components
 - Django Crispy Forms for form rendering and validation
-- Chart.js for dashboard analytics and data visualization
+- shadcn ui for dashboard analytics and data visualization
 - Custom CSS with CSS variables for theming and consistency
 - Progressive enhancement with vanilla JavaScript
 
@@ -94,7 +94,6 @@ The system uses Django's ORM with SQLite for development (PostgreSQL support con
 # External Dependencies
 
 ## Third-Party Services
-- **MercadoPago SDK**: Payment gateway integration for contract payments
 - **Django REST Framework**: API endpoints for data access and integration
 
 ## Key Python Packages
@@ -113,10 +112,9 @@ The system uses Django's ORM with SQLite for development (PostgreSQL support con
 - **Django Environ**: Additional environment configuration support
 
 ## Database
-- **SQLite**: Current development database (working correctly)
 - **PostgreSQL**: Configured for production use (requires resolving psycopg2 compatibility issues)
 
 ## Static Assets
-- **Bootstrap 5.3.0**: CSS framework via CDN
+- **Tailwind**: CSS framework via CDN
 - **Font Awesome 6.4.0**: Icon library via CDN
-- **Chart.js**: Data visualization library via CDN
+- **Aceternity UI**: Data visualization library via CDN
