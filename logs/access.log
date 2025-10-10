@@ -12611,3 +12611,8 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1724, in names_to_path
     raise FieldError(
 django.core.exceptions.FieldError: Cannot resolve keyword 'valor_pago' into field. Choices are: cod_ordem, contratado, cpf_cnpj, data_fim, data_inicio, data_parcela_inicial, descricao, itens, num_contrato, parcelas, situacao, tipo_pessoa, valor
+INFO 2025-10-10 14:40:22,391 autoreload 6567 140440149269376 Watching for file changes with StatReloader
+INFO 2025-10-10 14:40:24,814 basehttp 6567 140439967499968 "GET / HTTP/1.1" 302 0
+INFO 2025-10-10 14:40:24,854 basehttp 6567 140439967499968 "GET /dashboard/ HTTP/1.1" 302 0
+INFO 2025-10-10 14:40:24,919 basehttp 6567 140439967499968 "GET /accounts/login/?next=/dashboard/ HTTP/1.1" 200 11123
+INFO 2025-10-10 14:40:25,161 basehttp 6567 140439967499968 "GET /static/img/logo_pactum.png HTTP/1.1" 200 1463340
