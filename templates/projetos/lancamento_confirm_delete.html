@@ -3,17 +3,21 @@
 {% block title %}Confirmar Deleção{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <h1 class="h3 mb-4 text-gray-800">Confirmar Deleção</h1>
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <p>Você tem certeza que deseja deletar o lançamento "{{ object }}"?</p>
-            <form method="post">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Confirmar</button>
-                <a href="{% url 'projetos:projeto-detail' object.projeto.pk %}" class="btn btn-secondary">Cancelar</a>
-            </form>
+<div class="max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8">
+    <form method="post">
+        {% csrf_token %}
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Confirmar Deleção</h2>
+        <p class="text-lg text-gray-700 dark:text-gray-300">
+            Você tem certeza que deseja deletar o lançamento <strong>"{{ object }}"</strong>?
+        </p>
+        <div class="mt-8 flex justify-end space-x-4">
+            <a href="{% url 'projetos:projeto_detail' object.projeto.pk %}" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors">
+                Cancelar
+            </a>
+            <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                Confirmar
+            </button>
         </div>
-    </div>
+    </form>
 </div>
 {% endblock %}

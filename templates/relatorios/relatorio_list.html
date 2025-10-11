@@ -4,168 +4,128 @@
 {% block page_title %}Central de Relatórios{% endblock %}
 
 {% block content %}
-<!-- Resumo Estatístico -->
-<div class="row mb-4">
-    <div class="col-md-3">
-        <div class="card text-center bg-primary text-white">
-            <div class="card-body">
-                <i class="fas fa-project-diagram fa-2x mb-2"></i>
-                <h5>Total de Projetos</h5>
-                <h3>{{ total_projetos }}</h3>
-            </div>
+<div class="space-y-8">
+    <!-- Resumo Estatístico -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-6 bg-blue-600 text-white rounded-xl shadow-lg text-center">
+            <i class="fas fa-project-diagram fa-2x mb-2"></i>
+            <h5 class="font-semibold">Total de Projetos</h5>
+            <h3 class="text-3xl font-bold">{{ total_projetos }}</h3>
+        </div>
+        <div class="p-6 bg-green-600 text-white rounded-xl shadow-lg text-center">
+            <i class="fas fa-file-contract fa-2x mb-2"></i>
+            <h5 class="font-semibold">Total de Contratos</h5>
+            <h3 class="text-3xl font-bold">{{ total_contratos }}</h3>
+        </div>
+        <div class="p-6 bg-teal-600 text-white rounded-xl shadow-lg text-center">
+            <i class="fas fa-money-bill-wave fa-2x mb-2"></i>
+            <h5 class="font-semibold">Total de Pagamentos</h5>
+            <h3 class="text-3xl font-bold">{{ total_pagamentos }}</h3>
+        </div>
+        <div class="p-6 bg-yellow-600 text-white rounded-xl shadow-lg text-center">
+            <i class="fas fa-dollar-sign fa-2x mb-2"></i>
+            <h5 class="font-semibold">Valor Recebido</h5>
+            <h3 class="text-3xl font-bold">R$ {{ valor_total_recebido|floatformat:0 }}</h3>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="card text-center bg-success text-white">
-            <div class="card-body">
-                <i class="fas fa-file-contract fa-2x mb-2"></i>
-                <h5>Total de Contratos</h5>
-                <h3>{{ total_contratos }}</h3>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card text-center bg-info text-white">
-            <div class="card-body">
-                <i class="fas fa-money-bill-wave fa-2x mb-2"></i>
-                <h5>Total de Pagamentos</h5>
-                <h3>{{ total_pagamentos }}</h3>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card text-center bg-warning text-white">
-            <div class="card-body">
-                <i class="fas fa-dollar-sign fa-2x mb-2"></i>
-                <h5>Valor Recebido</h5>
-                <h3>R$ {{ valor_total_recebido|floatformat:0 }}</h3>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Relatórios Disponíveis -->
-<div class="row">
-    <div class="col-md-4 mb-4">
-        <div class="card shadow-sm h-100">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-project-diagram me-2 text-primary"></i> Relatório de Projetos</h5>
-                <p class="card-text">Lista completa de todos os projetos cadastrados no sistema, incluindo valores, situação e prazos.</p>
-                
-                <div class="d-grid gap-2">
-                    <a href="{% url 'relatorios:relatorio_projetos' %}" class="btn btn-outline-primary">
-                        <i class="fas fa-eye me-1"></i> Visualizar
+    <!-- Relatórios Disponíveis -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col">
+            <div class="p-6 flex-grow">
+                <h5 class="text-lg font-bold text-gray-800 dark:text-white flex items-center"><i class="fas fa-project-diagram mr-2 text-blue-500"></i> Relatório de Projetos</h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Lista completa de todos os projetos cadastrados no sistema, incluindo valores, situação e prazos.</p>
+            </div>
+            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-b-lg space-y-3">
+                <a href="{% url 'relatorios:relatorio_projetos' %}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                    <i class="fas fa-eye mr-2"></i> Visualizar
+                </a>
+                <div class="flex space-x-3">
+                    <a href="{% url 'relatorios:relatorio_projetos_generate' %}?format=pdf" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700">
+                        <i class="fas fa-file-pdf mr-2"></i> PDF
                     </a>
-                    <div class="btn-group">
-                        <a href="{% url 'relatorios:relatorio_projetos_generate' %}?format=pdf" class="btn btn-danger">
-                            <i class="fas fa-file-pdf me-1"></i> PDF
-                        </a>
-                        <a href="{% url 'relatorios:relatorio_projetos_generate' %}?format=excel" class="btn btn-success">
-                            <i class="fas fa-file-excel me-1"></i> Excel
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4 mb-4">
-        <div class="card shadow-sm h-100">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-file-contract me-2 text-success"></i> Relatório de Contratos</h5>
-                <p class="card-text">Relatório detalhado de contratos, prestadores, valores e status de execução dos serviços.</p>
-                
-                <div class="d-grid gap-2">
-                    <a href="{% url 'relatorios:relatorio_contratos' %}" class="btn btn-outline-success">
-                        <i class="fas fa-eye me-1"></i> Visualizar
+                    <a href="{% url 'relatorios:relatorio_projetos_generate' %}?format=excel" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
+                        <i class="fas fa-file-excel mr-2"></i> Excel
                     </a>
-                    <div class="btn-group">
-                        <a href="{% url 'relatorios:relatorio_contratos_generate' %}?format=pdf" class="btn btn-danger">
-                            <i class="fas fa-file-pdf me-1"></i> PDF
-                        </a>
-                        <a href="{% url 'relatorios:relatorio_contratos_generate' %}?format=excel" class="btn btn-success">
-                            <i class="fas fa-file-excel me-1"></i> Excel
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-md-4 mb-4">
-        <div class="card shadow-sm h-100">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-chart-line me-2 text-info"></i> Relatório Financeiro</h5>
-                <p class="card-text">Análise financeira completa: fluxo de caixa, inadimplência, valores recebidos e pagamentos.</p>
-                
-                <div class="d-grid gap-2">
-                    <a href="{% url 'relatorios:relatorio_financeiro' %}" class="btn btn-outline-info">
-                        <i class="fas fa-eye me-1"></i> Visualizar
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col">
+            <div class="p-6 flex-grow">
+                <h5 class="text-lg font-bold text-gray-800 dark:text-white flex items-center"><i class="fas fa-file-contract mr-2 text-green-500"></i> Relatório de Contratos</h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Relatório detalhado de contratos, prestadores, valores e status de execução dos serviços.</p>
+            </div>
+            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-b-lg space-y-3">
+                <a href="{% url 'relatorios:relatorio_contratos' %}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                    <i class="fas fa-eye mr-2"></i> Visualizar
+                </a>
+                <div class="flex space-x-3">
+                    <a href="{% url 'relatorios:relatorio_contratos_generate' %}?format=pdf" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700">
+                        <i class="fas fa-file-pdf mr-2"></i> PDF
                     </a>
-                    <div class="btn-group">
-                        <a href="{% url 'relatorios:relatorio_financeiro_generate' %}?format=pdf" class="btn btn-danger">
-                            <i class="fas fa-file-pdf me-1"></i> PDF
-                        </a>
-                        <a href="{% url 'relatorios:relatorio_financeiro_generate' %}?format=excel" class="btn btn-success">
-                            <i class="fas fa-file-excel me-1"></i> Excel
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4 mb-4">
-        <div class="card shadow-sm h-100 border-warning">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-cogs me-2 text-warning"></i> Relatórios Customizados</h5>
-                <p class="card-text">Crie relatórios personalizados com filtros avançados para projetos, contratos e dados financeiros.</p>
-                
-                <div class="d-grid gap-2">
-                    <a href="{% url 'relatorios:relatorio_custom' %}" class="btn btn-outline-warning">
-                        <i class="fas fa-filter me-1"></i> Configurar Filtros
+                    <a href="{% url 'relatorios:relatorio_contratos_generate' %}?format=excel" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
+                        <i class="fas fa-file-excel mr-2"></i> Excel
                     </a>
-                    <div class="text-center">
-                        <small class="text-muted">
-                            <i class="fas fa-magic me-1"></i> Filtros por data, valor, tipo e muito mais!
-                        </small>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<!-- Links Rápidos -->
-<div class="row mt-4">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-link me-2"></i>Acesso Rápido</h5>
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col">
+            <div class="p-6 flex-grow">
+                <h5 class="text-lg font-bold text-gray-800 dark:text-white flex items-center"><i class="fas fa-chart-line mr-2 text-teal-500"></i> Relatório Financeiro</h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Análise financeira completa: fluxo de caixa, inadimplência, valores recebidos e pagamentos.</p>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <a href="{% url 'dashboard:analytics_financeiro' %}" class="btn btn-outline-primary w-100">
-                            <i class="fas fa-chart-bar me-1"></i> Analytics Financeiro
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="{% url 'pagamentos:payment_history' %}" class="btn btn-outline-success w-100">
-                            <i class="fas fa-history me-1"></i> Histórico de Pagamentos
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="{% url 'contratos:parcela_list' %}" class="btn btn-outline-info w-100">
-                            <i class="fas fa-list me-1"></i> Lista de Parcelas
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="{% url 'projetos:projeto_list' %}" class="btn btn-outline-warning w-100">
-                            <i class="fas fa-project-diagram me-1"></i> Lista de Projetos
-                        </a>
-                    </div>
+            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-b-lg space-y-3">
+                <a href="{% url 'relatorios:relatorio_financeiro' %}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
+                    <i class="fas fa-eye mr-2"></i> Visualizar
+                </a>
+                <div class="flex space-x-3">
+                    <a href="{% url 'relatorios:relatorio_financeiro_generate' %}?format=pdf" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700">
+                        <i class="fas fa-file-pdf mr-2"></i> PDF
+                    </a>
+                    <a href="{% url 'relatorios:relatorio_financeiro_generate' %}?format=excel" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
+                        <i class="fas fa-file-excel mr-2"></i> Excel
+                    </a>
                 </div>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col border-2 border-yellow-400">
+            <div class="p-6 flex-grow">
+                <h5 class="text-lg font-bold text-gray-800 dark:text-white flex items-center"><i class="fas fa-cogs mr-2 text-yellow-500"></i> Relatórios Customizados</h5>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Crie relatórios personalizados com filtros avançados para projetos, contratos e dados financeiros.</p>
+            </div>
+            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-b-lg space-y-3">
+                <a href="{% url 'relatorios:relatorio_custom' %}" class="w-full inline-flex justify-center py-2 px-4 border border-yellow-400 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-yellow-600 dark:text-yellow-300 hover:bg-yellow-50 dark:hover:bg-yellow-900">
+                    <i class="fas fa-filter mr-2"></i> Configurar Filtros
+                </a>
+                 <small class="block text-center text-gray-500 dark:text-gray-400">
+                    <i class="fas fa-magic mr-1"></i> Filtros por data, valor, tipo e muito mais!
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Links Rápidos -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+            <h5 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center"><i class="fas fa-link mr-2"></i>Acesso Rápido</h5>
+        </div>
+        <div class="p-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="{% url 'dashboard:analytics_financeiro' %}" class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <i class="fas fa-chart-bar mr-2"></i> Analytics Financeiro
+                </a>
+                <a href="{% url 'pagamentos:payment_history' %}" class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <i class="fas fa-history mr-2"></i> Histórico de Pagamentos
+                </a>
+                <a href="{% url 'contratos:parcela_list' %}" class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <i class="fas fa-list mr-2"></i> Lista de Parcelas
+                </a>
+                <a href="{% url 'projetos:projeto_list' %}" class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <i class="fas fa-project-diagram mr-2"></i> Lista de Projetos
+                </a>
             </div>
         </div>
     </div>

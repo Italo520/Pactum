@@ -4,44 +4,49 @@
 {% block page_title %}Ordens de Serviço{% endblock %}
 
 {% block content %}
-<div class="card shadow-sm">
-    <div class="card-header">
-        <h5 class="mb-0">Ordens da Requisição #{{ requisicao.cod_requisicao }}</h5>
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
+    <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Ordens da Requisição #{{ requisicao.cod_requisicao }}</h2>
     </div>
-    <div class="card-body">
-        <a href="{% url 'projetos:ordem_create' requisicao.pk %}" class="btn btn-primary mb-3">
-            <i class="fas fa-plus me-1"></i> Nova Ordem
+
+    <div class="p-6">
+        <a href="{% url 'projetos:ordem_create' requisicao.pk %}" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-colors mb-6">
+            <i class="fas fa-plus mr-2"></i> Nova Ordem
         </a>
         
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th>Código</th>
-                        <th>Descrição</th>
-                        <th>Valor</th>
-                        <th>Data Limite</th>
-                        <th>Situação</th>
-                        <th>Ações</th>
+                        <th scope="col" class="px-6 py-3">Código</th>
+                        <th scope="col" class="px-6 py-3">Descrição</th>
+                        <th scope="col" class="px-6 py-3">Valor</th>
+                        <th scope="col" class="px-6 py-3">Data Limite</th>
+                        <th scope="col" class="px-6 py-3">Situação</th>
+                        <th scope="col" class="px-6 py-3">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for ordem in ordens %}
-                    <tr>
-                        <td><strong>#{{ ordem.cod_ordem }}</strong></td>
-                        <td>{{ ordem.descricao|truncatechars:50 }}</td>
-                        <td>R$ {{ ordem.valor|floatformat:2 }}</td>
-                        <td>{{ ordem.data_limite|date:"d/m/Y" }}</td>
-                        <td><span class="badge bg-info">{{ ordem.get_situacao_display }}</span></td>
-                        <td>
-                            <a href="{% url 'projetos:ordem_detail' ordem.pk %}" class="btn btn-sm btn-outline-info">
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium text-gray-900 dark:text-white"><strong>#{{ ordem.cod_ordem }}</strong></td>
+                        <td class="px-6 py-4">{{ ordem.descricao|truncatechars:50 }}</td>
+                        <td class="px-6 py-4">R$ {{ ordem.valor|floatformat:2 }}</td>
+                        <td class="px-6 py-4">{{ ordem.data_limite|date:"d/m/Y" }}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                {{ ordem.get_situacao_display }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="{% url 'projetos:ordem_detail' ordem.pk %}" class="text-blue-600 hover:text-blue-800" title="Ver Detalhes">
                                 <i class="fas fa-eye"></i>
                             </a>
                         </td>
                     </tr>
                     {% empty %}
-                    <tr>
-                        <td colspan="6" class="text-center text-muted">Nenhuma ordem encontrada.</td>
+                    <tr class="bg-white dark:bg-gray-800">
+                        <td colspan="6" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">Nenhuma ordem encontrada.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
