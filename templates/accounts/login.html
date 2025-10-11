@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -28,10 +29,10 @@
 </head>
 <body class="bg-gradient-to-r from-green-700 to-green-500 min-h-screen flex items-center justify-center font-sans">
 
-    <div class="w-full max-w-md p-8 space-y-8 bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl shadow-2xl m-4">
+    <div class="w-full max-w-md p-8 space-y-6 bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl shadow-2xl m-4">
         <div class="text-center">
             <div class="inline-block p-4 bg-green-100 border-2 border-green-200 rounded-2xl mb-4 transform hover:scale-105 transition-transform duration-300">
-                <img src="{% static 'img/logo_pactum.png' %}" alt="Pactum Logo" class="w-24 h-24 object-contain">
+                <img src="{% static 'img/logo_pactum.png' %}" alt="Pactum Logo" class="w-32 h-32 object-contain">
             </div>
             <h2 class="text-2xl font-light text-gray-800">Bem-vindo de volta!</h2>
             <p class="text-sm text-green-600">Sistema de Gestão de Projetos e Contratos</p>
@@ -52,16 +53,14 @@
             </div>
         {% endif %}
 
-        <form method="post" id="loginForm" class="space-y-6">
+        <form method="post" id="loginForm" class="space-y-4">
             {% csrf_token %}
             
             <div>
                 <label for="{{ form.username.id_for_label }}" class="text-sm font-medium text-gray-700 flex items-center">
                     <i class="fas fa-user mr-2 text-gray-400"></i>Email ou Usuário
                 </label>
-                <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
-                       class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-                       required>
+                {% render_field form.username class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" placeholder="seu.usuario" %}
                 {% if form.username.errors %}
                     <p class="mt-1 text-xs text-red-600">{{ form.username.errors|first }}</p>
                 {% endif %}
@@ -72,9 +71,7 @@
                     <i class="fas fa-lock mr-2 text-gray-400"></i>Senha
                 </label>
                 <div class="relative">
-                    <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}"
-                           class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-                           required>
+                    {% render_field form.password class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition" placeholder="sua.senha" %}
                     <button type="button" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500" id="togglePassword">
                         <i class="fas fa-eye" id="togglePasswordIcon"></i>
                     </button>
