@@ -82,4 +82,4 @@ O `docker-compose.yml` define dois serviços principais:
 -   `db`: O container do banco de dados PostgreSQL. Os dados são persistidos em um volume chamado `postgres_data`.
 -   `web`: O container da aplicação Django, que depende do serviço `db`.
 
-Para mais detalhes sobre a configuração, consulte a seção de **Deploy e Monitoramento** no [Guia Completo](./docs/GUIA_COMPLETO.md).
+Para mais detalhes sobre a configuração, consulte a seção de **Deploy e Monitoramento** no [Guia Completo](./docs/GUIA_COMPLETO.md)
