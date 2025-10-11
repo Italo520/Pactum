@@ -32,24 +32,6 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 
 ### Tarefas Prioritárias (A Fazer)
 
-* **ID**: `FE-MIG-002`
-    * **Título**: Refatoração do Layout Estrutural (Base, Sidebar e Navbar)
-    * **Descrição**: Reconstruir os componentes centrais da interface que são compartilhados por todas as páginas: o template base, a barra de navegação lateral (sidebar) e o cabeçalho (navbar), utilizando classes do Tailwind CSS e componentes `shadcn/ui` se aplicável.
-    * **Critérios de Aceitação**:
-        * O arquivo `base/base.html` define uma estrutura de layout flexível e responsiva com áreas para sidebar, header e conteúdo principal.
-        * Os arquivos `base/sidebar.html` e `base/navbar.html` são recriados sem nenhuma classe Bootstrap e com uma navegação funcional.
-        * O novo layout não apresenta quebras visuais em resoluções de desktop, tablet e mobile.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `UI-UX-Agent`.
-
-* **ID**: `FE-MIG-003`
-    * **Título**: Refatoração das Telas de Autenticação e Perfil
-    * **Descrição**: Migrar o design das telas de login, visualização e edição de perfil de usuário para a nova stack, focando em formulários limpos e usabilidade.
-    * **Critérios de Aceitação**:
-        * A página de login (`accounts/login.html`) utiliza os componentes `Card`, `Input`, `Label` e `Button` do `shadcn/ui`.
-        * As páginas de perfil (`accounts/profile.html` e `accounts/profile_edit.html`) são redesenhadas com um layout limpo, utilizando a nova estrutura de componentes.
-        * Toda a funcionalidade de login e edição de perfil permanece intacta.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
-
 * **ID**: `FE-MIG-004`
     * **Título**: Refatoração do Módulo de Clientes (CRUD)
     * **Descrição**: Atualizar a interface de todas as operações (Criar, Ler, Atualizar, Deletar) do módulo de Clientes, substituindo tabelas, formulários e botões antigos.
@@ -103,9 +85,12 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 * **ID**: `FE-MIG-001`
     * **Título**: Configuração do Ambiente e Remoção do Bootstrap
     * **Descrição**: Preparar a base do projeto para a nova stack de front-end. Isso envolve remover completamente as dependências do Bootstrap e instalar e configurar o Tailwind CSS para compilar os estilos a partir dos arquivos de template do Django.
-    * **Critérios de Aceitação**:
-        * Os links para os arquivos CSS e JS do Bootstrap foram removidos do template `base/base.html`.
-        * As dependências de front-end (`tailwindcss`, `postcss`, `autoprefixer`) estão listadas em um arquivo `package.json`.
-        * O arquivo `tailwind.config.js` está criado e configurado para escanear todos os arquivos `.html` dentro da pasta `templates/`.
-        * Um script de `build` consegue gerar um arquivo `output.css` na pasta `static/` que é carregado com sucesso no `base.html`.
     * **Agentes Envolvidos**: `Frontend-Agent`, `DevOps-Agent`.
+* **ID**: `FE-MIG-002`
+    * **Título**: Refatoração do Layout Estrutural (Base, Sidebar e Navbar)
+    * **Descrição**: Reconstruir os componentes centrais da interface que são compartilhados por todas as páginas: o template base, a barra de navegação lateral (sidebar) e o cabeçalho (navbar), utilizando classes do Tailwind CSS e componentes `shadcn/ui` se aplicável.
+    * **Agentes Envolvidos**: `Frontend-Agent`, `UI-UX-Agent`.
+* **ID**: `FE-MIG-003`
+    * **Título**: Refatoração das Telas de Autenticação e Perfil
+    * **Descrição**: Migrar o design das telas de login, visualização e edição de perfil de usuário para a nova stack, focando em formulários limpos e usabilidade.
+    * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
