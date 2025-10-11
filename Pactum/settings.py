@@ -23,7 +23,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 if 'test' in sys.argv:
     DEBUG = True
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost').split(',')
+ALLOWED_HOSTS = ['*']
 
 # Add Replit domain to ALLOWED_HOSTS
 REPLIT_DOMAIN = os.getenv('REPLIT_DEV_DOMAIN')
