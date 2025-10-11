@@ -51,14 +51,7 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
     * **Agentes Envolvidos**: `QA-Agent`, `Frontend-Agent`.
 
 ### Tarefas em Andamento
-* **ID**: `FE-MIG-006`
-    * **Título**: Refatoração do Módulo de Contratos
-    * **Descrição**: Atualizar a interface do módulo de Contratos, incluindo a gestão de prestadores, itens de contrato e visualização de parcelas.
-    * **Critérios de Aceitação**:
-        * A página de detalhes do contrato (`contratos/contrato_detail.html`) apresenta um layout claro, separando dados principais, itens e pagamentos.
-        * O modal de pagamento (`contratos/partials/modal_pagamento.html`) é reconstruído com os componentes `Dialog` ou `Drawer` do `shadcn/ui`.
-        * A funcionalidade de pagamento via Mercado Pago não é afetada.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
+
 
 ### Tarefas Concluídas
 * **ID**: `FE-MIG-001`
@@ -81,3 +74,11 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
     * **Título**: Refatoração do Módulo de Projetos (CRUD Completo)
     * **Descrição**: Migrar a interface de um dos módulos mais complexos do sistema, o de Projetos, que inclui a gestão de projetos, marcos, ordens de serviço e lançamentos financeiros.
     * **Agentes Envolvidos**: `Frontend-Agent`, `UI-UX-Agent`, `QA-Agent`.
+* **ID**: `FE-MIG-006`
+    * **Título**: Refatoração do Módulo de Contratos
+    * **Descrição**: Atualizar a interface do módulo de Contratos, incluindo a gestão de prestadores, itens de contrato e visualização de parcelas.
+    * **Critérios de Aceitação**:
+        * A página de detalhes do contrato (`contratos/contrato_detail.html`) apresenta um layout claro, separando dados principais, itens e pagamentos.
+        * O modal de pagamento (`contratos/partials/modal_pagamento.html`) é reconstruído com os componentes `Dialog` ou `Drawer` do `shadcn/ui`.
+        * A funcionalidade de pagamento via Mercado Pago não é afetada.
+    * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
