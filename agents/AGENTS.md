@@ -30,19 +30,19 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 
 ### **Tarefas Prioritárias (A Fazer)**
 
-* **ID**: `FE-MIG-004`
-    * **Título**: Correção Visual da Página de Login
-    * **Descrição**: Ajustar o layout e os estilos da página de login (`login.html`) para corrigir as distorções visuais. Isso inclui redimensionar o logo, estilizar os campos de formulário e o botão de login com classes do Tailwind CSS, e garantir que o alinhamento geral da página esteja consistente com o novo design system.
-    * **Agentes Envolvidos**: `Frontend-Agent`.
+
+### Tarefas em Andamento
+
+
+### Tarefas Concluídas
 
 * **ID**: `BE-DEVOPS-001`
     * **Título**: Criação Automática de Superusuário
     * **Descrição**: Desenvolver um script ou comando de gerenciamento do Django para criar um superusuário (usuário: `admin`, email: `admin@admin.com`, senha: `admin`) se ele ainda não existir. Integrar este script ao `docker-compose.yml` para que seja executado na inicialização do container, logo após as migrações.
     * **Agentes Envolvidos**: `Backend_Developer_Agent`, `DevOps_Agent`.
 
-
-### Tarefas em Andamento
-
-
-### Tarefas Concluídas
+* **ID**: `FE-MIG-004`
+    * **Título**: Correção Visual da Página de Login
+    * **Descrição**: Ajustar o layout e os estilos da página de login (`login.html`) para corrigir as distorções visuais. Isso inclui redimensionar o logo, estilizar os campos de formulário e o botão de login com classes do Tailwind CSS, e garantir que o alinhamento geral da página esteja consistente com o novo design system.
+    * **Agentes Envolvidos**: `Frontend-Agent`.
 

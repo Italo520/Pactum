@@ -70,7 +70,7 @@ THIRD_PARTY_APPS = [
 
 
 LOCAL_APPS = [
-    'apps.core.apps.CoreConfig',
+    'apps.core',
     'apps.accounts.apps.AccountsConfig',
     'apps.projetos.apps.ProjetosConfig',
     'apps.contratos.apps.ContratosConfig',
