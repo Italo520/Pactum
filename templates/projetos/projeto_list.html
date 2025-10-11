@@ -1,95 +1,114 @@
 {% extends 'base/base.html' %}
-
-{% block title %}Lista de Projetos - FUNETEC{% endblock %}
+{% load static %}
 
 {% block page_title %}Projetos{% endblock %}
 
 {% block page_actions %}
     {% if perms.projetos.add_projeto %}
-        <a href="{% url 'projetos:projeto_create' %}" class="btn btn-primary">
-            <i class="fas fa-plus me-1"></i> Novo Projeto
-        </a>
+    <a href="{% url 'projetos:projeto_create' %}" class="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75 transition">
+        <i class="fas fa-plus mr-2"></i>
+        Novo Projeto
+    </a>
     {% endif %}
 {% endblock %}
 
 {% block content %}
-<div class="card shadow-sm">
-    <div class="card-header">
-        <h5 class="mb-0">Lista de Projetos</h5>
+<div class="bg-white rounded-lg shadow-xl overflow-hidden">
+    <div class="p-6 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-800">Lista de Projetos</h2>
+        <p class="text-sm text-gray-500 mt-1">Gerencie os projetos cadastrados no sistema.</p>
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Nome do Projeto</th>
-                        <th>Código</th>
-                        <th>Situação</th>
-                        <th>Valor Orçado</th>
-                        <th>Data de Encerramento</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for projeto in projetos %}
-                    <tr>
-                        <td>
-                            <strong>{{ projeto.nome }}</strong>
-                        </td>
-                        <td>#{{ projeto.cod_projeto }}</td>
-                        <td>
-                            <span class="badge bg-primary">{{ projeto.get_situacao_display }}</span>
-                        </td>
-                        <td>R$ {{ projeto.valor|floatformat:2 }}</td>
-                        <td>{{ projeto.data_encerramento|date:"d/m/Y" }}</td>
-                        <td>
-                            <a href="{% url 'projetos:projeto_detail' projeto.pk %}" class="btn btn-sm btn-outline-info" title="Ver Detalhes">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            {% if perms.projetos.change_projeto %}
-                                <a href="{% url 'projetos:projeto_update' projeto.pk %}" class="btn btn-sm btn-outline-primary" title="Editar">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            {% endif %}
-                            {% if perms.projetos.delete_projeto %}
-                                <a href="{% url 'projetos:projeto_delete' projeto.pk %}" class="btn btn-sm btn-outline-danger" title="Excluir">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="6" class="text-center text-muted">Nenhum projeto encontrado.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Nome do Projeto
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Situação
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Valor Orçado
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Data de Encerramento
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Ações
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                {% for projeto in projetos %}
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-900">{{ projeto.nome }}</div>
+                        <div class="text-xs text-gray-500">#{{ projeto.cod_projeto }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            {{ projeto.get_situacao_display }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                        R$ {{ projeto.valor|floatformat:2 }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                        {{ projeto.data_encerramento|date:"d/m/Y" }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                        <a href="{% url 'projetos:projeto_detail' projeto.pk %}" class="text-blue-600 hover:text-blue-800" title="Ver Detalhes">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        {% if perms.projetos.change_projeto %}
+                        <a href="{% url 'projetos:projeto_update' projeto.pk %}" class="text-yellow-600 hover:text-yellow-800" title="Editar">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                        {% endif %}
+                        {% if perms.projetos.delete_projeto %}
+                        <a href="{% url 'projetos:projeto_delete' projeto.pk %}" class="text-red-600 hover:text-red-800" title="Deletar">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="px-6 py-12 text-center">
+                        <div class="text-center">
+                            <i class="fas fa-folder-open fa-3x text-gray-300"></i>
+                            <h3 class="mt-2 text-sm font-medium text-gray-900">Nenhum projeto encontrado</h3>
+                            <p class="mt-1 text-sm text-gray-500">Comece adicionando um novo projeto.</p>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if is_paginated %}
+    <div class="p-6 bg-gray-50 border-t border-gray-200">
+        <div class="flex items-center justify-between">
+            <div class="text-sm text-gray-600">
+                Página <span class="font-medium">{{ page_obj.number }}</span> de <span class="font-medium">{{ page_obj.paginator.num_pages }}</span>
+            </div>
+            <div class="flex-1 flex justify-end">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Anterior
+                    </a>
+                {% endif %}
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Próxima
+                    </a>
+                {% endif %}
+            </div>
         </div>
-
-        {% if is_paginated %}
-            <nav class="mt-4">
-                <ul class="pagination justify-content-center">
-                    {% if page_obj.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
-                    {% else %}
-                        <li class="page-item disabled"><span class="page-link">Anterior</span></li>
-                    {% endif %}
-
-                    {% for i in paginator.page_range %}
-                        <li class="page-item {% if page_obj.number == i %}active{% endif %}">
-                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-                        </li>
-                    {% endfor %}
-                    
-                    {% if page_obj.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a></li>
-                    {% else %}
-                        <li class="page-item disabled"><span class="page-link">Próximo</span></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        {% endif %}
     </div>
+    {% endif %}
 </div>
 {% endblock %}

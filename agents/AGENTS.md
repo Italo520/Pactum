@@ -32,34 +32,6 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 
 ### Tarefas Prioritárias (A Fazer)
 
-* **ID**: `FE-MIG-004`
-    * **Título**: Refatoração do Módulo de Clientes (CRUD)
-    * **Descrição**: Atualizar a interface de todas as operações (Criar, Ler, Atualizar, Deletar) do módulo de Clientes, substituindo tabelas, formulários e botões antigos.
-    * **Critérios de Aceitação**:
-        * A lista de clientes (`clientes/cliente_list.html`) utiliza o componente `Table` do `shadcn/ui`.
-        * Os formulários (`clientes/cliente_form.html`) são reconstruídos com os novos componentes de formulário.
-        * A página de detalhes (`clientes/cliente_detail.html`) exibe as informações do cliente de forma clara, utilizando `Card`.
-        * A tela de confirmação de exclusão (`clientes/cliente_confirm_delete.html`) é estilizada, preferencialmente como um `AlertDialog`.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
-
-* **ID**: `FE-MIG-005`
-    * **Título**: Refatoração do Módulo de Projetos (CRUD Completo)
-    * **Descrição**: Migrar a interface de um dos módulos mais complexos do sistema, o de Projetos, que inclui a gestão de projetos, marcos, ordens de serviço e lançamentos financeiros.
-    * **Critérios de Aceitação**:
-        * A tela de detalhes do projeto (`projetos/projeto_detail.html`) é redesenhada para funcionar como um painel central, exibindo informações relacionadas de forma organizada.
-        * Todas as listagens (projetos, ordens, etc.) são convertidas para o componente `Table`.
-        * Todos os formulários do módulo (`projeto_form.html`, `marco_form.html`, `ordem_form.html`, etc.) são modernizados.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `UI-UX-Agent`, `QA-Agent`.
-
-* **ID**: `FE-MIG-006`
-    * **Título**: Refatoração do Módulo de Contratos
-    * **Descrição**: Atualizar a interface do módulo de Contratos, incluindo a gestão de prestadores, itens de contrato e visualização de parcelas.
-    * **Critérios de Aceitação**:
-        * A página de detalhes do contrato (`contratos/contrato_detail.html`) apresenta um layout claro, separando dados principais, itens e pagamentos.
-        * O modal de pagamento (`contratos/partials/modal_pagamento.html`) é reconstruído com os componentes `Dialog` ou `Drawer` do `shadcn/ui`.
-        * A funcionalidade de pagamento via Mercado Pago não é afetada.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
-
 * **ID**: `FE-MIG-007`
     * **Título**: Redesenho do Dashboard e Telas de Analytics
     * **Descrição**: Criar um novo dashboard visualmente atraente e informativo, utilizando componentes de `Card` para KPIs e, se aplicável, componentes da `Aceternity UI` para dar um toque visual único e moderno aos gráficos e métricas.
@@ -79,7 +51,14 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
     * **Agentes Envolvidos**: `QA-Agent`, `Frontend-Agent`.
 
 ### Tarefas em Andamento
-*(Nenhuma tarefa em andamento no momento)*
+* **ID**: `FE-MIG-006`
+    * **Título**: Refatoração do Módulo de Contratos
+    * **Descrição**: Atualizar a interface do módulo de Contratos, incluindo a gestão de prestadores, itens de contrato e visualização de parcelas.
+    * **Critérios de Aceitação**:
+        * A página de detalhes do contrato (`contratos/contrato_detail.html`) apresenta um layout claro, separando dados principais, itens e pagamentos.
+        * O modal de pagamento (`contratos/partials/modal_pagamento.html`) é reconstruído com os componentes `Dialog` ou `Drawer` do `shadcn/ui`.
+        * A funcionalidade de pagamento via Mercado Pago não é afetada.
+    * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
 
 ### Tarefas Concluídas
 * **ID**: `FE-MIG-001`
@@ -94,3 +73,11 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
     * **Título**: Refatoração das Telas de Autenticação e Perfil
     * **Descrição**: Migrar o design das telas de login, visualização e edição de perfil de usuário para a nova stack, focando em formulários limpos e usabilidade.
     * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
+* **ID**: `FE-MIG-004`
+    * **Título**: Refatoração do Módulo de Clientes (CRUD)
+    * **Descrição**: Atualizar a interface de todas as operações (Criar, Ler, Atualizar, Deletar) do módulo de Clientes, substituindo tabelas, formulários e botões antigos.
+    * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
+* **ID**: `FE-MIG-005`
+    * **Título**: Refatoração do Módulo de Projetos (CRUD Completo)
+    * **Descrição**: Migrar a interface de um dos módulos mais complexos do sistema, o de Projetos, que inclui a gestão de projetos, marcos, ordens de serviço e lançamentos financeiros.
+    * **Agentes Envolvidos**: `Frontend-Agent`, `UI-UX-Agent`, `QA-Agent`.
