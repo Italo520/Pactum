@@ -4,10 +4,91 @@
 {% block page_title %}Analytics de Contratos{% endblock %}
 
 {% block content %}
-<div class="card shadow-sm">
-    <div class="card-body">
-        <h5 class="card-title">Métricas Gerais de Contratos</h5>
-        <p class="card-text">Esta funcionalidade está em desenvolvimento.</p>
+<div class="space-y-6">
+    <!-- Placeholder for filter controls -->
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg flex justify-between items-center">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Filtros (Em Breve)</h2>
+        <div class="flex space-x-2">
+            <button class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg text-sm font-medium">Período</button>
+            <button class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg text-sm font-medium">Tipo</button>
+        </div>
+    </div>
+
+    <!-- KPI Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center">
+            <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">Total de Contratos</p>
+            <p class="text-3xl font-bold text-gray-800 dark:text-white mt-1">1,250</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center">
+            <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">Valor Total</p>
+            <p class="text-3xl font-bold text-green-500 dark:text-green-400 mt-1">R$ 5.8M</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center">
+            <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">Contratos Ativos</p>
+            <p class="text-3xl font-bold text-blue-500 dark:text-blue-400 mt-1">890</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center">
+            <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">Próximos Vencimentos</p>
+            <p class="text-3xl font-bold text-yellow-500 dark:text-yellow-400 mt-1">45</p>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+            <h5 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Contratos por Tipo</h5>
+            <canvas id="chartContratosPorTipo"></canvas>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+            <h5 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Crescimento Mensal de Contratos</h5>
+            <canvas id="chartCrescimentoMensal"></canvas>
+        </div>
+    </div>
+
+    <!-- Message -->
+    <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 rounded-r-lg">
+        <p class="text-blue-700 dark:text-blue-300">
+            <strong>Nota:</strong> Esta página de analytics é um modelo visual. Os dados ainda precisam ser conectados ao backend.
+        </p>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Mock data for charts
+    const dataContratosPorTipo = {
+        labels: ['Pessoa Física', 'Pessoa Jurídica', 'Governo'],
+        datasets: [{
+            data: [450, 650, 150],
+            backgroundColor: ['#3498db', '#2ecc71', '#9b59b6'],
+        }]
+    };
+
+    const dataCrescimentoMensal = {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+        datasets: [{
+            label: 'Novos Contratos',
+            data: [20, 35, 40, 30, 50, 65],
+            borderColor: '#3498db',
+            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+            fill: true,
+            tension: 0.4
+        }]
+    };
+
+    // Chart instances
+    new Chart(document.getElementById('chartContratosPorTipo').getContext('2d'), {
+        type: 'doughnut',
+        data: dataContratosPorTipo,
+        options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+    });
+
+    new Chart(document.getElementById('chartCrescimentoMensal').getContext('2d'), {
+        type: 'line',
+        data: dataCrescimentoMensal,
+        options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+</script>
 {% endblock %}

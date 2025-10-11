@@ -32,15 +32,6 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 
 ### Tarefas Prioritárias (A Fazer)
 
-* **ID**: `FE-MIG-007`
-    * **Título**: Redesenho do Dashboard e Telas de Analytics
-    * **Descrição**: Criar um novo dashboard visualmente atraente e informativo, utilizando componentes de `Card` para KPIs e, se aplicável, componentes da `Aceternity UI` para dar um toque visual único e moderno aos gráficos e métricas.
-    * **Critérios de Aceitação**:
-        * O dashboard principal (`dashboard/index.html`) exibe os principais indicadores em `Card`s bem desenhados.
-        * As páginas de analytics (`dashboard/analytics/*`) são redesenhadas para facilitar a leitura dos dados.
-        * Os gráficos (gerados via Chart.js) são integrados de forma harmoniosa ao novo design.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `UI-UX-Agent`.
-
 * **ID**: `FE-MIG-008`
     * **Título**: Verificação Final e Limpeza de Ativos
     * **Descrição**: Após a migração de todas as telas, realizar uma varredura completa no projeto para garantir que nenhum resquício do Bootstrap permaneça no código-fonte ou nos arquivos estáticos.
@@ -82,3 +73,11 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
         * O modal de pagamento (`contratos/partials/modal_pagamento.html`) é reconstruído com os componentes `Dialog` ou `Drawer` do `shadcn/ui`.
         * A funcionalidade de pagamento via Mercado Pago não é afetada.
     * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
+* **ID**: `FE-MIG-007`
+    * **Título**: Redesenho do Dashboard e Telas de Analytics
+    * **Descrição**: Criar um novo dashboard visualmente atraente e informativo, utilizando componentes de `Card` para KPIs e, se aplicável, componentes da `Aceternity UI` para dar um toque visual único e moderno aos gráficos e métricas.
+    * **Critérios de Aceitação**:
+        * O dashboard principal (`dashboard/index.html`) exibe os principais indicadores em `Card`s bem desenhados.
+        * As páginas de analytics (`dashboard/analytics/*`) são redesenhadas para facilitar a leitura dos dados.
+        * Os gráficos (gerados via Chart.js) são integrados de forma harmoniosa ao novo design.
+    * **Agentes Envolvidos**: `Frontend-Agent`, `UI-UX-Agent`.
