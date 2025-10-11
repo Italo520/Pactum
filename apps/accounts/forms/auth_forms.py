@@ -238,6 +238,15 @@ class CustomUserCreationForm(UserCreationForm):
         return user
 
 
+class UserUpdateForm(forms.ModelForm):
+    """
+    Formulário para que o usuário edite suas próprias informações básicas.
+    """
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'telefone']
+
+
 class UserProfileForm(forms.ModelForm):
     """
     Formulário para edição de perfil.
@@ -247,6 +256,7 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = [
+            'avatar',
             'bio', 'data_nascimento', 'rg', 'estado_civil',
             'cargo', 'data_admissao', 'cep', 'logradouro',
             'numero', 'complemento', 'bairro', 'cidade', 'uf',
