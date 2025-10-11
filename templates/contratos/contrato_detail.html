@@ -1,114 +1,140 @@
 {% extends 'base/base.html' %}
+{% load static %}
+{% load class_tags %}
 
-{% block title %}Contrato {{ contrato.num_contrato }}{% endblock %}
 {% block page_title %}Detalhes do Contrato{% endblock %}
 
 {% block page_actions %}
-<a href="{% url 'contratos:contrato_list' %}" class="btn btn-secondary">
-    <i class="fas fa-arrow-left me-1"></i> Voltar para a Lista
-</a>
+<div class="flex items-center space-x-2">
+    <a href="{% url 'contratos:contrato_list' %}" class="flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition">
+        <i class="fas fa-arrow-left mr-2"></i>
+        Voltar
+    </a>
+</div>
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-8">
-        <div class="card shadow-sm">
-            <div class="card-header">
-                <h5 class="mb-0">Informações do Contrato</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p><strong>Número:</strong> {{ contrato.num_contrato }}</p>
-                        <p><strong>Contratado:</strong> {{ contrato.contratado }}</p>
-                        <p><strong>CPF/CNPJ:</strong> {{ contrato.cpf_cnpj }}</p>
-                        <p><strong>Tipo:</strong> {{ contrato.get_tipo_pessoa_display }}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Valor Total:</strong> R$ {{ contrato.valor|floatformat:2 }}</p>
-                        <p><strong>Situação:</strong> <span class="badge bg-success">{{ contrato.get_situacao_display }}</span></p>
-                        <p><strong>Vigência:</strong> {{ contrato.data_inicio|date:"d/m/Y" }} a {{ contrato.data_fim|date:"d/m/Y" }}</p>
-                        <p><strong>Parcelas:</strong> {{ contrato.parcelas }}x</p>
-                    </div>
-                </div>
-                
-                <hr>
-                
-                <div class="row">
-                    <div class="col-12">
-                        <p><strong>Descrição:</strong></p>
-                        <p class="text-muted">{{ contrato.descricao|default:"Sem descrição" }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-4">
-        <div class="card shadow-sm">
-            <div class="card-header">
-                <h6 class="mb-0">Resumo Financeiro</h6>
-            </div>
-            <div class="card-body">
-                <p><strong>Valor Total:</strong><br>R$ {{ contrato.valor|floatformat:2 }}</p>
-                <p><strong>Valor Pago:</strong><br>R$ 0,00</p>
-                <p><strong>Valor Pendente:</strong><br>R$ {{ contrato.valor|floatformat:2 }}</p>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="space-y-8">
 
-<div class="card shadow-sm mt-4">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Parcelas do Contrato</h5>
-        <a href="{% url 'contratos:itemcontrato-create' contrato.pk %}" class="btn btn-sm btn-primary">
-            <i class="fas fa-plus me-1"></i> Adicionar Parcela
-        </a>
+    <!-- Contract Header -->
+    <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+        <div class="p-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900">Contrato #{{ contrato.num_contrato }}</h2>
+                    <p class="text-md text-gray-600 mt-1">{{ contrato.contratado }}</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full {{ contrato.situacao|get_status_badge_class }}">
+                        {{ contrato.get_situacao_display }}
+                    </span>
+                </div>
+            </div>
+            <p class="mt-4 text-sm text-gray-500">{{ contrato.descricao|default:"Sem descrição" }}</p>
+        </div>
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
+
+    <!-- Main Data Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+        <!-- Main Details -->
+        <div class="lg:col-span-2 bg-white rounded-lg shadow-xl overflow-hidden">
+            <div class="p-6 border-b border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-800">Informações Principais</h3>
+            </div>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-sm font-medium text-gray-500">CPF/CNPJ</p>
+                    <p class="text-md font-semibold text-gray-800">{{ contrato.cpf_cnpj }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Tipo de Pessoa</p>
+                    <p class="text-md font-semibold text-gray-800">{{ contrato.get_tipo_pessoa_display }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Vigência</p>
+                    <p class="text-md font-semibold text-gray-800">{{ contrato.data_inicio|date:"d/m/Y" }} a {{ contrato.data_fim|date:"d/m/Y" }}</p>
+                </div>
+                 <div>
+                    <p class="text-sm font-medium text-gray-500">Número de Parcelas</p>
+                    <p class="text-md font-semibold text-gray-800">{{ contrato.parcelas }}x</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Summary -->
+        <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+             <div class="p-6 border-b border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-800">Resumo Financeiro</h3>
+            </div>
+            <div class="p-6 space-y-4">
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Valor Total</p>
+                    <p class="text-2xl font-bold text-gray-900">R$ {{ contrato.valor|floatformat:2 }}</p>
+                </div>
+                 <div>
+                    <p class="text-sm font-medium text-gray-500">Valor Pago</p>
+                    <p class="text-xl font-semibold text-green-600">R$ 0,00</p>
+                </div>
+                 <div>
+                    <p class="text-sm font-medium text-gray-500">Valor Pendente</p>
+                    <p class="text-xl font-semibold text-red-600">R$ {{ contrato.valor|floatformat:2 }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Installments (Parcelas) -->
+    <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">Parcelas do Contrato</h3>
+                <p class="text-sm text-gray-500">Detalhes de vencimentos e pagamentos.</p>
+            </div>
+            <a href="{% url 'contratos:itemcontrato-create' contrato.pk %}" class="text-green-600 hover:text-green-800" title="Adicionar Parcela">
+                <i class="fas fa-plus-circle fa-lg"></i>
+            </a>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
                     <tr>
-                        <th>Parcela</th>
-                        <th>Valor</th>
-                        <th>Vencimento</th>
-                        <th>Situação</th>
-                        <th>Ações</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Parcela</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vencimento</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Situação</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white divide-y divide-gray-200">
                     {% for item in contrato.itens.all %}
-                    <tr>
-                        <td>{{ forloop.counter }}ª Parcela</td>
-                        <td>R$ {{ item.valor_parcela|floatformat:2 }}</td>
-                        <td>{{ item.data_vencimento|date:"d/m/Y" }}</td>
-                        <td>
-                            {% if item.situacao == '1' %}
-                                <span class="badge bg-warning">Pendente</span>
-                            {% elif item.situacao == '2' %}
-                                <span class="badge bg-info">Processando</span>
-                            {% elif item.situacao == '3' %}
-                                <span class="badge bg-success">Pago</span>
-                            {% else %}
-                                <span class="badge bg-secondary">{{ item.get_situacao_display }}</span>
-                            {% endif %}
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ forloop.counter }}ª Parcela</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">R$ {{ item.valor_parcela|floatformat:2 }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ item.data_vencimento|date:"d/m/Y" }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ item.situacao|get_status_badge_class }}">
+                                {{ item.get_situacao_display }}
+                            </span>
                         </td>
-                        <td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             {% if item.situacao == '1' %}
-                                <button type="button" class="btn btn-sm btn-success" 
-                                        data-bs-toggle="modal" data-bs-target="#pagamentoModal"
-                                        data-parcela-pk="{{ item.pk }}"
-                                        data-parcela-num="{{ forloop.counter }}"
-                                        data-valor-pendente="{{ item.valor_parcela }}">
-                                    <i class="fas fa-money-bill me-1"></i> Pagar
-                                </button>
+                            <button type="button" class="px-3 py-1 bg-green-600 text-white text-xs rounded-md shadow-sm hover:bg-green-700"
+                                    onclick="openPaymentModal('{{ item.pk }}', '{{ forloop.counter }}', '{{ item.valor_parcela }}')">
+                                <i class="fas fa-money-bill-wave mr-1"></i> Pagar
+                            </button>
                             {% endif %}
                         </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="5" class="text-center text-muted">Nenhuma parcela cadastrada</td>
+                        <td colspan="5" class="px-6 py-12 text-center">
+                             <div class="text-center">
+                                <i class="fas fa-file-invoice-dollar fa-3x text-gray-300"></i>
+                                <h3 class="mt-2 text-sm font-medium text-gray-900">Nenhuma parcela cadastrada</h3>
+                                <p class="mt-1 text-sm text-gray-500">Adicione a primeira parcela para este contrato.</p>
+                            </div>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -117,66 +143,43 @@
     </div>
 </div>
 
-<!-- Modal de Pagamento -->
-<div class="modal fade" id="pagamentoModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Registrar Pagamento</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form id="pagamentoForm" method="post">
-                {% csrf_token %}
-                <div class="modal-body">
-                    <p>Registrar pagamento da <strong><span id="modalParcelaNum"></span></strong></p>
-                    <p>Valor pendente: <strong><span id="modalValorPendente"></span></strong></p>
-                    
-                    <div class="mb-3">
-                        <label for="valor_pago" class="form-label">Valor Pago (R$)</label>
-                        <input type="number" class="form-control" id="valor_pago" name="valor_pago" step="0.01" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="data_pagamento" class="form-label">Data do Pagamento</label>
-                        <input type="date" class="form-control" id="data_pagamento" name="data_pagamento" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="observacoes" class="form-label">Observações</label>
-                        <textarea class="form-control" id="observacoes" name="observacoes" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<!-- Modal de Pagamento (Drawer Style) -->
+{% include 'contratos/partials/modal_pagamento.html' %}
 
 {% endblock %}
 
 {% block extra_js %}
 <script>
+function openPaymentModal(parcelaPk, parcelaNum, valorPendente) {
+    const modal = document.getElementById('paymentDrawer');
+    const form = document.getElementById('pagamentoForm');
+
+    form.action = `/contratos/parcelas/${parcelaPk}/registrar-pagamento/`;
+
+    document.getElementById('modalParcelaNum').textContent = `${parcelaNum}ª Parcela`;
+    document.getElementById('modalValorPendente').textContent = `R$ ${valorPendente}`;
+    document.getElementById('valor_pago').value = valorPendente;
+
+    // Data atual como padrão
+    const hoje = new Date().toISOString().split('T')[0];
+    document.getElementById('data_pagamento').value = hoje;
+
+    modal.classList.remove('hidden');
+}
+
+function closePaymentModal() {
+    const modal = document.getElementById('paymentDrawer');
+    modal.classList.add('hidden');
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-    const pagamentoModal = document.getElementById('pagamentoModal');
-    pagamentoModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget;
-        const parcelaPk = button.getAttribute('data-parcela-pk');
-        const parcelaNum = button.getAttribute('data-parcela-num');
-        const valorPendente = button.getAttribute('data-valor-pendente');
-
-        const form = pagamentoModal.querySelector('#pagamentoForm');
-        form.action = `/contratos/parcelas/${parcelaPk}/registrar-pagamento/`;
-
-        pagamentoModal.querySelector('#modalParcelaNum').textContent = parcelaNum + 'ª Parcela';
-        pagamentoModal.querySelector('#modalValorPendente').textContent = `R$ ${valorPendente}`;
-        pagamentoModal.querySelector('#valor_pago').value = valorPendente;
-        
-        // Data atual como padrão
-        const hoje = new Date().toISOString().split('T')[0];
-        pagamentoModal.querySelector('#data_pagamento').value = hoje;
+    // Event listener to close modal on background click
+    const modal = document.getElementById('paymentDrawer');
+    const modalContent = document.getElementById('paymentDrawerContent');
+    modal.addEventListener('click', function(event) {
+        if (!modalContent.contains(event.target)) {
+            closePaymentModal();
+        }
     });
 });
 </script>

@@ -1,38 +1,80 @@
 {% extends 'base/base.html' %}
+{% load static %}
+{% load class_tags %}
+
+{% block page_title %}Requisições do Projeto{% endblock %}
+
+{% block page_actions %}
+<a href="#" class="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75 transition">
+    <i class="fas fa-plus mr-2"></i>
+    Nova Requisição
+</a>
+{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h2>Requisições do Projeto: {{ projeto.nome }}</h2>
-            <a href="#" class="btn btn-success">Nova Requisição</a>
-        </div>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Número</th>
-                        <th>Descrição</th>
-                        <th>Status</th>
-                        <th>Data de Solicitação</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for req in requisicoes %}
-                    <tr>
-                        <td>{{ req.numero }}</td>
-                        <td>{{ req.descricao|truncatewords:10 }}</td>
-                        <td><span class="badge bg-secondary">{{ req.get_status_display }}</span></td>
-                        <td>{{ req.data_solicitacao|date:"d/m/Y" }}</td>
-                        <td>
-                            <a href="#" class="btn btn-info btn-sm">Ver Detalhes</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+<div class="bg-white rounded-lg shadow-xl overflow-hidden">
+    <div class="p-6 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-800">Requisições do Projeto: <span class="text-green-600">{{ projeto.nome }}</span></h2>
+        <p class="text-sm text-gray-500 mt-1">Gerencie as requisições de compra e serviços.</p>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Número
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Descrição
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Status
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Data de Solicitação
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Ações
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                {% for req in requisicoes %}
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {{ req.numero }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                        {{ req.descricao|truncatewords:10 }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ req.status|get_status_badge_class }}">
+                            {{ req.get_status_display }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                        {{ req.data_solicitacao|date:"d/m/Y" }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <a href="#" class="text-blue-600 hover:text-blue-800" title="Ver Detalhes">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="px-6 py-12 text-center">
+                        <div class="text-center">
+                            <i class="fas fa-folder-open fa-3x text-gray-300"></i>
+                            <h3 class="mt-2 text-sm font-medium text-gray-900">Nenhuma requisição encontrada</h3>
+                            <p class="mt-1 text-sm text-gray-500">Comece adicionando uma nova requisição.</p>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}
