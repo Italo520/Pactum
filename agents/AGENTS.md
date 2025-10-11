@@ -32,14 +32,6 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 
 ### Tarefas Prioritárias (A Fazer)
 
-* **ID**: `FE-MIG-008`
-    * **Título**: Verificação Final e Limpeza de Ativos
-    * **Descrição**: Após a migração de todas as telas, realizar uma varredura completa no projeto para garantir que nenhum resquício do Bootstrap permaneça no código-fonte ou nos arquivos estáticos.
-    * **Critérios de Aceitação**:
-        * Nenhum arquivo `.html` no projeto contém classes como `container`, `row`, `col-md-*`, `btn-*`, etc.
-        * A pasta `staticfiles/rest_framework/` (que contém o Bootstrap para o DRF) é a única exceção permitida.
-        * Os arquivos CSS/JS do Bootstrap são removidos da pasta `static/`.
-    * **Agentes Envolvidos**: `QA-Agent`, `Frontend-Agent`.
 
 ### Tarefas em Andamento
 
@@ -81,3 +73,11 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
         * As páginas de analytics (`dashboard/analytics/*`) são redesenhadas para facilitar a leitura dos dados.
         * Os gráficos (gerados via Chart.js) são integrados de forma harmoniosa ao novo design.
     * **Agentes Envolvidos**: `Frontend-Agent`, `UI-UX-Agent`.
+* **ID**: `FE-MIG-008`
+    * **Título**: Verificação Final e Limpeza de Ativos
+    * **Descrição**: Após a migração de todas as telas, realizar uma varredura completa no projeto para garantir que nenhum resquício do Bootstrap permaneça no código-fonte ou nos arquivos estáticos.
+    * **Critérios de Aceitação**:
+        * Nenhum arquivo `.html` no projeto contém classes como `container`, `row`, `col-md-*`, `btn-*`, etc.
+        * A pasta `staticfiles/rest_framework/` (que contém o Bootstrap para o DRF) é a única exceção permitida.
+        * Os arquivos CSS/JS do Bootstrap são removidos da pasta `static/`.
+    * **Agentes Envolvidos**: `QA-Agent`, `Frontend-Agent`.

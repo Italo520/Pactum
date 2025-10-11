@@ -7,198 +7,169 @@
 {% endblock %}
 
 {% block page_actions %}
-<a href="{% url 'contratos:prestador_list' %}" class="btn btn-secondary">
-    <i class="fas fa-arrow-left me-1"></i> Voltar para Lista
+<a href="{% url 'contratos:prestador_list' %}" class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg shadow-md hover:bg-gray-700 transition-colors">
+    <i class="fas fa-arrow-left mr-2"></i> Voltar para Lista
 </a>
-<a href="{% url 'contratos:prestador_update' prestador.pk %}" class="btn btn-primary">
-    <i class="fas fa-edit me-1"></i> Editar
+<a href="{% url 'contratos:prestador_update' prestador.pk %}" class="inline-flex items-center px-4 py-2 bg-yellow-500 text-white rounded-lg shadow-md hover:bg-yellow-600 transition-colors">
+    <i class="fas fa-edit mr-2"></i> Editar
 </a>
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-8">
-        <div class="card shadow-sm">
-            <div class="card-header">
-                <h5 class="mb-0">
-                    <i class="fas fa-user me-2"></i>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="lg:col-span-2">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white flex items-center">
+                    <i class="fas fa-user mr-3"></i>
                     {{ prestador.nome }}
-                    <span class="badge bg-{{ prestador.ativo|yesno:'success,secondary' }} ms-2">
+                    <span class="ml-3 px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ prestador.ativo|yesno:'bg-green-100 text-green-800,bg-gray-100 text-gray-800' }}">
                         {{ prestador.ativo|yesno:'Ativo,Inativo' }}
                     </span>
-                </h5>
+                </h2>
             </div>
-            <div class="card-body">
-                <!-- Dados Básicos -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h6 class="border-bottom pb-2 mb-3">
-                            <i class="fas fa-user me-2"></i>Dados Básicos
-                        </h6>
+            <div class="p-6 space-y-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white border-b pb-2 mb-4"><i class="fas fa-info-circle mr-2"></i>Dados Básicos</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <strong class="text-gray-500 dark:text-gray-400">Tipo de Pessoa:</strong>
+                            <p class="text-gray-800 dark:text-white">{{ prestador.get_tipo_pessoa_display }}</p>
+                        </div>
+                        <div>
+                            <strong class="text-gray-500 dark:text-gray-400">Nome/Razão Social:</strong>
+                            <p class="text-gray-800 dark:text-white">{{ prestador.nome }}</p>
+                        </div>
+                        {% if prestador.nome_fantasia %}
+                        <div class="md:col-span-2">
+                            <strong class="text-gray-500 dark:text-gray-400">Nome Fantasia:</strong>
+                            <p class="text-gray-800 dark:text-white">{{ prestador.nome_fantasia }}</p>
+                        </div>
+                        {% endif %}
                     </div>
-                    <div class="col-md-6">
-                        <strong>Tipo de Pessoa:</strong><br>
-                        {{ prestador.get_tipo_pessoa_display }}
-                    </div>
-                    <div class="col-md-6">
-                        <strong>Nome/Razão Social:</strong><br>
-                        {{ prestador.nome }}
-                    </div>
-                    {% if prestador.nome_fantasia %}
-                    <div class="col-md-12 mt-2">
-                        <strong>Nome Fantasia:</strong><br>
-                        {{ prestador.nome_fantasia }}
-                    </div>
-                    {% endif %}
                 </div>
 
-                <!-- Documentos -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h6 class="border-bottom pb-2 mb-3">
-                            <i class="fas fa-id-card me-2"></i>Documentos
-                        </h6>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white border-b pb-2 mb-4"><i class="fas fa-id-card mr-2"></i>Documentos</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {% if prestador.cpf %}
+                        <div>
+                            <strong class="text-gray-500 dark:text-gray-400">CPF:</strong>
+                            <p class="text-gray-800 dark:text-white">{{ prestador.cpf }}</p>
+                        </div>
+                        {% endif %}
+                        {% if prestador.cnpj %}
+                        <div>
+                            <strong class="text-gray-500 dark:text-gray-400">CNPJ:</strong>
+                            <p class="text-gray-800 dark:text-white">{{ prestador.cnpj }}</p>
+                        </div>
+                        {% endif %}
+                        {% if prestador.rg %}
+                        <div>
+                            <strong class="text-gray-500 dark:text-gray-400">RG:</strong>
+                            <p class="text-gray-800 dark:text-white">{{ prestador.rg }}</p>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% if prestador.cpf %}
-                    <div class="col-md-4">
-                        <strong>CPF:</strong><br>
-                        {{ prestador.cpf }}
-                    </div>
-                    {% endif %}
-                    {% if prestador.cnpj %}
-                    <div class="col-md-4">
-                        <strong>CNPJ:</strong><br>
-                        {{ prestador.cnpj }}
-                    </div>
-                    {% endif %}
-                    {% if prestador.rg %}
-                    <div class="col-md-4">
-                        <strong>RG:</strong><br>
-                        {{ prestador.rg }}
-                    </div>
-                    {% endif %}
                 </div>
 
-                <!-- Contato -->
                 {% if prestador.email or prestador.telefone %}
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h6 class="border-bottom pb-2 mb-3">
-                            <i class="fas fa-envelope me-2"></i>Contato
-                        </h6>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white border-b pb-2 mb-4"><i class="fas fa-envelope mr-2"></i>Contato</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {% if prestador.email %}
+                        <div>
+                            <strong class="text-gray-500 dark:text-gray-400">Email:</strong>
+                            <p><a href="mailto:{{ prestador.email }}" class="text-blue-600 hover:underline">{{ prestador.email }}</a></p>
+                        </div>
+                        {% endif %}
+                        {% if prestador.telefone %}
+                        <div>
+                            <strong class="text-gray-500 dark:text-gray-400">Telefone:</strong>
+                            <p><a href="tel:{{ prestador.telefone }}" class="text-blue-600 hover:underline">{{ prestador.telefone }}</a></p>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% if prestador.email %}
-                    <div class="col-md-6">
-                        <strong>Email:</strong><br>
-                        <a href="mailto:{{ prestador.email }}">{{ prestador.email }}</a>
-                    </div>
-                    {% endif %}
-                    {% if prestador.telefone %}
-                    <div class="col-md-6">
-                        <strong>Telefone:</strong><br>
-                        <a href="tel:{{ prestador.telefone }}">{{ prestador.telefone }}</a>
-                    </div>
-                    {% endif %}
                 </div>
                 {% endif %}
 
-                <!-- Endereço -->
                 {% if prestador.cep or prestador.logradouro %}
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h6 class="border-bottom pb-2 mb-3">
-                            <i class="fas fa-map-marker-alt me-2"></i>Endereço
-                        </h6>
-                    </div>
-                    <div class="col-md-12">
-                        <address>
-                            {% if prestador.logradouro %}{{ prestador.logradouro }}{% endif %}
-                            {% if prestador.numero %}, {{ prestador.numero }}{% endif %}
-                            {% if prestador.complemento %} - {{ prestador.complemento }}{% endif %}<br>
-                            {% if prestador.bairro %}{{ prestador.bairro }} - {% endif %}
-                            {% if prestador.cidade %}{{ prestador.cidade }}/{% endif %}{{ prestador.uf|default:"" }}<br>
-                            {% if prestador.cep %}CEP: {{ prestador.cep }}{% endif %}
-                        </address>
-                    </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white border-b pb-2 mb-4"><i class="fas fa-map-marker-alt mr-2"></i>Endereço</h3>
+                    <address class="not-italic text-gray-800 dark:text-white">
+                        {% if prestador.logradouro %}{{ prestador.logradouro }}{% endif %}
+                        {% if prestador.numero %}, {{ prestador.numero }}{% endif %}
+                        {% if prestador.complemento %} - {{ prestador.complemento }}{% endif %}<br>
+                        {% if prestador.bairro %}{{ prestador.bairro }} - {% endif %}
+                        {% if prestador.cidade %}{{ prestador.cidade }}/{% endif %}{{ prestador.uf|default:"" }}<br>
+                        {% if prestador.cep %}CEP: {{ prestador.cep }}{% endif %}
+                    </address>
                 </div>
                 {% endif %}
 
-                <!-- Dados Bancários -->
                 {% if prestador.banco or prestador.agencia or prestador.conta %}
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h6 class="border-bottom pb-2 mb-3">
-                            <i class="fas fa-university me-2"></i>Dados Bancários
-                        </h6>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white border-b pb-2 mb-4"><i class="fas fa-university mr-2"></i>Dados Bancários</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {% if prestador.banco %}
+                        <div>
+                            <strong class="text-gray-500 dark:text-gray-400">Banco:</strong>
+                            <p class="text-gray-800 dark:text-white">{{ prestador.banco }}</p>
+                        </div>
+                        {% endif %}
+                        {% if prestador.agencia %}
+                        <div>
+                            <strong class="text-gray-500 dark:text-gray-400">Agência:</strong>
+                            <p class="text-gray-800 dark:text-white">{{ prestador.agencia }}</p>
+                        </div>
+                        {% endif %}
+                        {% if prestador.conta %}
+                        <div>
+                            <strong class="text-gray-500 dark:text-gray-400">Conta:</strong>
+                            <p class="text-gray-800 dark:text-white">{{ prestador.conta }}</p>
+                        </div>
+                        {% endif %}
+                        {% if prestador.tipo_conta %}
+                        <div>
+                            <strong class="text-gray-500 dark:text-gray-400">Tipo:</strong>
+                            <p class="text-gray-800 dark:text-white">{{ prestador.tipo_conta }}</p>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% if prestador.banco %}
-                    <div class="col-md-3">
-                        <strong>Banco:</strong><br>
-                        {{ prestador.banco }}
-                    </div>
-                    {% endif %}
-                    {% if prestador.agencia %}
-                    <div class="col-md-3">
-                        <strong>Agência:</strong><br>
-                        {{ prestador.agencia }}
-                    </div>
-                    {% endif %}
-                    {% if prestador.conta %}
-                    <div class="col-md-3">
-                        <strong>Conta:</strong><br>
-                        {{ prestador.conta }}
-                    </div>
-                    {% endif %}
-                    {% if prestador.tipo_conta %}
-                    <div class="col-md-3">
-                        <strong>Tipo de Conta:</strong><br>
-                        {{ prestador.tipo_conta }}
-                    </div>
-                    {% endif %}
                 </div>
                 {% endif %}
             </div>
         </div>
     </div>
 
-    <div class="col-md-4">
-        <!-- Informações Adicionais -->
-        <div class="card shadow-sm">
-            <div class="card-header">
-                <h6 class="mb-0">
-                    <i class="fas fa-info-circle me-2"></i>Informações
-                </h6>
+    <div class="space-y-6">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center"><i class="fas fa-info-circle mr-2"></i>Informações</h3>
             </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <small class="text-muted">ID do Prestador</small><br>
-                    <code>{{ prestador.pk }}</code>
+            <div class="p-4 space-y-4">
+                <div>
+                    <small class="text-gray-500 dark:text-gray-400">ID do Prestador</small>
+                    <p class="text-sm font-mono text-gray-800 dark:text-white bg-gray-100 dark:bg-gray-700 p-2 rounded">{{ prestador.pk }}</p>
                 </div>
-                <div class="mb-3">
-                    <small class="text-muted">Tipo de Pessoa</small><br>
-                    <span class="badge bg-info">
-                        {{ prestador.get_tipo_pessoa_display }}
-                    </span>
+                <div>
+                    <small class="text-gray-500 dark:text-gray-400">Tipo de Pessoa</small>
+                    <p><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">{{ prestador.get_tipo_pessoa_display }}</span></p>
                 </div>
-                <div class="mb-3">
-                    <small class="text-muted">Status</small><br>
-                    <span class="badge bg-{{ prestador.ativo|yesno:'success,secondary' }}">
-                        {{ prestador.ativo|yesno:'Ativo,Inativo' }}
-                    </span>
+                <div>
+                    <small class="text-gray-500 dark:text-gray-400">Status</small>
+                    <p><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ prestador.ativo|yesno:'bg-green-100 text-green-800,bg-gray-100 text-gray-800' }}">{{ prestador.ativo|yesno:'Ativo,Inativo' }}</span></p>
                 </div>
             </div>
         </div>
 
-        <!-- Contratos Relacionados (Futuro) -->
-        <div class="card shadow-sm mt-3">
-            <div class="card-header">
-                <h6 class="mb-0">
-                    <i class="fas fa-file-contract me-2"></i>Contratos
-                </h6>
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center"><i class="fas fa-file-contract mr-2"></i>Contratos</h3>
             </div>
-            <div class="card-body">
-                <p class="text-muted small">
-                    <i class="fas fa-info-circle me-1"></i>
+            <div class="p-4">
+                <p class="text-sm text-gray-500 dark:text-gray-400 flex items-center">
+                    <i class="fas fa-info-circle mr-2"></i>
                     Listagem de contratos será implementada em breve.
                 </p>
             </div>

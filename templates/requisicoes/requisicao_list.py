@@ -4,44 +4,49 @@
 {% block page_title %}Requisições do Projeto{% endblock %}
 
 {% block content %}
-<div class="card shadow-sm">
-    <div class="card-header">
-        <h5 class="mb-0">Requisições do Projeto: {{ projeto.nome }}</h5>
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
+    <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Requisições do Projeto: {{ projeto.nome }}</h2>
     </div>
-    <div class="card-body">
-        <a href="{% url 'projetos:requisicao_create' projeto.pk %}" class="btn btn-primary mb-3">
-            <i class="fas fa-plus me-1"></i> Nova Requisição
+
+    <div class="p-6">
+        <a href="{% url 'projetos:requisicao_create' projeto.pk %}" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-colors mb-6">
+            <i class="fas fa-plus mr-2"></i> Nova Requisição
         </a>
         
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th>Código</th>
-                        <th>Descrição</th>
-                        <th>Valor</th>
-                        <th>Data Limite</th>
-                        <th>Situação</th>
-                        <th>Ações</th>
+                        <th scope="col" class="px-6 py-3">Código</th>
+                        <th scope="col" class="px-6 py-3">Descrição</th>
+                        <th scope="col" class="px-6 py-3">Valor</th>
+                        <th scope="col" class="px-6 py-3">Data Limite</th>
+                        <th scope="col" class="px-6 py-3">Situação</th>
+                        <th scope="col" class="px-6 py-3">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for requisicao in requisicoes %}
-                    <tr>
-                        <td><strong>#{{ requisicao.cod_requisicao }}</strong></td>
-                        <td>{{ requisicao.descricao|truncatechars:50 }}</td>
-                        <td>R$ {{ requisicao.valor|floatformat:2 }}</td>
-                        <td>{{ requisicao.data_limite|date:"d/m/Y" }}</td>
-                        <td><span class="badge bg-info">{{ requisicao.get_situacao_display }}</span></td>
-                        <td>
-                            <a href="{% url 'projetos:requisicao_detail' requisicao.pk %}" class="btn btn-sm btn-outline-info">
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium text-gray-900 dark:text-white"><strong>#{{ requisicao.cod_requisicao }}</strong></td>
+                        <td class="px-6 py-4">{{ requisicao.descricao|truncatechars:50 }}</td>
+                        <td class="px-6 py-4">R$ {{ requisicao.valor|floatformat:2 }}</td>
+                        <td class="px-6 py-4">{{ requisicao.data_limite|date:"d/m/Y" }}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                                {{ requisicao.get_situacao_display }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="{% url 'projetos:requisicao_detail' requisicao.pk %}" class="text-blue-600 hover:text-blue-800" title="Ver Detalhes">
                                 <i class="fas fa-eye"></i>
                             </a>
                         </td>
                     </tr>
                     {% empty %}
-                    <tr>
-                        <td colspan="6" class="text-center text-muted">Nenhuma requisição encontrada.</td>
+                    <tr class="bg-white dark:bg-gray-800">
+                        <td colspan="6" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">Nenhuma requisição encontrada.</td>
                     </tr>
                     {% endfor %}
                 </tbody>

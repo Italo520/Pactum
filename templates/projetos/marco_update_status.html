@@ -4,14 +4,20 @@
 {% block title %}Atualizar Status do Marco{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <h1 class="h3 mb-4 text-gray-800">Atualizar Status do Marco</h1>
-    <div class="card shadow mb-4">
-        <div class="card-body">
+<div class="max-w-xl mx-auto">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
+        <div class="p-8">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Atualizar Status do Marco</h2>
             <form method="post">
                 {% csrf_token %}
-                {{ form|crispy }}
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <div class="space-y-4">
+                    {{ form|crispy }}
+                </div>
+                <div class="mt-8 flex justify-end">
+                    <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        Salvar
+                    </button>
+                </div>
             </form>
         </div>
     </div>

@@ -12,23 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Adicionando um spinner simples para o estado de loading do botão */
-        .btn-loading::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: auto;
+        .spinner {
             border: 2px solid transparent;
             border-top-color: #ffffff;
             border-radius: 50%;
+            width: 16px;
+            height: 16px;
             animation: spin 1s linear infinite;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -38,7 +29,6 @@
 <body class="bg-gradient-to-r from-green-700 to-green-500 min-h-screen flex items-center justify-center font-sans">
 
     <div class="w-full max-w-md p-8 space-y-8 bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl shadow-2xl m-4">
-        <!-- Cabeçalho com Logo -->
         <div class="text-center">
             <div class="inline-block p-4 bg-green-100 border-2 border-green-200 rounded-2xl mb-4 transform hover:scale-105 transition-transform duration-300">
                 <img src="{% static 'img/logo_pactum.png' %}" alt="Pactum Logo" class="w-24 h-24 object-contain">
@@ -47,7 +37,6 @@
             <p class="text-sm text-green-600">Sistema de Gestão de Projetos e Contratos</p>
         </div>
 
-        <!-- Mensagens e Erros -->
         {% if messages %}
             {% for message in messages %}
                 <div class="p-4 rounded-md bg-red-100 text-red-700 border border-red-200" role="alert">
@@ -63,13 +52,11 @@
             </div>
         {% endif %}
 
-        <!-- Formulário de Login -->
         <form method="post" id="loginForm" class="space-y-6">
             {% csrf_token %}
             
-            <!-- Campo de Usuário/Email -->
             <div>
-                <label for="{{ form.username.id_for_label }}" class="text-sm font-medium text-gray-700">
+                <label for="{{ form.username.id_for_label }}" class="text-sm font-medium text-gray-700 flex items-center">
                     <i class="fas fa-user mr-2 text-gray-400"></i>Email ou Usuário
                 </label>
                 <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
@@ -80,9 +67,8 @@
                 {% endif %}
             </div>
 
-            <!-- Campo de Senha -->
             <div>
-                <label for="{{ form.password.id_for_label }}" class="text-sm font-medium text-gray-700">
+                <label for="{{ form.password.id_for_label }}" class="text-sm font-medium text-gray-700 flex items-center">
                     <i class="fas fa-lock mr-2 text-gray-400"></i>Senha
                 </label>
                 <div class="relative">
@@ -98,7 +84,6 @@
                 {% endif %}
             </div>
 
-            <!-- Opções (Lembrar-me / Esqueci a senha) -->
             <div class="flex items-center justify-between text-sm">
                 <div class="flex items-center">
                     <input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500">
@@ -109,11 +94,11 @@
                 </a>
             </div>
 
-            <!-- Botão de Login -->
             <div>
-                <button type="submit"
+                <button type="submit" id="loginButton"
                         class="relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-70">
-                    <span class="btn-text">Entrar</span>
+                    <span id="buttonText">Entrar</span>
+                    <div id="spinner" class="spinner hidden ml-2"></div>
                 </button>
             </div>
         </form>
@@ -127,7 +112,6 @@
         </p>
     </div>
 
-    <!-- Modal "Esqueci a Senha" -->
     <div id="forgotPasswordModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
         <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md m-4">
             <div class="flex justify-between items-center pb-3 border-b">
@@ -152,10 +136,8 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Foco automático no campo de usuário
             document.getElementById('{{ form.username.id_for_label }}').focus();
 
-            // Alternar visibilidade da senha
             const togglePassword = document.getElementById('togglePassword');
             if (togglePassword) {
                 togglePassword.addEventListener('click', function() {
@@ -173,29 +155,27 @@
                 });
             }
 
-            // Estado de loading no formulário
             const loginForm = document.getElementById('loginForm');
             if (loginForm) {
                 loginForm.addEventListener('submit', function() {
-                    const button = this.querySelector('button[type="submit"]');
-                    const buttonText = button.querySelector('.btn-text');
+                    const button = document.getElementById('loginButton');
+                    const buttonText = document.getElementById('buttonText');
+                    const spinner = document.getElementById('spinner');
 
-                    button.classList.add('btn-loading');
-                    if (buttonText) buttonText.textContent = 'Entrando...';
+                    buttonText.textContent = 'Entrando...';
+                    spinner.classList.remove('hidden');
                     button.disabled = true;
 
-                    // Timeout para reativar o botão em caso de erro
                     setTimeout(function() {
                         if (button.disabled) {
-                            button.classList.remove('btn-loading');
-                            if (buttonText) buttonText.textContent = 'Entrar';
+                            buttonText.textContent = 'Entrar';
+                            spinner.classList.add('hidden');
                             button.disabled = false;
                         }
                     }, 5000);
                 });
             }
 
-            // Modal
             const modal = document.getElementById('forgotPasswordModal');
             const openLink = document.getElementById('forgotPasswordLink');
             const closeButtons = [document.getElementById('closeModal'), document.getElementById('closeModalButton')];

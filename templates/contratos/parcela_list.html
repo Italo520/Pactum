@@ -1,69 +1,66 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h3>Todas as Parcelas</h3>
-            <a href="{% url 'contratos:contrato_list' %}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-1"></i>Voltar aos Contratos
-            </a>
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
+    <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Todas as Parcelas</h2>
+        <a href="{% url 'contratos:contrato_list' %}" class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors">
+            <i class="fas fa-arrow-left mr-2"></i>Voltar aos Contratos
+        </a>
+    </div>
+    <div class="overflow-x-auto">
+        {% if parcelas %}
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Contrato</th>
+                    <th scope="col" class="px-6 py-3">Nº da Parcela</th>
+                    <th scope="col" class="px-6 py-3">Data de Vencimento</th>
+                    <th scope="col" class="px-6 py-3">Valor Previsto</th>
+                    <th scope="col" class="px-6 py-3">Valor Pago</th>
+                    <th scope="col" class="px-6 py-3">Status</th>
+                    <th scope="col" class="px-6 py-3">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for parcela in parcelas %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="px-6 py-4">
+                        <a href="{% url 'contratos:contrato_detail' parcela.num_contrato.pk %}" class="text-blue-600 hover:underline">
+                            {{ parcela.num_contrato.num_contrato }}
+                        </a>
+                    </td>
+                    <td class="px-6 py-4">{{ parcela.cod_lancamento }}</td>
+                    <td class="px-6 py-4">{{ parcela.data_vencimento|date:"d/m/Y" }}</td>
+                    <td class="px-6 py-4">R$ {{ parcela.valor_previsto|floatformat:2 }}</td>
+                    <td class="px-6 py-4">R$ {{ parcela.valor_pago|default:"0.00"|floatformat:2 }}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {% if parcela.valor_pago %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300{% else %}bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300{% endif %}">
+                            {% if parcela.valor_pago %}Pago{% else %}Pendente{% endif %}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        {% if not parcela.valor_pago %}
+                        <a href="{% url 'contratos:registrar-pagamento' parcela.pk %}" class="inline-flex items-center px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-xs">
+                            <i class="fas fa-money-bill mr-1"></i>Registrar Pagamento
+                        </a>
+                        {% else %}
+                        <span class="text-green-600 dark:text-green-400 inline-flex items-center">
+                            <i class="fas fa-check-circle mr-1"></i>Pago
+                        </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="text-center py-12">
+            <i class="fas fa-receipt fa-3x text-gray-400 dark:text-gray-500 mb-3"></i>
+            <h5 class="text-lg font-medium text-gray-600 dark:text-gray-300">Nenhuma parcela encontrada</h5>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Não há parcelas cadastradas no sistema.</p>
         </div>
-        <div class="card-body">
-            {% if parcelas %}
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Contrato</th>
-                        <th>Nº da Parcela</th>
-                        <th>Data de Vencimento</th>
-                        <th>Valor Previsto</th>
-                        <th>Valor Pago</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for parcela in parcelas %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'contratos:contrato_detail' parcela.num_contrato.pk %}" class="text-decoration-none">
-                                {{ parcela.num_contrato.num_contrato }}
-                            </a>
-                        </td>
-                        <td>{{ parcela.cod_lancamento }}</td>
-                        <td>{{ parcela.data_vencimento|date:"d/m/Y" }}</td>
-                        <td>R$ {{ parcela.valor_previsto|floatformat:2 }}</td>
-                        <td>R$ {{ parcela.valor_pago|default:"0.00"|floatformat:2 }}</td>
-                        <td>
-                            <span class="badge bg-{% if parcela.valor_pago %}success{% else %}warning{% endif %}">
-                                {% if parcela.valor_pago %}Pago{% else %}Pendente{% endif %}
-                            </span>
-                        </td>
-                        <td>
-                            {% if not parcela.valor_pago %}
-                            <a href="{% url 'contratos:registrar-pagamento' parcela.pk %}" class="btn btn-success btn-sm">
-                                <i class="fas fa-money-bill me-1"></i>Registrar Pagamento
-                            </a>
-                            {% else %}
-                            <span class="text-success">
-                                <i class="fas fa-check-circle me-1"></i>Pago
-                            </span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% else %}
-            <div class="text-center py-4">
-                <i class="fas fa-receipt fa-3x text-muted mb-3"></i>
-                <h5 class="text-muted">Nenhuma parcela encontrada</h5>
-                <p class="text-muted">Não há parcelas cadastradas no sistema.</p>
-            </div>
-            {% endif %}
-        </div>
+        {% endif %}
     </div>
 </div>
-
 {% endblock %}
