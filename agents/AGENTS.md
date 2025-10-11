@@ -25,59 +25,24 @@ Todas as tarefas devem seguir o ciclo de vida abaixo para garantir qualidade, co
 
 ---
 
-## Backlog da Tarefas: Migração Completa do Front-end
+## Backlog da Tarefas:
 
-**Épico:** Refatorar a interface do usuário do sistema Pactum, substituindo o framework Bootstrap por uma stack moderna composta por Tailwind CSS, shadcn/ui e Aceternity UI.
-**Objetivo:** Modernizar a UI/UX, melhorar a responsividade e criar um sistema de design coeso e de fácil manutenção.
 
-### Tarefas Prioritárias (A Fazer)
+### **Tarefas Prioritárias (A Fazer)**
+
+* **ID**: `FE-MIG-004`
+    * **Título**: Correção Visual da Página de Login
+    * **Descrição**: Ajustar o layout e os estilos da página de login (`login.html`) para corrigir as distorções visuais. Isso inclui redimensionar o logo, estilizar os campos de formulário e o botão de login com classes do Tailwind CSS, e garantir que o alinhamento geral da página esteja consistente com o novo design system.
+    * **Agentes Envolvidos**: `Frontend-Agent`.
+
+* **ID**: `BE-DEVOPS-001`
+    * **Título**: Criação Automática de Superusuário
+    * **Descrição**: Desenvolver um script ou comando de gerenciamento do Django para criar um superusuário (usuário: `admin`, email: `admin@admin.com`, senha: `admin`) se ele ainda não existir. Integrar este script ao `docker-compose.yml` para que seja executado na inicialização do container, logo após as migrações.
+    * **Agentes Envolvidos**: `Backend_Developer_Agent`, `DevOps_Agent`.
 
 
 ### Tarefas em Andamento
 
 
 ### Tarefas Concluídas
-* **ID**: `FE-MIG-001`
-    * **Título**: Configuração do Ambiente e Remoção do Bootstrap
-    * **Descrição**: Preparar a base do projeto para a nova stack de front-end. Isso envolve remover completamente as dependências do Bootstrap e instalar e configurar o Tailwind CSS para compilar os estilos a partir dos arquivos de template do Django.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `DevOps-Agent`.
-* **ID**: `FE-MIG-002`
-    * **Título**: Refatoração do Layout Estrutural (Base, Sidebar e Navbar)
-    * **Descrição**: Reconstruir os componentes centrais da interface que são compartilhados por todas as páginas: o template base, a barra de navegação lateral (sidebar) e o cabeçalho (navbar), utilizando classes do Tailwind CSS e componentes `shadcn/ui` se aplicável.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `UI-UX-Agent`.
-* **ID**: `FE-MIG-003`
-    * **Título**: Refatoração das Telas de Autenticação e Perfil
-    * **Descrição**: Migrar o design das telas de login, visualização e edição de perfil de usuário para a nova stack, focando em formulários limpos e usabilidade.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
-* **ID**: `FE-MIG-004`
-    * **Título**: Refatoração do Módulo de Clientes (CRUD)
-    * **Descrição**: Atualizar a interface de todas as operações (Criar, Ler, Atualizar, Deletar) do módulo de Clientes, substituindo tabelas, formulários e botões antigos.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
-* **ID**: `FE-MIG-005`
-    * **Título**: Refatoração do Módulo de Projetos (CRUD Completo)
-    * **Descrição**: Migrar a interface de um dos módulos mais complexos do sistema, o de Projetos, que inclui a gestão de projetos, marcos, ordens de serviço e lançamentos financeiros.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `UI-UX-Agent`, `QA-Agent`.
-* **ID**: `FE-MIG-006`
-    * **Título**: Refatoração do Módulo de Contratos
-    * **Descrição**: Atualizar a interface do módulo de Contratos, incluindo a gestão de prestadores, itens de contrato e visualização de parcelas.
-    * **Critérios de Aceitação**:
-        * A página de detalhes do contrato (`contratos/contrato_detail.html`) apresenta um layout claro, separando dados principais, itens e pagamentos.
-        * O modal de pagamento (`contratos/partials/modal_pagamento.html`) é reconstruído com os componentes `Dialog` ou `Drawer` do `shadcn/ui`.
-        * A funcionalidade de pagamento via Mercado Pago não é afetada.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `QA-Agent`.
-* **ID**: `FE-MIG-007`
-    * **Título**: Redesenho do Dashboard e Telas de Analytics
-    * **Descrição**: Criar um novo dashboard visualmente atraente e informativo, utilizando componentes de `Card` para KPIs e, se aplicável, componentes da `Aceternity UI` para dar um toque visual único e moderno aos gráficos e métricas.
-    * **Critérios de Aceitação**:
-        * O dashboard principal (`dashboard/index.html`) exibe os principais indicadores em `Card`s bem desenhados.
-        * As páginas de analytics (`dashboard/analytics/*`) são redesenhadas para facilitar a leitura dos dados.
-        * Os gráficos (gerados via Chart.js) são integrados de forma harmoniosa ao novo design.
-    * **Agentes Envolvidos**: `Frontend-Agent`, `UI-UX-Agent`.
-* **ID**: `FE-MIG-008`
-    * **Título**: Verificação Final e Limpeza de Ativos
-    * **Descrição**: Após a migração de todas as telas, realizar uma varredura completa no projeto para garantir que nenhum resquício do Bootstrap permaneça no código-fonte ou nos arquivos estáticos.
-    * **Critérios de Aceitação**:
-        * Nenhum arquivo `.html` no projeto contém classes como `container`, `row`, `col-md-*`, `btn-*`, etc.
-        * A pasta `staticfiles/rest_framework/` (que contém o Bootstrap para o DRF) é a única exceção permitida.
-        * Os arquivos CSS/JS do Bootstrap são removidos da pasta `static/`.
-    * **Agentes Envolvidos**: `QA-Agent`, `Frontend-Agent`.
+
