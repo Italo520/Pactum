@@ -4,10 +4,85 @@
 {% block page_title %}Analytics de Projetos{% endblock %}
 
 {% block content %}
-<div class="card shadow-sm">
-    <div class="card-body">
-        <h5 class="card-title">Métricas Gerais</h5>
-        <p class="card-text">Esta funcionalidade está em desenvolvimento.</p>
+<div class="space-y-6">
+    <!-- KPI Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center">
+            <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">Total de Projetos</p>
+            <p class="text-3xl font-bold text-gray-800 dark:text-white mt-1">48</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center">
+            <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">Projetos em Andamento</p>
+            <p class="text-3xl font-bold text-blue-500 dark:text-blue-400 mt-1">32</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center">
+            <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">Projetos Atrasados</p>
+            <p class="text-3xl font-bold text-red-500 dark:text-red-400 mt-1">5</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center">
+            <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">Projetos Concluídos</p>
+            <p class="text-3xl font-bold text-green-500 dark:text-green-400 mt-1">11</p>
+        </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+            <h5 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Progresso dos Projetos Ativos</h5>
+            <canvas id="chartProgressoProjetos"></canvas>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+            <h5 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Projetos por Status</h5>
+            <canvas id="chartProjetosPorStatus"></canvas>
+        </div>
+    </div>
+
+    <!-- Message -->
+    <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 rounded-r-lg">
+        <p class="text-blue-700 dark:text-blue-300">
+            <strong>Nota:</strong> Esta página de analytics é um modelo visual. Os dados ainda precisam ser conectados ao backend.
+        </p>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Mock data for charts
+    const dataProjetosPorStatus = {
+        labels: ['Em Andamento', 'Atrasado', 'Concluído', 'Aguardando'],
+        datasets: [{
+            data: [32, 5, 11, 0],
+            backgroundColor: ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f'],
+        }]
+    };
+
+    const dataProgressoProjetos = {
+        labels: ['Projeto A', 'Projeto B', 'Projeto C', 'Projeto D', 'Projeto E'],
+        datasets: [{
+            label: 'Progresso (%)',
+            data: [75, 50, 90, 60, 30],
+            backgroundColor: 'rgba(52, 152, 219, 0.5)',
+            borderColor: '#3498db',
+            borderWidth: 1
+        }]
+    };
+
+    // Chart instances
+    new Chart(document.getElementById('chartProjetosPorStatus').getContext('2d'), {
+        type: 'pie',
+        data: dataProjetosPorStatus,
+        options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+    });
+
+    new Chart(document.getElementById('chartProgressoProjetos').getContext('2d'), {
+        type: 'bar',
+        data: dataProgressoProjetos,
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: { legend: { display: false } }
+        }
+    });
+</script>
 {% endblock %}
