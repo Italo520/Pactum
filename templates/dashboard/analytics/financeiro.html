@@ -8,12 +8,12 @@
     <!-- KPI Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Card Receitas -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">Receitas {{ resumo_financeiro.ano }}</p>
-                    <p class="text-3xl font-bold text-green-500 dark:text-green-400 mt-1">R$ {{ resumo_financeiro.total_receitas|floatformat:2 }}</p>
-                    <p class="text-xs text-gray-400 dark:text-gray-500">Valores já recebidos</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider">Receitas {{ resumo_financeiro.ano }}</p>
+                    <p class="text-4xl font-bold text-green-500 dark:text-green-400 mt-2">R$ {{ resumo_financeiro.total_receitas|floatformat:2 }}</p>
+                    <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Valores já recebidos</p>
                 </div>
                 <div class="bg-green-100 dark:bg-green-900/50 p-3 rounded-full">
                     <svg class="w-6 h-6 text-green-500 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
@@ -21,12 +21,12 @@
             </div>
         </div>
         <!-- Card Despesas -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">Despesas {{ resumo_financeiro.ano }}</p>
-                    <p class="text-3xl font-bold text-red-500 dark:text-red-400 mt-1">R$ {{ resumo_financeiro.total_despesas|floatformat:2 }}</p>
-                    <p class="text-xs text-gray-400 dark:text-gray-500">Gastos registrados</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider">Despesas {{ resumo_financeiro.ano }}</p>
+                    <p class="text-4xl font-bold text-red-500 dark:text-red-400 mt-2">R$ {{ resumo_financeiro.total_despesas|floatformat:2 }}</p>
+                    <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Gastos registrados</p>
                 </div>
                 <div class="bg-red-100 dark:bg-red-900/50 p-3 rounded-full">
                     <svg class="w-6 h-6 text-red-500 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
@@ -34,12 +34,12 @@
             </div>
         </div>
         <!-- Card Saldo -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">Saldo</p>
-                    <p class="text-3xl font-bold {% if resumo_financeiro.saldo >= 0 %}text-blue-500 dark:text-blue-400{% else %}text-red-500 dark:text-red-400{% endif %} mt-1">R$ {{ resumo_financeiro.saldo|floatformat:2 }}</p>
-                    <p class="text-xs text-gray-400 dark:text-gray-500">Receitas - Despesas</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider">Saldo</p>
+                    <p class="text-4xl font-bold {% if resumo_financeiro.saldo >= 0 %}text-blue-500 dark:text-blue-400{% else %}text-red-500 dark:text-red-400{% endif %} mt-2">R$ {{ resumo_financeiro.saldo|floatformat:2 }}</p>
+                    <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Receitas - Despesas</p>
                 </div>
                 <div class="bg-blue-100 dark:bg-blue-900/50 p-3 rounded-full">
                     <svg class="w-6 h-6 text-blue-500 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
@@ -47,12 +47,12 @@
             </div>
         </div>
         <!-- Card a Receber -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 uppercase">A Receber</p>
-                    <p class="text-3xl font-bold text-yellow-500 dark:text-yellow-400 mt-1">R$ {{ total_pendente|default:"0.00"|floatformat:2 }}</p>
-                    <p class="text-xs text-gray-400 dark:text-gray-500">Valores em aberto</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider">A Receber</p>
+                    <p class="text-4xl font-bold text-yellow-500 dark:text-yellow-400 mt-2">R$ {{ total_pendente|default:"0.00"|floatformat:2 }}</p>
+                    <p class="text-xs text-gray-400 dark:text-gray-500 mt-1">Valores em aberto</p>
                 </div>
                 <div class="bg-yellow-100 dark:bg-yellow-900/50 p-3 rounded-full">
                     <svg class="w-6 h-6 text-yellow-500 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>

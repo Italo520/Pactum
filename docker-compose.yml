@@ -9,6 +9,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pactum_password}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./inserts_postgres.sql:/docker-entrypoint-initdb.d/inserts_postgres.sql
     ports:
       - "5434:5432"
     healthcheck:
