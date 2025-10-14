@@ -19,7 +19,7 @@ services:
 
   web:
     build: .
-    command: bash -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn --bind 0.0.0.0:5000 Pactum.wsgi:application --log-level debug"
+    command: bash -c "python manage.py migrate && python manage.py create_initial_superuser && python manage.py collectstatic --noinput && gunicorn --bind 0.0.0.0:5000 Pactum.wsgi:application --log-level debug"
     volumes:
       - .:/app
     ports:
