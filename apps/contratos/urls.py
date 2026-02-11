@@ -6,7 +6,8 @@ app_name = 'contratos'
 urlpatterns = [
     # URLs de Contrato (Funcionais)
     path('', contrato_views.ContratoListView.as_view(), name='contrato_list'),
-    path('create/<int:ordem_id>/', contrato_views.ContratoCreateView.as_view(), name='contrato_create'),
+    path('create/', contrato_views.ContratoCreateView.as_view(), name='contrato_create'),
+    path('create/<int:ordem_id>/', contrato_views.ContratoCreateView.as_view(), name='contrato_create_ordem'),
 
     # URLs de Prestador - DEVEM VIR ANTES DAS URLs GENÉRICAS
     path('prestadores/', contrato_views.PrestadorListView.as_view(), name='prestador_list'),

@@ -70,9 +70,11 @@ class ContratoCreateView(LoginRequiredMixin, CreateView):
     template_name = 'contratos/contrato_form.html'
 
     def form_valid(self, form):
-        # Associa a Ordem de Serviço que veio da URL
-        ordem = get_object_or_404(Ordem, pk=self.kwargs['ordem_id'])
-        form.instance.cod_ordem = ordem
+        # Associa a Ordem de Serviço se foi fornecida na URL
+        ordem_id = self.kwargs.get('ordem_id')
+        if ordem_id:
+            ordem = get_object_or_404(Ordem, pk=ordem_id)
+            form.instance.cod_ordem = ordem
         
         # Gera o número do contrato automaticamente
         form.instance.num_contrato = Contrato.gerar_numero_contrato()
@@ -83,9 +85,11 @@ class ContratoCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
-        # Envia a Ordem para o template para podermos exibir suas informações
+        # Envia a Ordem para o template se foi fornecida
         context = super().get_context_data(**kwargs)
-        context['ordem'] = get_object_or_404(Ordem, pk=self.kwargs['ordem_id'])
+        ordem_id = self.kwargs.get('ordem_id')
+        if ordem_id:
+            context['ordem'] = get_object_or_404(Ordem, pk=ordem_id)
         return context
 
     def get_success_url(self):
