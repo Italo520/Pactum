@@ -197,86 +197,7 @@ body {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Sidebar */
-.sidebar {
-    position: fixed;
-    top: var(--navbar-height);
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    padding: 48px 0 0;
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-    overflow-y: auto;
-    background-color: var(--light-color);
-    width: var(--sidebar-width);
-    transition: all 0.3s ease-in-out;
-}
-
-/* Sidebar colapsado */
-.sidebar.collapsed {
-    width: var(--sidebar-collapsed-width);
-}
-
-.sidebar.collapsed .sidebar-heading,
-.sidebar.collapsed .nav-link span {
-    display: none;
-}
-
-.sidebar.collapsed .nav-link {
-    text-align: center;
-    padding: 0.5rem;
-    margin: 0.125rem 0.25rem;
-    justify-content: center;
-}
-
-.sidebar.collapsed .nav-link i {
-    margin-right: 0 !important;
-}
-
-.sidebar-heading {
-    font-size: .75rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #6c757d;
-}
-
-.sidebar .nav-link {
-    font-weight: 500;
-    color: #333;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    margin: 0.125rem 0.5rem;
-    transition: all 0.15s ease-in-out;
-}
-
-.sidebar .nav-link:hover {
-    color: var(--primary-color);
-    background-color: rgba(0, 123, 255, 0.1);
-}
-
-.sidebar .nav-link.active {
-    color: var(--primary-color);
-    background-color: rgba(0, 123, 255, 0.1);
-    border-left: 3px solid var(--primary-color);
-}
-
-.sidebar .nav-link i {
-    width: 16px;
-    text-align: center;
-}
-
-/* Main content */
-main {
-    padding-top: calc(var(--navbar-height) + 1rem);
-    margin-left: var(--sidebar-width);
-    padding: 20px;
-    transition: margin-left 0.3s ease-in-out;
-}
-
-/* Main content quando sidebar está colapsado */
-body.sidebar-collapsed main {
-    margin-left: var(--sidebar-collapsed-width);
-}
+/* Sidebar and Main layout styles removed to fix conflict with Tailwind layout */
 
 /* Cards */
 .card {
@@ -472,14 +393,7 @@ body.sidebar-collapsed main {
 }
 
 @media (max-width: 767.98px) {
-    .sidebar {
-        display: none;
-    }
-
-    main {
-        margin-left: 0 !important;
-        width: 100% !important;
-    }
+    /* Legacy sidebar/main rules removed */
 
     .navbar-nav {
         flex-direction: column;
