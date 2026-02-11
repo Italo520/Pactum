@@ -26,13 +26,13 @@ kombu==5.5.4
 mercadopago==2.2.1
 openpyxl==3.1.2
 packaging==25.0
-Pillow==10.1.0
+Pillow>=10.1.0
 prompt_toolkit==3.0.52
-psycopg2-binary==2.9.9
+psycopg2-binary>=2.9.9
 python-dateutil==2.9.0.post0
 python-decouple==3.8
 redis==5.0.1
-reportlab==4.0.7
+reportlab>=4.0.7
 requests==2.32.5
 six==1.17.0
 sqlparse==0.5.3

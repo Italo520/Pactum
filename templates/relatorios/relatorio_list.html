@@ -1,132 +1,255 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
-{% block title %}Central de Relatórios - FUNETEC{% endblock %}
-{% block page_title %}Central de Relatórios{% endblock %}
+{% block page_title %}{% endblock %}
 
 {% block content %}
 <div class="space-y-8">
+
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-neutral-900 dark:text-white">Central de Relatórios</h1>
+            <p class="text-neutral-500 dark:text-neutral-400 mt-1">Visão geral e exportação de dados do sistema.</p>
+        </div>
+    </div>
+
     <!-- Resumo Estatístico -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="p-6 bg-blue-600 text-white rounded-xl shadow-lg text-center">
-            <i class="fas fa-project-diagram fa-2x mb-2"></i>
-            <h5 class="font-semibold">Total de Projetos</h5>
-            <h3 class="text-3xl font-bold">{{ total_projetos }}</h3>
+        <div class="card p-6 flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-neutral-500 dark:text-neutral-400">Total de Projetos</p>
+                <p class="text-2xl font-bold text-neutral-900 dark:text-white mt-1">{{ total_projetos }}</p>
+            </div>
+            <div class="p-3 bg-primary/10 rounded-xl text-primary">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                    </path>
+                </svg>
+            </div>
         </div>
-        <div class="p-6 bg-green-600 text-white rounded-xl shadow-lg text-center">
-            <i class="fas fa-file-contract fa-2x mb-2"></i>
-            <h5 class="font-semibold">Total de Contratos</h5>
-            <h3 class="text-3xl font-bold">{{ total_contratos }}</h3>
+
+        <div class="card p-6 flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-neutral-500 dark:text-neutral-400">Total de Contratos</p>
+                <p class="text-2xl font-bold text-neutral-900 dark:text-white mt-1">{{ total_contratos }}</p>
+            </div>
+            <div class="p-3 bg-secondary/10 rounded-xl text-secondary">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                    </path>
+                </svg>
+            </div>
         </div>
-        <div class="p-6 bg-teal-600 text-white rounded-xl shadow-lg text-center">
-            <i class="fas fa-money-bill-wave fa-2x mb-2"></i>
-            <h5 class="font-semibold">Total de Pagamentos</h5>
-            <h3 class="text-3xl font-bold">{{ total_pagamentos }}</h3>
+
+        <div class="card p-6 flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-neutral-500 dark:text-neutral-400">Pagamentos</p>
+                <p class="text-2xl font-bold text-neutral-900 dark:text-white mt-1">{{ total_pagamentos }}</p>
+            </div>
+            <div class="p-3 bg-success/10 rounded-xl text-success">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
         </div>
-        <div class="p-6 bg-yellow-600 text-white rounded-xl shadow-lg text-center">
-            <i class="fas fa-dollar-sign fa-2x mb-2"></i>
-            <h5 class="font-semibold">Valor Recebido</h5>
-            <h3 class="text-3xl font-bold">R$ {{ valor_total_recebido|floatformat:0 }}</h3>
+
+        <div class="card p-6 flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-neutral-500 dark:text-neutral-400">Valor Recebido</p>
+                <p class="text-2xl font-bold text-neutral-900 dark:text-white mt-1">R$ {{
+                    valor_total_recebido|floatformat:0 }}</p>
+            </div>
+            <div class="p-3 bg-warning/10 rounded-xl text-warning">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                    </path>
+                </svg>
+            </div>
         </div>
     </div>
 
     <!-- Relatórios Disponíveis -->
+    <h2 class="text-lg font-bold text-neutral-900 dark:text-white mt-8 mb-4">Relatórios Disponíveis</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col">
+
+        <!-- Projetos -->
+        <div class="card flex flex-col h-full hover:shadow-lg transition-shadow">
             <div class="p-6 flex-grow">
-                <h5 class="text-lg font-bold text-gray-800 dark:text-white flex items-center"><i class="fas fa-project-diagram mr-2 text-blue-500"></i> Relatório de Projetos</h5>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Lista completa de todos os projetos cadastrados no sistema, incluindo valores, situação e prazos.</p>
+                <div
+                    class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-white">Relatório de Projetos</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2">Lista completa de todos os projetos
+                    cadastrados, valores e prazos.</p>
             </div>
-            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-b-lg space-y-3">
-                <a href="{% url 'relatorios:relatorio_projetos' %}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <i class="fas fa-eye mr-2"></i> Visualizar
+            <div
+                class="px-6 py-4 bg-neutral-50 dark:bg-gray-800/50 border-t border-neutral-100 dark:border-gray-700 rounded-b-xl flex flex-col gap-2">
+                <a href="{% url 'relatorios:relatorio_projetos' %}" class="btn-secondary w-full justify-center">
+                    Visualizar na Tela
                 </a>
-                <div class="flex space-x-3">
-                    <a href="{% url 'relatorios:relatorio_projetos_generate' %}?format=pdf" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700">
-                        <i class="fas fa-file-pdf mr-2"></i> PDF
+                <div class="flex gap-2">
+                    <a href="{% url 'relatorios:relatorio_projetos_generate' %}?format=pdf"
+                        class="btn-sm btn-danger w-full justify-center flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                            </path>
+                        </svg> PDF
                     </a>
-                    <a href="{% url 'relatorios:relatorio_projetos_generate' %}?format=excel" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
-                        <i class="fas fa-file-excel mr-2"></i> Excel
+                    <a href="{% url 'relatorios:relatorio_projetos_generate' %}?format=excel"
+                        class="btn-sm btn-success w-full justify-center flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg> Excel
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col">
+        <!-- Contratos -->
+        <div class="card flex flex-col h-full hover:shadow-lg transition-shadow">
             <div class="p-6 flex-grow">
-                <h5 class="text-lg font-bold text-gray-800 dark:text-white flex items-center"><i class="fas fa-file-contract mr-2 text-green-500"></i> Relatório de Contratos</h5>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Relatório detalhado de contratos, prestadores, valores e status de execução dos serviços.</p>
+                <div
+                    class="w-10 h-10 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-white">Relatório de Contratos</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2">Detalhes de contratos, prestadores e
+                    status de execução.</p>
             </div>
-            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-b-lg space-y-3">
-                <a href="{% url 'relatorios:relatorio_contratos' %}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <i class="fas fa-eye mr-2"></i> Visualizar
+            <div
+                class="px-6 py-4 bg-neutral-50 dark:bg-gray-800/50 border-t border-neutral-100 dark:border-gray-700 rounded-b-xl flex flex-col gap-2">
+                <a href="{% url 'relatorios:relatorio_contratos' %}" class="btn-secondary w-full justify-center">
+                    Visualizar na Tela
                 </a>
-                <div class="flex space-x-3">
-                    <a href="{% url 'relatorios:relatorio_contratos_generate' %}?format=pdf" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700">
-                        <i class="fas fa-file-pdf mr-2"></i> PDF
+                <div class="flex gap-2">
+                    <a href="{% url 'relatorios:relatorio_contratos_generate' %}?format=pdf"
+                        class="btn-sm btn-danger w-full justify-center flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                            </path>
+                        </svg> PDF
                     </a>
-                    <a href="{% url 'relatorios:relatorio_contratos_generate' %}?format=excel" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
-                        <i class="fas fa-file-excel mr-2"></i> Excel
+                    <a href="{% url 'relatorios:relatorio_contratos_generate' %}?format=excel"
+                        class="btn-sm btn-success w-full justify-center flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg> Excel
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col">
+        <!-- Financeiro -->
+        <div class="card flex flex-col h-full hover:shadow-lg transition-shadow">
             <div class="p-6 flex-grow">
-                <h5 class="text-lg font-bold text-gray-800 dark:text-white flex items-center"><i class="fas fa-chart-line mr-2 text-teal-500"></i> Relatório Financeiro</h5>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Análise financeira completa: fluxo de caixa, inadimplência, valores recebidos e pagamentos.</p>
+                <div
+                    class="w-10 h-10 rounded-lg bg-teal-50 dark:bg-teal-900/20 text-teal-600 dark:text-teal-400 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-white">Relatório Financeiro</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2">Fluxo de caixa, recebimentos, pagamentos
+                    e inadimplência.</p>
             </div>
-            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-b-lg space-y-3">
-                <a href="{% url 'relatorios:relatorio_financeiro' %}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600">
-                    <i class="fas fa-eye mr-2"></i> Visualizar
+            <div
+                class="px-6 py-4 bg-neutral-50 dark:bg-gray-800/50 border-t border-neutral-100 dark:border-gray-700 rounded-b-xl flex flex-col gap-2">
+                <a href="{% url 'relatorios:relatorio_financeiro' %}" class="btn-secondary w-full justify-center">
+                    Visualizar na Tela
                 </a>
-                <div class="flex space-x-3">
-                    <a href="{% url 'relatorios:relatorio_financeiro_generate' %}?format=pdf" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700">
-                        <i class="fas fa-file-pdf mr-2"></i> PDF
+                <div class="flex gap-2">
+                    <a href="{% url 'relatorios:relatorio_financeiro_generate' %}?format=pdf"
+                        class="btn-sm btn-danger w-full justify-center flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z">
+                            </path>
+                        </svg> PDF
                     </a>
-                    <a href="{% url 'relatorios:relatorio_financeiro_generate' %}?format=excel" class="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
-                        <i class="fas fa-file-excel mr-2"></i> Excel
+                    <a href="{% url 'relatorios:relatorio_financeiro_generate' %}?format=excel"
+                        class="btn-sm btn-success w-full justify-center flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg> Excel
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col border-2 border-yellow-400">
+        <!-- Customizados -->
+        <div class="card flex flex-col h-full hover:shadow-lg transition-shadow border-2 border-primary/20">
             <div class="p-6 flex-grow">
-                <h5 class="text-lg font-bold text-gray-800 dark:text-white flex items-center"><i class="fas fa-cogs mr-2 text-yellow-500"></i> Relatórios Customizados</h5>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Crie relatórios personalizados com filtros avançados para projetos, contratos e dados financeiros.</p>
+                <div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-white">Relatórios Customizados</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2">Filtros avançados por data, valor e tipo.
+                </p>
             </div>
-            <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-b-lg space-y-3">
-                <a href="{% url 'relatorios:relatorio_custom' %}" class="w-full inline-flex justify-center py-2 px-4 border border-yellow-400 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-yellow-600 dark:text-yellow-300 hover:bg-yellow-50 dark:hover:bg-yellow-900">
-                    <i class="fas fa-filter mr-2"></i> Configurar Filtros
+            <div
+                class="px-6 py-4 bg-neutral-50 dark:bg-gray-800/50 border-t border-neutral-100 dark:border-gray-700 rounded-b-xl space-y-2">
+                <a href="{% url 'relatorios:relatorio_custom' %}" class="btn-primary w-full justify-center">
+                    Configurar Filtros
                 </a>
-                 <small class="block text-center text-gray-500 dark:text-gray-400">
-                    <i class="fas fa-magic mr-1"></i> Filtros por data, valor, tipo e muito mais!
-                </small>
+                <div class="text-center text-xs text-neutral-400 mt-2">
+                    Personalize sua exportação
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Links Rápidos -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl">
-        <div class="p-4 border-b border-gray-200 dark:border-gray-700">
-            <h5 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center"><i class="fas fa-link mr-2"></i>Acesso Rápido</h5>
+    <div class="card p-0 overflow-hidden mt-8">
+        <div class="p-4 border-b border-neutral-100 dark:border-gray-700 bg-neutral-50/50 dark:bg-gray-800/50">
+            <h5 class="font-bold text-neutral-800 dark:text-white flex items-center gap-2">
+                <svg class="w-5 h-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                    </path>
+                </svg>
+                Acesso Rápido
+            </h5>
         </div>
-        <div class="p-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <a href="{% url 'dashboard:analytics_financeiro' %}" class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">
-                    <i class="fas fa-chart-bar mr-2"></i> Analytics Financeiro
-                </a>
-                <a href="{% url 'pagamentos:payment_history' %}" class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">
-                    <i class="fas fa-history mr-2"></i> Histórico de Pagamentos
-                </a>
-                <a href="{% url 'contratos:parcela_list' %}" class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">
-                    <i class="fas fa-list mr-2"></i> Lista de Parcelas
-                </a>
-                <a href="{% url 'projetos:projeto_list' %}" class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">
-                    <i class="fas fa-project-diagram mr-2"></i> Lista de Projetos
-                </a>
-            </div>
+        <div class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <a href="{% url 'dashboard:analytics_financeiro' %}" class="btn-secondary justify-center py-3">
+                Analytics Financeiro
+            </a>
+            <a href="{% url 'pagamentos:payment_history' %}" class="btn-secondary justify-center py-3">
+                Histórico Pagamentos
+            </a>
+            <a href="{% url 'contratos:parcela_list' %}" class="btn-secondary justify-center py-3">
+                Lista de Parcelas
+            </a>
+            <a href="{% url 'projetos:projeto_list' %}" class="btn-secondary justify-center py-3">
+                Lista de Projetos
+            </a>
         </div>
     </div>
 </div>

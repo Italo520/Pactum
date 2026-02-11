@@ -1,195 +1,289 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% load class_tags %}
+{% load status_tags %}
 
-{% block page_title %}Detalhes do Projeto{% endblock %}
-
-{% block page_actions %}
-<div class="flex items-center space-x-2">
-    {% if perms.projetos.change_projeto %}
-    <a href="{% url 'projetos:projeto_update' projeto.pk %}" class="flex items-center px-4 py-2 bg-yellow-500 text-white rounded-lg shadow-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
-        <i class="fas fa-pencil-alt mr-2"></i>
-        Editar
-    </a>
-    {% endif %}
-    <a href="{% url 'projetos:projeto_list' %}" class="flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition">
-        <i class="fas fa-arrow-left mr-2"></i>
-        Voltar
-    </a>
-</div>
-{% endblock %}
+{% block page_title %}{% endblock %}
 
 {% block content %}
-<div class="space-y-8">
+<div class="space-y-6">
 
-    <!-- Project Header Card -->
-    <div class="bg-white rounded-lg shadow-xl overflow-hidden">
-        <div class="p-8">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between">
-                <div>
-                    <h2 class="text-3xl font-bold text-gray-900">{{ projeto.nome }}</h2>
-                    <p class="text-sm text-gray-500 mt-1">#{{ projeto.cod_projeto }}</p>
-                </div>
-                <div class="mt-4 md:mt-0">
-                    <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full {{ projeto.situacao|get_status_badge_class }}">
+    <!-- Header & Actions -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="flex items-center space-x-2">
+                    <li>
+                        <a href="{% url 'dashboard' %}"
+                            class="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="text-neutral-400">/</li>
+                    <li>
+                        <a href="{% url 'projetos:projeto_list' %}"
+                            class="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300 font-medium">Projetos</a>
+                    </li>
+                    <li class="text-neutral-400">/</li>
+                    <li class="text-primary font-medium" aria-current="page">Detalhes</li>
+                </ol>
+            </nav>
+            <h1 class="text-2xl font-bold text-neutral-900 dark:text-white mt-2">{{ projeto.nome }}</h1>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="{% url 'projetos:projeto_list' %}" class="btn-secondary flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Voltar
+            </a>
+            {% if perms.projetos.change_projeto %}
+            <a href="{% url 'projetos:projeto_update' projeto.pk %}" class="btn-primary flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                    </path>
+                </svg>
+                Editar
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Overview Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="card p-6 flex items-center gap-4 border-l-4 border-primary">
+            <div class="p-3 bg-primary/10 rounded-xl text-primary">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <div>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">Situação</p>
+                <div class="mt-1">
+                    <span class="badge-modern {{ projeto.situacao|get_status_badge }}">
                         {{ projeto.get_situacao_display }}
                     </span>
                 </div>
             </div>
-            <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div>
-                    <p class="text-sm font-medium text-gray-500">Data de Início</p>
-                    <p class="text-md font-semibold text-gray-800">{{ projeto.data_inicio|date:"d/m/Y" }}</p>
-                </div>
-                <div>
-                    <p class="text-sm font-medium text-gray-500">Data de Encerramento</p>
-                    <p class="text-md font-semibold text-gray-800">{{ projeto.data_encerramento|date:"d/m/Y" }}</p>
-                </div>
-                <div>
-                    <p class="text-sm font-medium text-gray-500">Valor Orçado</p>
-                    <p class="text-md font-semibold text-gray-800">R$ {{ projeto.valor|floatformat:2 }}</p>
-                </div>
-                 <div>
-                    <p class="text-sm font-medium text-gray-500">Custo Atual</p>
-                    <p class="text-md font-semibold text-red-600">R$ {{ projeto.get_total_custos|floatformat:2 }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Milestones and Financials Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
-        <!-- Milestones (Marcos) -->
-        <div class="bg-white rounded-lg shadow-xl overflow-hidden">
-            <div class="p-6 border-b border-gray-200 flex justify-between items-center">
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Marcos do Projeto</h3>
-                    <p class="text-sm text-gray-500">Próximas entregas e status.</p>
-                </div>
-                {% if perms.projetos.add_marco %}
-                <a href="{% url 'projetos:marco-create' projeto.pk %}" class="text-green-600 hover:text-green-800" title="Adicionar Marco">
-                    <i class="fas fa-plus-circle fa-lg"></i>
-                </a>
-                {% endif %}
-            </div>
-            <div class="overflow-x-auto">
-                {% with marcos=projeto.marcos.all %}
-                    {% if marcos %}
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descrição</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data Prevista</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                        {% for marco in marcos %}
-                            <tr class="hover:bg-gray-50 transition">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ marco.descricao }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ marco.data_prevista|date:"d/m/Y" }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ marco.status|get_status_badge_class }}">
-                                        {{ marco.get_status_display }}
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{% url 'projetos:marco-update-status' marco.pk %}" class="text-blue-600 hover:text-blue-800" title="Atualizar Status">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    {% else %}
-                    <p class="p-6 text-sm text-gray-500 text-center">Nenhum marco cadastrado.</p>
-                    {% endif %}
-                {% endwith %}
-            </div>
         </div>
 
-        <!-- Financials (Lançamentos de Custo) -->
-        <div class="bg-white rounded-lg shadow-xl overflow-hidden">
-            <div class="p-6 border-b border-gray-200 flex justify-between items-center">
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Lançamentos de Custo</h3>
-                    <p class="text-sm text-gray-500">Despesas associadas ao projeto.</p>
-                </div>
-                {% if perms.projetos.add_lancamento %}
-                <a href="{% url 'projetos:lancamento-create' projeto.pk %}" class="text-green-600 hover:text-green-800" title="Adicionar Lançamento">
-                     <i class="fas fa-plus-circle fa-lg"></i>
-                </a>
-                {% endif %}
+        <div class="card p-6 flex items-center gap-4">
+            <div class="p-3 bg-neutral-100 dark:bg-neutral-700 rounded-xl text-neutral-600 dark:text-neutral-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                    </path>
+                </svg>
             </div>
-            <div class="overflow-x-auto">
-                 {% with lancamentos=projeto.lancamentos.all %}
-                    {% if lancamentos %}
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descrição</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                        {% for lancamento in lancamentos %}
-                            <tr class="hover:bg-gray-50 transition">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ lancamento.descricao }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ lancamento.data|date:"d/m/Y" }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">R$ {{ lancamento.valor|floatformat:2 }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                     <a href="{% url 'projetos:lancamento-delete' lancamento.pk %}" class="text-red-600 hover:text-red-800" title="Excluir Lançamento">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    {% else %}
-                    <p class="p-6 text-sm text-gray-500 text-center">Nenhum lançamento de custo cadastrado.</p>
-                    {% endif %}
-                {% endwith %}
-            </div>
-        </div>
-    </div>
-
-    <!-- Requests (Requisições) -->
-    <div class="bg-white rounded-lg shadow-xl overflow-hidden">
-        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
             <div>
-                <h3 class="text-lg font-semibold text-gray-800">Requisições do Projeto</h3>
-                <p class="text-sm text-gray-500">Solicitações de compra e serviços.</p>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">Período</p>
+                <p class="font-semibold text-neutral-900 dark:text-white text-sm">
+                    {{ projeto.data_inicio|date:"d/m/Y" }} - {{ projeto.data_encerramento|date:"d/m/Y" }}
+                </p>
             </div>
+        </div>
+
+        <div class="card p-6 flex items-center gap-4">
+            <div class="p-3 bg-success/10 rounded-xl text-success">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                    </path>
+                </svg>
+            </div>
+            <div>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">Valor Orçado</p>
+                <p class="font-bold text-neutral-900 dark:text-white">R$ {{ projeto.valor|floatformat:2 }}</p>
+            </div>
+        </div>
+
+        <div class="card p-6 flex items-center gap-4">
+            <div class="p-3 bg-danger/10 rounded-xl text-danger">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+            </div>
+            <div>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">Custo Atual</p>
+                <p class="font-bold text-danger">R$ {{ projeto.get_total_custos|floatformat:2 }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+        <!-- Marcos -->
+        <div class="card overflow-hidden p-0 border-0 shadow-lg h-full">
+            <div
+                class="p-5 border-b border-neutral-100 dark:border-gray-700 flex justify-between items-center bg-white dark:bg-gray-800">
+                <h3 class="font-bold text-lg text-neutral-800 dark:text-white flex items-center gap-2">
+                    <span class="w-2 h-6 bg-primary rounded-full"></span>
+                    Marcos do Projeto
+                </h3>
+                {% if perms.projetos.add_marco %}
+                <a href="{% url 'projetos:marco-create' projeto.pk %}"
+                    class="btn-sm btn-primary flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Novo
+                </a>
+                {% endif %}
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <thead class="text-xs text-neutral-500 uppercase bg-neutral-50/50 dark:bg-neutral-800/50">
+                        <tr>
+                            <th class="px-6 py-3 font-semibold">Descrição</th>
+                            <th class="px-6 py-3 font-semibold">Data</th>
+                            <th class="px-6 py-3 font-semibold">Status</th>
+                            <th class="px-6 py-3 font-semibold text-right">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-neutral-100 dark:divide-gray-700">
+                        {% for marco in projeto.marcos.all %}
+                        <tr class="hover:bg-neutral-50 dark:hover:bg-gray-700/50 transition-colors">
+                            <td class="px-6 py-4 font-medium">{{ marco.descricao }}</td>
+                            <td class="px-6 py-4 text-neutral-500">{{ marco.data_prevista|date:"d/m/Y" }}</td>
+                            <td class="px-6 py-4">
+                                <span class="badge-modern {{ marco.status|get_status_badge }}">
+                                    {{ marco.get_status_display }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="{% url 'projetos:marco-update-status' marco.pk %}"
+                                    class="text-primary hover:text-primary-dark transition-colors">
+                                    <svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="px-6 py-8 text-center text-neutral-500">Nenhum marco cadastrado.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Lançamentos -->
+        <div class="card overflow-hidden p-0 border-0 shadow-lg h-full">
+            <div
+                class="p-5 border-b border-neutral-100 dark:border-gray-700 flex justify-between items-center bg-white dark:bg-gray-800">
+                <h3 class="font-bold text-lg text-neutral-800 dark:text-white flex items-center gap-2">
+                    <span class="w-2 h-6 bg-warning rounded-full"></span>
+                    Custos
+                </h3>
+                {% if perms.projetos.add_lancamento %}
+                <a href="{% url 'projetos:lancamento-create' projeto.pk %}"
+                    class="btn-sm btn-secondary flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Novo
+                </a>
+                {% endif %}
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <thead class="text-xs text-neutral-500 uppercase bg-neutral-50/50 dark:bg-neutral-800/50">
+                        <tr>
+                            <th class="px-6 py-3 font-semibold">Descrição</th>
+                            <th class="px-6 py-3 font-semibold">Data</th>
+                            <th class="px-6 py-3 font-semibold">Valor</th>
+                            <th class="px-6 py-3 font-semibold text-right">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-neutral-100 dark:divide-gray-700">
+                        {% for lan in projeto.lancamentos.all %}
+                        <tr class="hover:bg-neutral-50 dark:hover:bg-gray-700/50 transition-colors">
+                            <td class="px-6 py-4 font-medium">{{ lan.descricao }}</td>
+                            <td class="px-6 py-4 text-neutral-500">{{ lan.data|date:"d/m/Y" }}</td>
+                            <td class="px-6 py-4 font-mono text-neutral-700 dark:text-neutral-300">R$ {{
+                                lan.valor|floatformat:2 }}</td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="{% url 'projetos:lancamento-delete' lan.pk %}"
+                                    class="text-danger hover:text-danger-dark transition-colors">
+                                    <svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="px-6 py-8 text-center text-neutral-500">Nenhum custo lançado.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Requisições List -->
+    <div class="card overflow-hidden p-0 border-0 shadow-lg">
+        <div
+            class="p-5 border-b border-neutral-100 dark:border-gray-700 flex justify-between items-center bg-white dark:bg-gray-800">
+            <h3 class="font-bold text-lg text-neutral-800 dark:text-white flex items-center gap-2">
+                <span class="w-2 h-6 bg-info rounded-full"></span>
+                Requisições
+            </h3>
             {% if perms.projetos.add_requisicao %}
-            <a href="{% url 'projetos:requisicao_create' projeto.pk %}" class="text-green-600 hover:text-green-800" title="Adicionar Requisição">
-                <i class="fas fa-plus-circle fa-lg"></i>
+            <a href="{% url 'projetos:requisicao_create' projeto.pk %}"
+                class="btn-sm btn-primary flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Nova
             </a>
             {% endif %}
         </div>
-        <div>
-            {% with requisicoes=projeto.requisicoes.all %}
-                {% if requisicoes %}
-                <ul class="divide-y divide-gray-200">
-                    {% for req in requisicoes %}
-                    <li class="p-6 hover:bg-gray-50 flex justify-between items-center transition">
-                        <div>
-                            <a href="{% url 'projetos:requisicao_detail' req.pk %}" class="text-sm font-medium text-blue-600 hover:underline">{{ req.descricao|truncatechars:100 }}</a>
-                            <p class="text-xs text-gray-500">Criada em: {{ req.data_criacao|date:"d/m/Y" }}</p>
-                        </div>
-                        <a href="{% url 'projetos:requisicao_detail' req.pk %}" class="text-xs text-white bg-blue-500 hover:bg-blue-600 rounded-full px-3 py-1">Ver Detalhes</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p class="p-6 text-sm text-gray-500 text-center">Nenhuma requisição cadastrada.</p>
-                {% endif %}
-            {% endwith %}
+        <div class="divide-y divide-neutral-100 dark:divide-gray-700">
+            {% for req in projeto.requisicoes.all %}
+            <div
+                class="p-4 hover:bg-neutral-50 dark:hover:bg-gray-700/50 transition-colors flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="p-2 bg-neutral-100 dark:bg-gray-700 rounded-lg">
+                        <span class="font-mono text-xs font-bold text-neutral-600 dark:text-neutral-400">#{{
+                            req.cod_requisicao }}</span>
+                    </div>
+                    <div>
+                        <p class="font-medium text-neutral-900 dark:text-white">{{ req.descricao|truncatewords:8 }}</p>
+                        <p class="text-xs text-neutral-500">{{ req.data_solicitacao|date:"d/m/Y" }}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="badge-modern {{ req.situacao|get_status_badge:'requisicao' }}">
+                        {{ req.get_situacao_display }}
+                    </span>
+                    <a href="{% url 'projetos:requisicao_detail' req.pk %}"
+                        class="text-neutral-400 hover:text-primary transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="p-8 text-center text-neutral-500">Nenhuma requisição vinculada.</div>
+            {% endfor %}
         </div>
     </div>
 

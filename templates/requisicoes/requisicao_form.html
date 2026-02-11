@@ -1,54 +1,94 @@
 {% extends 'base/base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}Nova Requisição - FUNETEC{% endblock %}
 
-{% block page_title %}Adicionar Requisição ao Projeto: {{ projeto.nome }}{% endblock %}
+{% block page_title %}{% endblock %}
 
 {% block content %}
 <div class="max-w-4xl mx-auto">
-    <form method="post" class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden" novalidate>
-        {% csrf_token %}
-        <div class="p-8">
+    <div class="card overflow-hidden">
+        <div class="p-6 border-b border-neutral-200 dark:border-gray-700 bg-neutral-50/50 dark:bg-gray-800/50">
+            <h2 class="text-xl font-bold text-neutral-900 dark:text-white">
+                Nova Requisição
+            </h2>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Projeto: <span
+                    class="font-medium text-neutral-700 dark:text-neutral-300">{{ projeto.nome }}</span></p>
+        </div>
+
+        <form method="post" class="p-6 space-y-6" novalidate>
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="p-4 bg-red-50 text-red-700 border border-red-200 rounded-lg">
+                {% for error in form.non_field_errors %}
+                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                        </path>
+                    </svg> {{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             <div class="space-y-6">
                 <div>
-                    <label for="{{ form.descricao.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ form.descricao.label }}</label>
-                    {{ form.descricao }}
+                    <label for="{{ form.descricao.id_for_label }}" class="form-label">{{ form.descricao.label }}</label>
+                    {% render_field form.descricao class="form-input" rows="3" %}
+                    {% if form.descricao.errors %}<p class="form-error">{{ form.descricao.errors|first }}</p>{% endif %}
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="{{ form.data_solicitacao.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ form.data_solicitacao.label }}</label>
-                        {{ form.data_solicitacao }}
+                        <label for="{{ form.data_solicitacao.id_for_label }}" class="form-label">{{
+                            form.data_solicitacao.label }}</label>
+                        {% render_field form.data_solicitacao class="form-input" type="date" %}
+                        {% if form.data_solicitacao.errors %}<p class="form-error">{{ form.data_solicitacao.errors|first
+                            }}</p>{% endif %}
                     </div>
                     <div>
-                        <label for="{{ form.data_limite.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ form.data_limite.label }}</label>
-                        {{ form.data_limite }}
+                        <label for="{{ form.data_limite.id_for_label }}" class="form-label">{{ form.data_limite.label
+                            }}</label>
+                        {% render_field form.data_limite class="form-input" type="date" %}
+                        {% if form.data_limite.errors %}<p class="form-error">{{ form.data_limite.errors|first }}</p>{%
+                        endif %}
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
-                        <label for="{{ form.valor.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ form.valor.label }}</label>
-                        {{ form.valor }}
+                        <label for="{{ form.valor.id_for_label }}" class="form-label">{{ form.valor.label }}</label>
+                        {% render_field form.valor class="form-input" %}
+                        {% if form.valor.errors %}<p class="form-error">{{ form.valor.errors|first }}</p>{% endif %}
                     </div>
                     <div>
-                        <label for="{{ form.situacao.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ form.situacao.label }}</label>
-                        {{ form.situacao }}
+                        <label for="{{ form.situacao.id_for_label }}" class="form-label">{{ form.situacao.label
+                            }}</label>
+                        {% render_field form.situacao class="form-select" %}
+                        {% if form.situacao.errors %}<p class="form-error">{{ form.situacao.errors|first }}</p>{% endif
+                        %}
                     </div>
                     <div>
-                        <label for="{{ form.prioridade.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ form.prioridade.label }}</label>
-                        {{ form.prioridade }}
+                        <label for="{{ form.prioridade.id_for_label }}" class="form-label">{{ form.prioridade.label
+                            }}</label>
+                        {% render_field form.prioridade class="form-select" %}
+                        {% if form.prioridade.errors %}<p class="form-error">{{ form.prioridade.errors|first }}</p>{%
+                        endif %}
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="bg-gray-50 dark:bg-gray-700 px-8 py-4 border-t border-gray-200 dark:border-gray-600 flex justify-end space-x-4">
-            <a href="{% url 'projetos:projeto_detail' projeto.pk %}" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors">Cancelar</a>
-            <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center">
-                <i class="fas fa-save mr-2"></i> Salvar Requisição
-            </button>
-        </div>
-    </form>
+            <div class="pt-6 border-t border-neutral-200 dark:border-gray-700 flex justify-end gap-3">
+                <a href="{% url 'projetos:projeto_detail' projeto.pk %}" class="btn-secondary">Cancelar</a>
+                <button type="submit" class="btn-primary">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Salvar Requisição
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

@@ -1,30 +1,47 @@
 {% extends 'base/base.html' %}
+{% load static %}
+{% load status_tags %}
 
 {% block title %}Lista de Contratos - FUNETEC{% endblock %}
 {% block page_title %}Contratos{% endblock %}
 
+{% block page_actions %}
+{% if perms.contratos.add_contrato %}
+<a href="{% url 'contratos:contrato_create' %}"
+    class="btn-primary flex items-center gap-2 shadow-sm hover:shadow-md transition-shadow">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+    </svg>
+    Novo Contrato
+</a>
+{% endif %}
+{% endblock %}
+
 {% block content %}
-<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+<div class="card overflow-hidden p-0 border-0 shadow-lg">
     <!-- Header -->
-    <div class="p-6 border-b border-neutral-200 dark:border-gray-700">
+    <div class="p-6 border-b border-neutral-100 dark:border-gray-700 bg-white dark:bg-gray-800">
         <div class="flex items-center justify-between">
-            <div class="flex items-center">
-                <div class="icon-wrapper bg-gradient-to-br from-primary to-primary-light mr-4">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-center gap-4">
+                <div
+                    class="icon-wrapper w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
                         </path>
                     </svg>
                 </div>
                 <div>
-                    <h2 class="text-2xl font-bold text-neutral-900 dark:text-white">Contratos</h2>
+                    <h2 class="text-xl font-bold text-neutral-900 dark:text-white font-heading">Contratos</h2>
                     <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Gerencie todos os contratos do
                         sistema</p>
                 </div>
             </div>
             {% if contratos %}
-            <span class="badge-modern badge-primary text-sm">{{ contratos|length }} contrato{{
-                contratos|length|pluralize }}</span>
+            <span
+                class="px-3 py-1 bg-neutral-100 text-neutral-600 rounded-full text-xs font-medium border border-neutral-200">
+                {{ contratos|length }} contrato{{ contratos|length|pluralize }}
+            </span>
             {% endif %}
         </div>
     </div>
@@ -33,44 +50,49 @@
     <div class="overflow-x-auto">
         <table class="w-full text-sm text-left text-neutral-600 dark:text-neutral-400">
             <thead
-                class="text-xs text-neutral-700 uppercase bg-neutral-50 dark:bg-neutral-700/50 dark:text-neutral-300">
+                class="text-xs text-neutral-500 uppercase bg-neutral-50/50 dark:bg-neutral-800/50 dark:text-neutral-400 border-b border-neutral-100 dark:border-gray-700">
                 <tr>
-                    <th scope="col" class="px-6 py-4 font-semibold">Nº Contrato</th>
-                    <th scope="col" class="px-6 py-4 font-semibold">Contratado</th>
-                    <th scope="col" class="px-6 py-4 font-semibold">Valor Total</th>
-                    <th scope="col" class="px-6 py-4 font-semibold">Situação</th>
-                    <th scope="col" class="px-6 py-4 font-semibold">Vigência</th>
-                    <th scope="col" class="px-6 py-4 font-semibold text-right">Ações</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Nº Contrato</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Contratado</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Valor Total</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Situação</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Vigência</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider text-right">Ações</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="divide-y divide-neutral-100 dark:divide-gray-700 bg-white dark:bg-gray-800">
                 {% for contrato in contratos %}
-                <tr
-                    class="border-b border-neutral-100 dark:border-gray-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/30 transition-colors duration-200">
-                    <td class="px-6 py-4">
-                        <span class="text-primary font-bold">#{{ contrato.num_contrato }}</span>
+                <tr class="hover:bg-neutral-50 dark:hover:bg-gray-700/50 transition-colors duration-150">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                            <span class="font-mono text-sm font-medium text-primary">#{{ contrato.num_contrato }}</span>
+                        </div>
                     </td>
-                    <td class="px-6 py-4 font-medium text-neutral-900 dark:text-white">
-                        {{ contrato.contratado }}
+                    <td class="px-6 py-4 font-medium text-neutral-900 dark:text-white whitespace-nowrap">
+                        {{ contrato.contratado|truncatechars:30 }}
                     </td>
                     <td class="px-6 py-4">
                         <span class="font-semibold text-neutral-900 dark:text-white">R$ {{ contrato.valor|floatformat:2
                             }}</span>
                     </td>
                     <td class="px-6 py-4">
-                        <span class="badge-modern badge-success">
+                        <span class="badge-modern {{ contrato.situacao|get_status_badge }}">
                             {{ contrato.get_situacao_display }}
                         </span>
                     </td>
-                    <td class="px-6 py-4 text-neutral-700 dark:text-neutral-300">
-                        {{ contrato.data_inicio|date:"d/m/y" }} a {{ contrato.data_fim|date:"d/m/y" }}
+                    <td class="px-6 py-4 text-xs text-neutral-500">
+                        <div class="flex flex-col">
+                            <span>Início: {{ contrato.data_inicio|date:"d/m/y" }}</span>
+                            <span>Fim: {{ contrato.data_fim|date:"d/m/y" }}</span>
+                        </div>
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex items-center justify-end">
                             <a href="{% url 'contratos:contrato_detail' contrato.pk %}"
-                                class="inline-flex items-center px-2.5 py-1.5 rounded-lg text-primary hover:bg-primary-50 dark:hover:bg-primary/10 transition-colors duration-200"
+                                class="p-2 rounded-lg text-neutral-500 hover:text-primary hover:bg-primary-50 dark:hover:bg-primary/10 transition-colors"
                                 title="Ver Detalhes">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -85,14 +107,24 @@
                 <tr>
                     <td colspan="6" class="px-6 py-12 text-center">
                         <div class="flex flex-col items-center justify-center text-neutral-400">
-                            <svg class="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-16 h-16 mb-4 text-neutral-300" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
                                 </path>
                             </svg>
                             <h3 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-2">Nenhum
                                 contrato encontrado</h3>
-                            <p class="text-sm text-neutral-500">Ainda não há contratos cadastrados</p>
+                            <p class="text-sm text-neutral-500 mb-4">Ainda não há contratos cadastrados</p>
+                            {% if perms.contratos.add_contrato %}
+                            <a href="{% url 'contratos:contrato_create' %}" class="btn-primary flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4"></path>
+                                </svg>
+                                Criar Primeiro Contrato
+                            </a>
+                            {% endif %}
                         </div>
                     </td>
                 </tr>
@@ -100,5 +132,51 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Paginação -->
+    {% if is_paginated %}
+    <div
+        class="px-6 py-4 border-t border-neutral-100 dark:border-gray-700 bg-neutral-50 dark:bg-gray-800/50 flex items-center justify-between">
+        <div class="text-xs text-neutral-500 dark:text-neutral-400">
+            Mostrando página <span class="font-semibold text-neutral-900 dark:text-white">{{ page_obj.number }}</span>
+            de <span class="font-semibold text-neutral-900 dark:text-white">{{ page_obj.paginator.num_pages }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+                class="p-2 rounded-lg border border-neutral-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-gray-600 transition-colors"
+                title="Anterior">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </a>
+            {% else %}
+            <span
+                class="p-2 rounded-lg border border-neutral-100 dark:border-gray-700 bg-neutral-50 dark:bg-gray-800 text-neutral-300 dark:text-gray-600 cursor-not-allowed">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </span>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+                class="p-2 rounded-lg border border-neutral-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-gray-600 transition-colors"
+                title="Próxima">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
+            {% else %}
+            <span
+                class="p-2 rounded-lg border border-neutral-100 dark:border-gray-700 bg-neutral-50 dark:bg-gray-800 text-neutral-300 dark:text-gray-600 cursor-not-allowed">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </span>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

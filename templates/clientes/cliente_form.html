@@ -4,133 +4,159 @@
 {% block page_title %}{% if form.instance.pk %}Editar Cliente{% else %}Adicionar Cliente{% endif %}{% endblock %}
 
 {% block content %}
-<div class="max-w-2xl mx-auto">
-    <form method="post" class="bg-white rounded-lg shadow-xl overflow-hidden">
-        {% csrf_token %}
-        <div class="p-8">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">
-                {% if form.instance.pk %}
-                    Editar Cliente: <span class="text-green-600">{{ form.instance }}</span>
-                {% else %}
-                    Adicionar Novo Cliente
-                {% endif %}
-            </h2>
+<div class="max-w-3xl mx-auto">
+    <div class="card overflow-hidden">
+        <div
+            class="p-6 border-b border-neutral-200 dark:border-gray-700 bg-neutral-50/50 dark:bg-gray-800/50 flex justify-between items-center">
+            <div>
+                <h2 class="text-xl font-bold text-neutral-900 dark:text-white">
+                    {% if form.instance.pk %}
+                    Editar Cliente
+                    {% else %}
+                    Novo Cliente
+                    {% endif %}
+                </h2>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Preencha as informações abaixo.</p>
+            </div>
+            {% if form.instance.pk %}
+            <span class="badge-neutral">{{ form.instance }}</span>
+            {% endif %}
+        </div>
+
+        <form method="post" class="p-6 space-y-6">
+            {% csrf_token %}
 
             {% if form.non_field_errors %}
-            <div class="mb-4 p-4 bg-red-100 text-red-700 border border-red-200 rounded-lg">
+            <div class="p-4 bg-red-50 text-red-700 border border-red-200 rounded-lg">
                 {% for error in form.non_field_errors %}
-                    <p>{{ error }}</p>
+                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                        </path>
+                    </svg> {{ error }}</p>
                 {% endfor %}
             </div>
             {% endif %}
 
-            <div class="space-y-6">
-                <!-- Tipo de Cliente -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Tipo de Cliente</label>
-                    <div class="mt-2 flex space-x-4">
-                        {% for radio in form.tipo %}
-                        <label for="{{ radio.id_for_label }}" class="flex items-center">
+            <!-- Tipo de Cliente -->
+            <div>
+                <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">Tipo de
+                    Cliente</label>
+                <div class="flex space-x-6">
+                    {% for radio in form.tipo %}
+                    <label for="{{ radio.id_for_label }}" class="flex items-center cursor-pointer group">
+                        <div class="relative flex items-center">
                             {{ radio.tag }}
-                            <span class="ml-2 text-sm text-gray-700">{{ radio.choice_label }}</span>
-                        </label>
-                        {% endfor %}
-                    </div>
+                        </div>
+                        <span
+                            class="ml-2 text-sm text-neutral-700 dark:text-neutral-300 group-hover:text-primary transition-colors">{{
+                            radio.choice_label }}</span>
+                    </label>
+                    {% endfor %}
                 </div>
+            </div>
 
-                <!-- Campos Pessoa Física -->
-                <div id="pessoa_fisica_fields" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="{{ form.nome.id_for_label }}" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                            {% render_field form.nome class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" %}
-                            {% if form.nome.errors %}<p class="mt-1 text-xs text-red-600">{{ form.nome.errors|first }}</p>{% endif %}
-                        </div>
-                        <div>
-                            <label for="{{ form.cpf.id_for_label }}" class="block text-sm font-medium text-gray-700">CPF</label>
-                            {% render_field form.cpf class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" %}
-                            {% if form.cpf.errors %}<p class="mt-1 text-xs text-red-600">{{ form.cpf.errors|first }}</p>{% endif %}
-                        </div>
-                    </div>
-                </div>
+            <hr class="border-neutral-200 dark:border-gray-700">
 
-                <!-- Campos Pessoa Jurídica -->
-                <div id="pessoa_juridica_fields" class="space-y-6 hidden">
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="{{ form.razao_social.id_for_label }}" class="block text-sm font-medium text-gray-700">Razão Social</label>
-                            {% render_field form.razao_social class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" %}
-                            {% if form.razao_social.errors %}<p class="mt-1 text-xs text-red-600">{{ form.razao_social.errors|first }}</p>{% endif %}
-                        </div>
-                        <div>
-                            <label for="{{ form.cnpj.id_for_label }}" class="block text-sm font-medium text-gray-700">CNPJ</label>
-                            {% render_field form.cnpj class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" %}
-                            {% if form.cnpj.errors %}<p class="mt-1 text-xs text-red-600">{{ form.cnpj.errors|first }}</p>{% endif %}
-                        </div>
-                        <div>
-                            <label for="{{ form.nome_fantasia.id_for_label }}" class="block text-sm font-medium text-gray-700">Nome Fantasia</label>
-                            {% render_field form.nome_fantasia class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" %}
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="border-t border-gray-200">
-
-                <!-- Contato e Endereço -->
-                <div class="space-y-6">
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700">Email</label>
-                            {% render_field form.email class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" %}
-                             {% if form.email.errors %}<p class="mt-1 text-xs text-red-600">{{ form.email.errors|first }}</p>{% endif %}
-                        </div>
-                        <div>
-                            <label for="{{ form.telefone.id_for_label }}" class="block text-sm font-medium text-gray-700">Telefone</label>
-                            {% render_field form.telefone class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" %}
-                        </div>
+            <!-- Campos Pessoa Física -->
+            <div id="pessoa_fisica_fields" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="{{ form.nome.id_for_label }}" class="form-label">Nome Completo</label>
+                        {% render_field form.nome class="form-input" placeholder="Ex: João da Silva" %}
+                        {% if form.nome.errors %}<p class="form-error">{{ form.nome.errors|first }}</p>{% endif %}
                     </div>
                     <div>
-                        <label for="{{ form.endereco.id_for_label }}" class="block text-sm font-medium text-gray-700">Endereço</label>
-                        {% render_field form.endereco class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" %}
+                        <label for="{{ form.cpf.id_for_label }}" class="form-label">CPF</label>
+                        {% render_field form.cpf class="form-input" placeholder="000.000.000-00" %}
+                        {% if form.cpf.errors %}<p class="form-error">{{ form.cpf.errors|first }}</p>{% endif %}
                     </div>
                 </div>
-
             </div>
-        </div>
 
-        <div class="bg-gray-50 px-8 py-4 border-t border-gray-200 flex justify-end space-x-3">
-            <a href="{% url 'clientes:cliente-list' %}" class="px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50">
-                Cancelar
-            </a>
-            <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75 transition">
-                Salvar
-            </button>
-        </div>
-    </form>
+            <!-- Campos Pessoa Jurídica -->
+            <div id="pessoa_juridica_fields" class="space-y-6 hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="md:col-span-2">
+                        <label for="{{ form.razao_social.id_for_label }}" class="form-label">Razão Social</label>
+                        {% render_field form.razao_social class="form-input" placeholder="Ex: Empresa LTDA" %}
+                        {% if form.razao_social.errors %}<p class="form-error">{{ form.razao_social.errors|first }}</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.cnpj.id_for_label }}" class="form-label">CNPJ</label>
+                        {% render_field form.cnpj class="form-input" placeholder="00.000.000/0000-00" %}
+                        {% if form.cnpj.errors %}<p class="form-error">{{ form.cnpj.errors|first }}</p>{% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.nome_fantasia.id_for_label }}" class="form-label">Nome Fantasia</label>
+                        {% render_field form.nome_fantasia class="form-input" placeholder="Ex: Minha Empresa" %}
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-neutral-200 dark:border-gray-700">
+
+            <!-- Contato e Endereço -->
+            <div class="space-y-6">
+                <h3 class="text-sm font-semibold text-neutral-900 dark:text-white uppercase tracking-wider">Informações
+                    de Contato</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                        {% render_field form.email class="form-input" placeholder="exemplo@email.com" %}
+                        {% if form.email.errors %}<p class="form-error">{{ form.email.errors|first }}</p>{% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.telefone.id_for_label }}" class="form-label">Telefone</label>
+                        {% render_field form.telefone class="form-input" placeholder="(00) 00000-0000" %}
+                    </div>
+                </div>
+                <div>
+                    <label for="{{ form.endereco.id_for_label }}" class="form-label">Endereço Completo</label>
+                    {% render_field form.endereco class="form-input" rows="3" placeholder="Rua, Número, Bairro, Cidade -
+                    UF" %}
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-neutral-200 dark:border-gray-700 flex justify-end gap-3">
+                <a href="{% url 'clientes:cliente-list' %}" class="btn-secondary">
+                    Cancelar
+                </a>
+                <button type="submit" class="btn-primary">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Salvar Cliente
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const tipoRadios = document.querySelectorAll('input[name="tipo"]');
-    const pfFields = document.getElementById('pessoa_fisica_fields');
-    const pjFields = document.getElementById('pessoa_juridica_fields');
+    document.addEventListener('DOMContentLoaded', function () {
+        const tipoRadios = document.querySelectorAll('input[name="tipo"]');
+        const pfFields = document.getElementById('pessoa_fisica_fields');
+        const pjFields = document.getElementById('pessoa_juridica_fields');
 
-    function toggleFields() {
-        if (document.querySelector('input[name="tipo"]:checked').value === 'PF') {
-            pfFields.classList.remove('hidden');
-            pjFields.classList.add('hidden');
-        } else {
-            pfFields.classList.add('hidden');
-            pjFields.classList.remove('hidden');
+        function toggleFields() {
+            if (document.querySelector('input[name="tipo"]:checked').value === 'PF') {
+                pfFields.classList.remove('hidden');
+                pjFields.classList.add('hidden');
+            } else {
+                pfFields.classList.add('hidden');
+                pjFields.classList.remove('hidden');
+            }
         }
-    }
 
-    tipoRadios.forEach(radio => radio.addEventListener('change', toggleFields));
+        tipoRadios.forEach(radio => radio.addEventListener('change', toggleFields));
 
-    // Initial check on page load
-    toggleFields();
-});
+        // Initial check on page load
+        toggleFields();
+    });
 </script>
 {% endblock %}

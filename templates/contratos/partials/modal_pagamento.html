@@ -1,48 +1,66 @@
 <!-- Drawer-style Modal for Payment -->
-<div id="paymentDrawer" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end hidden">
-    <div id="paymentDrawerContent" class="w-full max-w-md bg-white h-full shadow-xl transform transition-transform duration-300 ease-in-out">
-        <form id="pagamentoForm" method="post">
+<div id="paymentDrawer"
+    class="fixed inset-0 bg-neutral-900/50 backdrop-blur-sm z-50 flex justify-end hidden transition-opacity duration-300">
+    <div id="paymentDrawerContent"
+        class="w-full max-w-md bg-white dark:bg-gray-800 h-full shadow-2xl transform transition-transform duration-300 ease-in-out border-l border-neutral-200 dark:border-gray-700">
+        <form id="pagamentoForm" method="post" class="h-full flex flex-col">
             {% csrf_token %}
-            <div class="p-6 border-b flex justify-between items-center">
+            <div
+                class="p-6 border-b border-neutral-100 dark:border-gray-700 flex justify-between items-center bg-neutral-50/50 dark:bg-gray-800">
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Registrar Pagamento</h3>
-                    <p class="text-sm text-gray-500">Parcela: <strong id="modalParcelaNum"></strong></p>
+                    <h3 class="text-xl font-bold text-neutral-900 dark:text-white font-heading">Registrar Pagamento</h3>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Parcela: <strong id="modalParcelaNum"
+                            class="text-primary"></strong></p>
                 </div>
-                <button type="button" onclick="closePaymentModal()" class="text-gray-400 hover:text-gray-600">
-                    <i class="fas fa-times fa-lg"></i>
+                <button type="button" onclick="closePaymentModal()"
+                    class="p-2 rounded-lg text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-gray-700 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
                 </button>
             </div>
 
-            <div class="p-6 space-y-6">
-                 <div>
-                    <p class="text-sm font-medium text-gray-500">Valor Pendente</p>
-                    <p id="modalValorPendente" class="text-xl font-bold text-gray-900"></p>
+            <div class="p-6 space-y-6 flex-1 overflow-y-auto">
+                <div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-4 border border-primary/10">
+                    <p class="text-sm font-medium text-primary mb-1">Valor Pendente</p>
+                    <p id="modalValorPendente" class="text-2xl font-bold text-neutral-900 dark:text-white"></p>
                 </div>
 
                 <div>
-                    <label for="valor_pago" class="block text-sm font-medium text-gray-700">Valor Pago (R$)</label>
+                    <label for="valor_pago"
+                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Valor Pago
+                        (R$)</label>
                     <input type="number" id="valor_pago" name="valor_pago" step="0.01" required
-                           class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
+                        class="w-full px-4 py-2 rounded-lg border border-neutral-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-shadow">
                 </div>
 
                 <div>
-                    <label for="data_pagamento" class="block text-sm font-medium text-gray-700">Data do Pagamento</label>
+                    <label for="data_pagamento"
+                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Data do
+                        Pagamento</label>
                     <input type="date" id="data_pagamento" name="data_pagamento" required
-                           class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500">
+                        class="w-full px-4 py-2 rounded-lg border border-neutral-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-shadow">
                 </div>
 
                 <div>
-                    <label for="observacoes" class="block text-sm font-medium text-gray-700">Observações</label>
+                    <label for="observacoes"
+                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Observações</label>
                     <textarea id="observacoes" name="observacoes" rows="4"
-                              class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"></textarea>
+                        class="w-full px-4 py-2 rounded-lg border border-neutral-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-shadow"
+                        placeholder="Opcional..."></textarea>
                 </div>
             </div>
 
-            <div class="bg-gray-50 px-6 py-4 border-t flex justify-end space-x-3">
-                <button type="button" onclick="closePaymentModal()" class="px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50">
+            <div
+                class="p-6 border-t border-neutral-100 dark:border-gray-700 bg-neutral-50 dark:bg-gray-800/50 flex justify-end gap-3">
+                <button type="button" onclick="closePaymentModal()" class="btn-secondary">
                     Cancelar
                 </button>
-                <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75 transition">
+                <button type="submit" class="btn-primary flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
                     Confirmar Pagamento
                 </button>
             </div>

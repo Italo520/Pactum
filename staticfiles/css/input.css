@@ -1,3 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* Colors */
+    --color-primary: #3B82F6;
+    --color-secondary: #60A5FA;
+    --color-cta: #F97316;
+    --color-background: #F8FAFC;
+    --color-text: #1E293B;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+  }
+
+  body {
+    font-family: 'Fira Sans', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fira Code', monospace;
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 cursor-pointer hover:bg-orange-600 hover:-translate-y-px shadow-sm hover:shadow-md;
+    background-color: var(--color-cta);
+  }
+
+  .btn-secondary {
+    @apply bg-transparent text-blue-500 border-2 border-blue-500 px-6 py-3 rounded-lg font-semibold transition-all duration-200 cursor-pointer hover:bg-blue-50 hover:-translate-y-px;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+  
+  .btn-gradient {
+     @apply bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg font-medium shadow-md hover:from-blue-600 hover:to-blue-700 transition-all duration-200 cursor-pointer;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-xl p-6 shadow-md transition-all duration-200 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 border border-slate-100;
+  }
+  
+  .kpi-card {
+    @apply bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md border border-neutral-100 dark:border-gray-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden;
+  }
+
+  /* Inputs */
+  .input {
+    @apply px-4 py-3 border border-slate-200 rounded-lg text-base transition-colors duration-200 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10;
+  }
+
+  /* Modals */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center;
+  }
+
+  .modal {
+    @apply bg-white rounded-2xl p-8 shadow-2xl max-w-lg w-[90%];
+  }
+  
+  /* Modern Badges */
+  .badge-modern {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border;
+  }
+  
+  .badge-success {
+    @apply bg-green-50 text-green-700 border-green-200 dark:bg-green-900/20 dark:text-green-300 dark:border-green-800;
+  }
+  
+  .badge-warning {
+    @apply bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-300 dark:border-yellow-800;
+  }
+  
+  .badge-danger {
+    @apply bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-300 dark:border-red-800;
+  }
+  
+  .badge-info {
+    @apply bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-800;
+  }
+  
+  .badge-primary {
+    @apply bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-800;
+  }
+}

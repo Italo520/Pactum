@@ -1,12 +1,14 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load status_tags %}
 
 {% block page_title %}Projetos{% endblock %}
 
 {% block page_actions %}
 {% if perms.projetos.add_projeto %}
-<a href="{% url 'projetos:projeto_create' %}" class="btn-gradient inline-flex items-center">
-    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<a href="{% url 'projetos:projeto_create' %}"
+    class="btn-primary flex items-center gap-2 shadow-sm hover:shadow-md transition-shadow">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
     </svg>
     Novo Projeto
@@ -15,27 +17,30 @@
 {% endblock %}
 
 {% block content %}
-<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+<div class="card overflow-hidden p-0 border-0 shadow-lg">
     <!-- Header -->
-    <div class="p-6 border-b border-neutral-200 dark:border-gray-700">
+    <div class="p-6 border-b border-neutral-100 dark:border-gray-700 bg-white dark:bg-gray-800">
         <div class="flex items-center justify-between">
-            <div class="flex items-center">
-                <div class="icon-wrapper bg-gradient-to-br from-primary to-primary-light mr-4">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-center gap-4">
+                <div
+                    class="icon-wrapper w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
                         </path>
                     </svg>
                 </div>
                 <div>
-                    <h2 class="text-2xl font-bold text-neutral-900 dark:text-white">Projetos</h2>
+                    <h2 class="text-xl font-bold text-neutral-900 dark:text-white font-heading">Projetos</h2>
                     <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Gerencie todos os projetos
                         cadastrados no sistema</p>
                 </div>
             </div>
             {% if projetos %}
-            <span class="badge-modern badge-primary text-sm">{{ projetos|length }} projeto{{ projetos|length|pluralize
-                }}</span>
+            <span
+                class="px-3 py-1 bg-neutral-100 text-neutral-600 rounded-full text-xs font-medium border border-neutral-200">
+                {{ projetos|length }} projeto{{ projetos|length|pluralize }}
+            </span>
             {% endif %}
         </div>
     </div>
@@ -44,27 +49,27 @@
     <div class="overflow-x-auto">
         <table class="w-full text-sm text-left text-neutral-600 dark:text-neutral-400">
             <thead
-                class="text-xs text-neutral-700 uppercase bg-neutral-50 dark:bg-neutral-700/50 dark:text-neutral-300">
+                class="text-xs text-neutral-500 uppercase bg-neutral-50/50 dark:bg-neutral-800/50 dark:text-neutral-400 border-b border-neutral-100 dark:border-gray-700">
                 <tr>
-                    <th scope="col" class="px-6 py-4 font-semibold">Projeto</th>
-                    <th scope="col" class="px-6 py-4 font-semibold">Situação</th>
-                    <th scope="col" class="px-6 py-4 font-semibold">Valor Orçado</th>
-                    <th scope="col" class="px-6 py-4 font-semibold">Encerramento</th>
-                    <th scope="col" class="px-6 py-4 font-semibold text-right">Ações</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Projeto</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Situação</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Valor Orçado</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Encerramento</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider text-right">Ações</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="divide-y divide-neutral-100 dark:divide-gray-700 bg-white dark:bg-gray-800">
                 {% for projeto in projetos %}
-                <tr
-                    class="border-b border-neutral-100 dark:border-gray-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/30 transition-colors duration-200">
-                    <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            <span class="text-primary font-bold mr-2">#{{ projeto.cod_projeto }}</span>
-                            <span class="font-medium text-neutral-900 dark:text-white">{{ projeto.nome }}</span>
+                <tr class="hover:bg-neutral-50 dark:hover:bg-gray-700/50 transition-colors duration-150">
+                    <td class="px-6 py-4 font-medium text-neutral-900 dark:text-white whitespace-nowrap">
+                        <div class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-primary/80"></span>
+                            <span class="font-mono text-xs text-neutral-400">#{{ projeto.cod_projeto }}</span>
+                            <span>{{ projeto.nome }}</span>
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <span class="badge-modern badge-success">
+                        <span class="badge-modern {{ projeto.situacao|get_status_badge }}">
                             {{ projeto.get_situacao_display }}
                         </span>
                     </td>
@@ -144,33 +149,46 @@
 
     <!-- Paginação -->
     {% if is_paginated %}
-    <div class="p-5 bg-neutral-50 dark:bg-neutral-800/50 border-t border-neutral-200 dark:border-gray-700">
-        <div class="flex items-center justify-between">
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">
-                Página <span class="font-semibold text-primary">{{ page_obj.number }}</span> de
-                <span class="font-semibold">{{ page_obj.paginator.num_pages }}</span>
-            </div>
-            <div class="flex space-x-2">
-                {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}"
-                    class="inline-flex items-center px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-primary-50 dark:hover:bg-primary/10 hover:border-primary transition-all duration-200">
-                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                        </path>
-                    </svg>
-                    Anterior
-                </a>
-                {% endif %}
-                {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}"
-                    class="inline-flex items-center px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-primary-50 dark:hover:bg-primary/10 hover:border-primary transition-all duration-200">
-                    Próxima
-                    <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
-                {% endif %}
-            </div>
+    <div
+        class="px-6 py-4 border-t border-neutral-100 dark:border-gray-700 bg-neutral-50 dark:bg-gray-800/50 flex items-center justify-between">
+        <div class="text-xs text-neutral-500 dark:text-neutral-400">
+            Mostrando página <span class="font-semibold text-neutral-900 dark:text-white">{{ page_obj.number }}</span>
+            de <span class="font-semibold text-neutral-900 dark:text-white">{{ page_obj.paginator.num_pages }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+                class="p-2 rounded-lg border border-neutral-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-gray-600 transition-colors"
+                title="Anterior">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </a>
+            {% else %}
+            <span
+                class="p-2 rounded-lg border border-neutral-100 dark:border-gray-700 bg-neutral-50 dark:bg-gray-800 text-neutral-300 dark:text-gray-600 cursor-not-allowed">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </span>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+                class="p-2 rounded-lg border border-neutral-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-gray-600 transition-colors"
+                title="Próxima">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
+            {% else %}
+            <span
+                class="p-2 rounded-lg border border-neutral-100 dark:border-gray-700 bg-neutral-50 dark:bg-gray-800 text-neutral-300 dark:text-gray-600 cursor-not-allowed">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </span>
+            {% endif %}
         </div>
     </div>
     {% endif %}

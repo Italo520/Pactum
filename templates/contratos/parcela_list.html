@@ -1,66 +1,127 @@
 {% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_title %}{% endblock %}
 
 {% block content %}
-<div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
-    <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Todas as Parcelas</h2>
-        <a href="{% url 'contratos:contrato_list' %}" class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors">
-            <i class="fas fa-arrow-left mr-2"></i>Voltar aos Contratos
-        </a>
+<div class="card overflow-hidden p-0 border-0 shadow-lg">
+    <!-- Header -->
+    <div class="p-6 border-b border-neutral-100 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div
+                    class="icon-wrapper w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                        </path>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-neutral-900 dark:text-white font-heading">Todas as Parcelas</h2>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Gerencie os pagamentos e recebimentos
+                        do sistema</p>
+                </div>
+            </div>
+
+            <a href="{% url 'contratos:contrato_list' %}"
+                class="btn-secondary flex items-center gap-2 text-sm shadow-sm hover:shadow-md transition-shadow">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Voltar aos Contratos
+            </a>
+        </div>
     </div>
+
+    <!-- Tabela -->
     <div class="overflow-x-auto">
-        {% if parcelas %}
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table class="w-full text-sm text-left text-neutral-600 dark:text-neutral-400">
+            <thead
+                class="text-xs text-neutral-500 uppercase bg-neutral-50/50 dark:bg-neutral-800/50 dark:text-neutral-400 border-b border-neutral-100 dark:border-gray-700">
                 <tr>
-                    <th scope="col" class="px-6 py-3">Contrato</th>
-                    <th scope="col" class="px-6 py-3">Nº da Parcela</th>
-                    <th scope="col" class="px-6 py-3">Data de Vencimento</th>
-                    <th scope="col" class="px-6 py-3">Valor Previsto</th>
-                    <th scope="col" class="px-6 py-3">Valor Pago</th>
-                    <th scope="col" class="px-6 py-3">Status</th>
-                    <th scope="col" class="px-6 py-3">Ações</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Contrato</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Nº Parcela</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Vencimento</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Previsto</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Realizado</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Status</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider text-right">Ações</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="divide-y divide-neutral-100 dark:divide-gray-700 bg-white dark:bg-gray-800">
                 {% for parcela in parcelas %}
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <tr class="hover:bg-neutral-50 dark:hover:bg-gray-700/50 transition-colors duration-150">
                     <td class="px-6 py-4">
-                        <a href="{% url 'contratos:contrato_detail' parcela.num_contrato.pk %}" class="text-blue-600 hover:underline">
-                            {{ parcela.num_contrato.num_contrato }}
+                        <a href="{% url 'contratos:contrato_detail' parcela.num_contrato.pk %}"
+                            class="text-primary hover:text-primary-dark hover:underline font-medium">
+                            #{{ parcela.num_contrato.num_contrato }}
                         </a>
                     </td>
-                    <td class="px-6 py-4">{{ parcela.cod_lancamento }}</td>
-                    <td class="px-6 py-4">{{ parcela.data_vencimento|date:"d/m/Y" }}</td>
-                    <td class="px-6 py-4">R$ {{ parcela.valor_previsto|floatformat:2 }}</td>
-                    <td class="px-6 py-4">R$ {{ parcela.valor_pago|default:"0.00"|floatformat:2 }}</td>
+                    <td class="px-6 py-4 font-mono text-xs">
+                        {{ parcela.cod_lancamento|default:"-" }}
+                    </td>
                     <td class="px-6 py-4">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {% if parcela.valor_pago %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300{% else %}bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300{% endif %}">
+                        {{ parcela.data_vencimento|date:"d/m/Y" }}
+                    </td>
+                    <td class="px-6 py-4 font-medium">
+                        R$ {{ parcela.valor_previsto|floatformat:2 }}
+                    </td>
+                    <td class="px-6 py-4 text-neutral-500">
+                        R$ {{ parcela.valor_pago|default:"0.00"|floatformat:2 }}
+                    </td>
+                    <td class="px-6 py-4">
+                        <span
+                            class="badge-modern {% if parcela.valor_pago %}badge-success{% else %}badge-warning{% endif %} text-xs">
                             {% if parcela.valor_pago %}Pago{% else %}Pendente{% endif %}
                         </span>
                     </td>
                     <td class="px-6 py-4">
-                        {% if not parcela.valor_pago %}
-                        <a href="{% url 'contratos:registrar-pagamento' parcela.pk %}" class="inline-flex items-center px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-xs">
-                            <i class="fas fa-money-bill mr-1"></i>Registrar Pagamento
-                        </a>
-                        {% else %}
-                        <span class="text-green-600 dark:text-green-400 inline-flex items-center">
-                            <i class="fas fa-check-circle mr-1"></i>Pago
-                        </span>
-                        {% endif %}
+                        <div class="flex items-center justify-end">
+                            {% if not parcela.valor_pago %}
+                            <a href="{% url 'contratos:registrar-pagamento' parcela.pk %}"
+                                class="inline-flex items-center px-3 py-1.5 rounded-lg bg-success/10 text-success hover:bg-success/20 transition-colors text-xs font-semibold"
+                                title="Registrar Pagamento">
+                                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z">
+                                    </path>
+                                </svg>
+                                Pagar
+                            </a>
+                            {% else %}
+                            <span
+                                class="inline-flex items-center px-3 py-1.5 rounded-lg text-neutral-400 text-xs font-medium cursor-default">
+                                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Concluído
+                            </span>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="px-6 py-12 text-center">
+                        <div class="flex flex-col items-center justify-center text-neutral-400">
+                            <svg class="w-16 h-16 mb-4 text-neutral-300" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                            <h3 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-2">Nenhuma
+                                parcela encontrada</h3>
+                            <p class="text-sm text-neutral-500">Não há parcelas cadastradas no sistema.</p>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        {% else %}
-        <div class="text-center py-12">
-            <i class="fas fa-receipt fa-3x text-gray-400 dark:text-gray-500 mb-3"></i>
-            <h5 class="text-lg font-medium text-gray-600 dark:text-gray-300">Nenhuma parcela encontrada</h5>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Não há parcelas cadastradas no sistema.</p>
-        </div>
-        {% endif %}
     </div>
 </div>
 {% endblock %}

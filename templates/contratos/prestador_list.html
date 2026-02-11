@@ -1,44 +1,158 @@
 {% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_title %}{% endblock %}
 
 {% block content %}
-<div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
-    <div class="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Prestadores de Serviço</h2>
-        <a href="{% url 'contratos:prestador_create' %}" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-colors">
-            <i class="fas fa-plus mr-2"></i>Cadastrar Novo Prestador
-        </a>
+<div class="card overflow-hidden p-0 border-0 shadow-lg">
+    <!-- Header -->
+    <div class="p-6 border-b border-neutral-100 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div
+                    class="icon-wrapper w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-neutral-900 dark:text-white font-heading">Prestadores de Serviço
+                    </h2>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Gerencie os prestadores e
+                        fornecedores parceiros</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                {% if prestadores %}
+                <span
+                    class="px-3 py-1 bg-neutral-100 text-neutral-600 rounded-full text-xs font-medium border border-neutral-200">
+                    {{ prestadores|length }} prestador{{ prestadores|length|pluralize:"es" }}
+                </span>
+                {% endif %}
+
+                {% if perms.contratos.add_prestador %}
+                <a href="{% url 'contratos:prestador_create' %}"
+                    class="btn-primary flex items-center gap-2 shadow-sm hover:shadow-md transition-shadow">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    Novo Prestador
+                </a>
+                {% endif %}
+            </div>
+        </div>
     </div>
+
+    <!-- Tabela -->
     <div class="overflow-x-auto">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table class="w-full text-sm text-left text-neutral-600 dark:text-neutral-400">
+            <thead
+                class="text-xs text-neutral-500 uppercase bg-neutral-50/50 dark:bg-neutral-800/50 dark:text-neutral-400 border-b border-neutral-100 dark:border-gray-700">
                 <tr>
-                    <th scope="col" class="px-6 py-3">Nome/Razão Social</th>
-                    <th scope="col" class="px-6 py-3">CPF/CNPJ</th>
-                    <th scope="col" class="px-6 py-3">Tipo</th>
-                    <th scope="col" class="px-6 py-3">Status</th>
-                    <th scope="col" class="px-6 py-3">Ações</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Nome / Razão Social</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">CPF / CNPJ</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Tipo</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Status</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider text-right">Ações</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="divide-y divide-neutral-100 dark:divide-gray-700 bg-white dark:bg-gray-800">
                 {% for p in prestadores %}
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ p.nome }}</td>
-                    <td class="px-6 py-4">{{ p.cpf|default:p.cnpj|default:"-" }}</td>
-                    <td class="px-6 py-4">{{ p.get_tipo_pessoa_display }}</td>
+                <tr class="hover:bg-neutral-50 dark:hover:bg-gray-700/50 transition-colors duration-150">
+                    <td class="px-6 py-4 font-medium text-neutral-900 dark:text-white">
+                        {{ p.nome }}
+                    </td>
+                    <td class="px-6 py-4 font-mono text-xs text-neutral-600 dark:text-neutral-400">
+                        {{ p.cpf|default:p.cnpj|default:"-" }}
+                    </td>
                     <td class="px-6 py-4">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
+                        <span class="badge-modern badge-secondary text-xs">
+                            {{ p.get_tipo_pessoa_display }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="badge-modern badge-success">
                             Ativo
                         </span>
                     </td>
                     <td class="px-6 py-4">
-                        <a href="{% url 'contratos:prestador_detail' p.pk %}" class="text-blue-600 hover:text-blue-800" title="Ver Detalhes">
-                            <i class="fas fa-eye mr-1"></i>Ver Detalhes
-                        </a>
+                        <div class="flex items-center justify-end space-x-2">
+                            <a href="{% url 'contratos:prestador_detail' p.pk %}"
+                                class="p-2 rounded-lg text-neutral-500 hover:text-primary hover:bg-primary-50 dark:hover:bg-primary/10 transition-colors"
+                                title="Ver Detalhes">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="px-6 py-12 text-center">
+                        <div class="flex flex-col items-center justify-center text-neutral-400">
+                            <svg class="w-16 h-16 mb-4 text-neutral-300" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <h3 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-2">Nenhum
+                                prestador encontrado</h3>
+                            <p class="text-sm text-neutral-500 mb-4">Cadastre parceiros para gerenciar contratos</p>
+                            {% if perms.contratos.add_prestador %}
+                            <a href="{% url 'contratos:prestador_create' %}"
+                                class="btn-primary flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                Cadastrar Prestador
+                            </a>
+                            {% endif %}
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+
+    <!-- Paginação (Simplificada por enquanto, assumindo que view usa pagination padrão se houver) -->
+    {% if is_paginated %}
+    <div
+        class="px-6 py-4 border-t border-neutral-100 dark:border-gray-700 bg-neutral-50 dark:bg-gray-800/50 flex items-center justify-between">
+        <div class="text-xs text-neutral-500 dark:text-neutral-400">
+            Mostrando página <span class="font-semibold text-neutral-900 dark:text-white">{{ page_obj.number }}</span>
+            de <span class="font-semibold text-neutral-900 dark:text-white">{{ page_obj.paginator.num_pages }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+                class="p-2 rounded-lg border border-neutral-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-gray-600 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </a>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+                class="p-2 rounded-lg border border-neutral-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-gray-600 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,74 +1,118 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% load class_tags %}
+{% load status_tags %}
 
-{% block page_title %}Requisições do Projeto{% endblock %}
-
-{% block page_actions %}
-<a href="#" class="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75 transition">
-    <i class="fas fa-plus mr-2"></i>
-    Nova Requisição
-</a>
-{% endblock %}
+{% block page_title %}{% endblock %}
 
 {% block content %}
-<div class="bg-white rounded-lg shadow-xl overflow-hidden">
-    <div class="p-6 border-b border-gray-200">
-        <h2 class="text-xl font-semibold text-gray-800">Requisições do Projeto: <span class="text-green-600">{{ projeto.nome }}</span></h2>
-        <p class="text-sm text-gray-500 mt-1">Gerencie as requisições de compra e serviços.</p>
+<div class="card overflow-hidden p-0 border-0 shadow-lg">
+    <!-- Header -->
+    <div class="p-6 border-b border-neutral-100 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div
+                    class="icon-wrapper w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                        </path>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-neutral-900 dark:text-white font-heading">
+                        Requisições {% if projeto %}do Projeto: <span class="text-primary">{{ projeto.nome }}</span>{%
+                        endif %}
+                    </h2>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Gerencie as requisições de compra e
+                        serviços</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                {% if requisicoes %}
+                <span
+                    class="px-3 py-1 bg-neutral-100 text-neutral-600 rounded-full text-xs font-medium border border-neutral-200">
+                    {{ requisicoes|length }} requisiç{{ requisicoes|length|pluralize:"ão,ões" }}
+                </span>
+                {% endif %}
+
+                <a href="#" class="btn-primary flex items-center gap-2 shadow-sm hover:shadow-md transition-shadow">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    Nova Requisição
+                </a>
+            </div>
+        </div>
     </div>
 
+    <!-- Tabela -->
     <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+        <table class="w-full text-sm text-left text-neutral-600 dark:text-neutral-400">
+            <thead
+                class="text-xs text-neutral-500 uppercase bg-neutral-50/50 dark:bg-neutral-800/50 dark:text-neutral-400 border-b border-neutral-100 dark:border-gray-700">
                 <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Número
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Descrição
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Data de Solicitação
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Ações
-                    </th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Número</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Descrição</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Status</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider">Data</th>
+                    <th scope="col" class="px-6 py-4 font-semibold tracking-wider text-right">Ações</th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody class="divide-y divide-neutral-100 dark:divide-gray-700 bg-white dark:bg-gray-800">
                 {% for req in requisicoes %}
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {{ req.numero }}
+                <tr class="hover:bg-neutral-50 dark:hover:bg-gray-700/50 transition-colors duration-150">
+                    <td class="px-6 py-4 font-medium text-neutral-900 dark:text-white">
+                        #{{ req.cod_requisicao }}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                    <td class="px-6 py-4 text-neutral-700 dark:text-neutral-300">
                         {{ req.descricao|truncatewords:10 }}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ req.status|get_status_badge_class }}">
-                            {{ req.get_status_display }}
+                    <td class="px-6 py-4">
+                        <span class="badge-modern {{ req.situacao|get_status_badge:'requisicao' }}">
+                            {{ req.get_situacao_display }}
                         </span>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                    <td class="px-6 py-4">
                         {{ req.data_solicitacao|date:"d/m/Y" }}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" class="text-blue-600 hover:text-blue-800" title="Ver Detalhes">
-                            <i class="fas fa-eye"></i>
-                        </a>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center justify-end space-x-2">
+                            <a href="#"
+                                class="p-2 rounded-lg text-neutral-500 hover:text-primary hover:bg-primary-50 dark:hover:bg-primary/10 transition-colors"
+                                title="Ver Detalhes">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </div>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
                     <td colspan="5" class="px-6 py-12 text-center">
-                        <div class="text-center">
-                            <i class="fas fa-folder-open fa-3x text-gray-300"></i>
-                            <h3 class="mt-2 text-sm font-medium text-gray-900">Nenhuma requisição encontrada</h3>
-                            <p class="mt-1 text-sm text-gray-500">Comece adicionando uma nova requisição.</p>
+                        <div class="flex flex-col items-center justify-center text-neutral-400">
+                            <svg class="w-16 h-16 mb-4 text-neutral-300" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                                </path>
+                            </svg>
+                            <h3 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-2">Nenhuma
+                                requisição encontrada</h3>
+                            <p class="text-sm text-neutral-500 mb-4">Comece adicionando uma nova requisição.</p>
+                            <a href="#" class="btn-primary flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                Nova Requisição
+                            </a>
                         </div>
                     </td>
                 </tr>

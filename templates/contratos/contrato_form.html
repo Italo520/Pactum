@@ -1,32 +1,145 @@
 {% extends 'base/base.html' %}
-{% load crispy_forms_tags %}
+{% load widget_tweaks %}
 
 {% block title %}{% if object %}Editar Contrato{% else %}Novo Contrato{% endif %}{% endblock %}
 
-{% block page_title %}
-    {% if object %}
-        Editar Contrato {{ object.numContrato }}
-    {% else %}
-        Novo Contrato para a Ordem de Serviço #{{ ordem.codOrdem }}
-    {% endif %}
-{% endblock %}
+{% block page_title %}{% endblock %}
 
 {% block content %}
 <div class="max-w-4xl mx-auto">
-    <form method="post" class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
-        {% csrf_token %}
-        <div class="p-8">
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Dados do Contrato</h2>
-            <div class="space-y-4">
-                {{ form|crispy }}
+    <div class="card overflow-hidden">
+        <div
+            class="p-6 border-b border-neutral-200 dark:border-gray-700 bg-neutral-50/50 dark:bg-gray-800/50 flex justify-between items-center">
+            <div>
+                <h2 class="text-xl font-bold text-neutral-900 dark:text-white">
+                    {% if object %}
+                    Editar Contrato {{ object.num_contrato }}
+                    {% else %}
+                    Novo Contrato
+                    {% if ordem %}
+                    <span class="text-neutral-500 font-normal"> ref. OS #{{ ordem.codOrdem }}</span>
+                    {% endif %}
+                    {% endif %}
+                </h2>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Preencha os dados do contrato.</p>
             </div>
         </div>
-        <div class="bg-gray-50 dark:bg-gray-700 px-8 py-4 border-t border-gray-200 dark:border-gray-600 flex justify-end space-x-4">
-            <a href="{{ request.META.HTTP_REFERER|escape }}" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors">Cancelar</a>
-            <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center">
-                <i class="fas fa-save mr-2"></i> Salvar Contrato
-            </button>
-        </div>
-    </form>
+
+        <form method="post" class="p-6 space-y-8">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="p-4 bg-red-50 text-red-700 border border-red-200 rounded-lg">
+                {% for error in form.non_field_errors %}
+                <p class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                        </path>
+                    </svg> {{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Dados Gerais -->
+            <div class="space-y-4">
+                <h3
+                    class="text-sm font-semibold text-neutral-900 dark:text-white uppercase tracking-wider border-b border-neutral-200 pb-2">
+                    Dados Gerais</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label for="{{ form.num_contrato.id_for_label }}" class="form-label">Número do Contrato</label>
+                        {% render_field form.num_contrato class="form-input" placeholder="0000/202X" %}
+                        {% if form.num_contrato.errors %}<p class="form-error">{{ form.num_contrato.errors|first }}</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.situacao.id_for_label }}" class="form-label">Situação</label>
+                        {% render_field form.situacao class="form-select" %}
+                        {% if form.situacao.errors %}<p class="form-error">{{ form.situacao.errors|first }}</p>{% endif
+                        %}
+                    </div>
+                    {% if form.cod_ordem %}
+                    <div>
+                        <label for="{{ form.cod_ordem.id_for_label }}" class="form-label">Código da Ordem</label>
+                        {% render_field form.cod_ordem class="form-input" %}
+                        {% if form.cod_ordem.errors %}<p class="form-error">{{ form.cod_ordem.errors|first }}</p>{%
+                        endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div>
+                    <label for="{{ form.descricao.id_for_label }}" class="form-label">Descrição / Objeto</label>
+                    {% render_field form.descricao class="form-input" rows="3" placeholder="Descrição detalhada do
+                    objeto do contrato" %}
+                    {% if form.descricao.errors %}<p class="form-error">{{ form.descricao.errors|first }}</p>{% endif %}
+                </div>
+            </div>
+
+            <!-- Dados do Contratado -->
+            <div class="space-y-4">
+                <h3
+                    class="text-sm font-semibold text-neutral-900 dark:text-white uppercase tracking-wider border-b border-neutral-200 pb-2">
+                    Contratado</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="{{ form.contratado.id_for_label }}" class="form-label">Nome do Contratado</label>
+                        {% render_field form.contratado class="form-input" %}
+                    </div>
+                    <div>
+                        <label for="{{ form.cpf_cnpj.id_for_label }}" class="form-label">CPF / CNPJ</label>
+                        {% render_field form.cpf_cnpj class="form-input" %}
+                    </div>
+                    <div>
+                        <label for="{{ form.tipo_pessoa.id_for_label }}" class="form-label">Tipo de Pessoa</label>
+                        {% render_field form.tipo_pessoa class="form-select" %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Valores e Prazos -->
+            <div class="space-y-4">
+                <h3
+                    class="text-sm font-semibold text-neutral-900 dark:text-white uppercase tracking-wider border-b border-neutral-200 pb-2">
+                    Valores e Prazos</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label for="{{ form.valor.id_for_label }}" class="form-label">Valor Total (R$)</label>
+                        {% render_field form.valor class="form-input" %}
+                        {% if form.valor.errors %}<p class="form-error">{{ form.valor.errors|first }}</p>{% endif %}
+                    </div>
+                    <div>
+                        <label for="{{ form.data_inicio.id_for_label }}" class="form-label">Data Início</label>
+                        {% render_field form.data_inicio class="form-input" type="date" %}
+                    </div>
+                    <div>
+                        <label for="{{ form.data_fim.id_for_label }}" class="form-label">Data Fim</label>
+                        {% render_field form.data_fim class="form-input" type="date" %}
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="{{ form.parcelas.id_for_label }}" class="form-label">Número de Parcelas</label>
+                        {% render_field form.parcelas class="form-input" type="number" %}
+                    </div>
+                    <div>
+                        <label for="{{ form.data_parcela_inicial.id_for_label }}" class="form-label">Data 1ª
+                            Parcela</label>
+                        {% render_field form.data_parcela_inicial class="form-input" type="date" %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-neutral-200 dark:border-gray-700 flex justify-end gap-3">
+                <a href="{{ request.META.HTTP_REFERER|escape }}" class="btn-secondary">Cancelar</a>
+                <button type="submit" class="btn-primary">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Salvar Contrato
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
