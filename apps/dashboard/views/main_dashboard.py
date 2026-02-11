@@ -5,6 +5,7 @@ from django.db.models import Sum, Count, Q, F
 from django.utils import timezone
 from datetime import timedelta
 from decimal import Decimal
+import json
 
 from apps.projetos.models import Projeto, Requisicao, Ordem
 from apps.contratos.models import Contrato, ItemContrato
@@ -49,7 +50,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             data_vencimento__lt=hoje
         )
         valor_inadimplencia = sum(
-            (parcela.valor_parcela - parcela.valor_pago) 
+            (parcela.valor_parcela - (parcela.valor_pago or 0)) 
             for parcela in parcelas_vencidas
         )
         valor_total_contratos = contratos.aggregate(Sum('valor'))['valor__sum'] or 1
@@ -94,9 +95,9 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             valores_realizados.insert(0, float(realizado))
         
         context['grafico_previsto_realizado'] = {
-            'labels': meses_labels,
-            'previsto': valores_previstos,
-            'realizado': valores_realizados,
+            'labels': json.dumps(meses_labels),
+            'previsto': json.dumps(valores_previstos),
+            'realizado': json.dumps(valores_realizados),
         }
         
         # ====== GRÁFICO STATUS DOS PROJETOS ======
@@ -118,8 +119,8 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             data.append(item['count'])
         
         context['grafico_status_projetos'] = {
-            'labels': labels,
-            'data': data,
+            'labels': json.dumps(labels),
+            'data': json.dumps(data),
         }
         
         # ====== GRÁFICO VENCIMENTOS ======
@@ -136,8 +137,8 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             vencimentos_data.append(count)
         
         context['grafico_vencimentos'] = {
-            'labels': vencimentos_labels,
-            'data': vencimentos_data,
+            'labels': json.dumps(vencimentos_labels),
+            'data': json.dumps(vencimentos_data),
         }
         
         # ====== ALERTAS CRÍTICOS ======

@@ -304,18 +304,18 @@
     // Dados do Django para JavaScript
     const dadosGraficos = {
         previstoRealizado: {
-            labels: {{ grafico_previsto_realizado.labels| safe }},
-    previsto: { { grafico_previsto_realizado.previsto | safe } },
-    realizado: { { grafico_previsto_realizado.realizado | safe } }
+            labels: {{ grafico_previsto_realizado.labels|safe }},
+            previsto: {{ grafico_previsto_realizado.previsto|safe }},
+            realizado: {{ grafico_previsto_realizado.realizado|safe }}
         },
-    statusProjetos: {
-        labels: { { grafico_status_projetos.labels | safe } },
-        data: { { grafico_status_projetos.data | safe } }
-    },
-    vencimentos: {
-        labels: { { grafico_vencimentos.labels | safe } },
-        data: { { grafico_vencimentos.data | safe } }
-    }
+        statusProjetos: {
+            labels: {{ grafico_status_projetos.labels|safe }},
+            data: {{ grafico_status_projetos.data|safe }}
+        },
+        vencimentos: {
+            labels: {{ grafico_vencimentos.labels|safe }},
+            data: {{ grafico_vencimentos.data|safe }}
+        }
     };
 
     // Gráfico Previsto vs Realizado
