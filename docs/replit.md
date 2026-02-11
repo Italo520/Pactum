@@ -1,6 +1,6 @@
 # Overview
 
-The FUNETEC System is a Django-based project and contract management application developed for the Fundação de Apoio à Pesquisa e ao Desenvolvimento Tecnológico da Paraíba (FUNETEC-PB). The system manages the complete lifecycle of projects, from initial requests to contract execution and payment processing, with comprehensive user authentication and role-based access control.
+The Pactum System is a Django-based project and contract management application developed for the Fundação de Apoio à Pesquisa e ao Desenvolvimento Tecnológico da Paraíba (Pactum-PB). The system manages the complete lifecycle of projects, from initial requests to contract execution and payment processing, with comprehensive user authentication and role-based access control.
 
 ## Current Status (September 2025)
 
@@ -14,7 +14,7 @@ The FUNETEC System is a Django-based project and contract management application
 ✅ **REPORTING SYSTEM COMPLETE:**
 - **Three Report Types**: Financial Reports, Project Reports, Contract Reports with real data
 - **Export Functionality**: Excel (.xlsx) generation fully functional for all reports using openpyxl
-- **PDF Generation**: Fully functional using fpdf2 library - all three reports generate proper PDFs with FUNETEC branding
+- **PDF Generation**: Fully functional using fpdf2 library - all three reports generate proper PDFs with Pactum branding
 - **Central Dashboard**: Unified interface with statistics and quick access links
 - **Data Visualization**: Charts and summaries integrated throughout the system
 
@@ -22,7 +22,7 @@ The FUNETEC System is a Django-based project and contract management application
 - **Official PACTUM Logo**: Integrated in navbar and login page with proper styling (logo_pactum.png)
 - **Official Color Palette**: Complete implementation of PACTUM colors (#089561, #17BB94, #FFFFFF, #F8F8F8, #2D3142)
 - **Professional Design**: Consistent visual identity across all system components
-- **Visual Identity**: PACTUM branding fully integrated replacing FUNETEC references
+- **Visual Identity**: PACTUM branding fully integrated replacing Pactum references
 
 ✅ **SYSTEM OPERATIONAL**: Django server running, database functional, complete reporting system implemented, ready for production use.
 

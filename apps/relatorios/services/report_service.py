@@ -54,7 +54,7 @@ class ReportService:
         buffer = io.BytesIO()
         p = canvas.Canvas(buffer, pagesize=letter)
 
-        p.drawString(inch, 10.5 * inch, "Relatório de Projetos - FUNETEC")
+        p.drawString(inch, 10.5 * inch, "Relatório de Projetos - PACTUM")
         
         y = 10 * inch
         for projeto in queryset:

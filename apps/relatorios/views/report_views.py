@@ -122,7 +122,7 @@ class RelatorioProjetosGenerateView(LoginRequiredMixin, View):
             
             # Título
             pdf.set_font('helvetica', 'B', 16)
-            pdf.cell(0, 10, 'RELATÓRIO DE PROJETOS - FUNETEC', new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
+            pdf.cell(0, 10, 'RELATÓRIO DE PROJETOS - PACTUM', new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
             
             # Data de geração
             pdf.set_font('helvetica', '', 10)
@@ -131,7 +131,7 @@ class RelatorioProjetosGenerateView(LoginRequiredMixin, View):
             
             # Cabeçalho da tabela
             pdf.set_font('helvetica', 'B', 9)
-            pdf.set_fill_color(8, 149, 97)  # Verde FUNETEC
+            pdf.set_fill_color(8, 149, 97)  # Verde Pactum
             pdf.set_text_color(255, 255, 255)  # Texto branco
             
             # Larguras das colunas
@@ -241,7 +241,7 @@ class RelatorioProjetosGenerateView(LoginRequiredMixin, View):
         
         # Título
         ws.merge_cells('A1:F1')
-        ws['A1'] = "RELATÓRIO DE PROJETOS - FUNETEC"
+        ws['A1'] = "RELATÓRIO DE PROJETOS - Pactum"
         ws['A1'].font = Font(bold=True, size=16)
         ws['A1'].alignment = Alignment(horizontal="center")
         
@@ -394,7 +394,7 @@ class RelatorioContratosGenerateView(LoginRequiredMixin, View):
             
             # Título
             pdf.set_font('helvetica', 'B', 16)
-            pdf.cell(0, 10, 'RELATÓRIO DE CONTRATOS - FUNETEC', new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
+            pdf.cell(0, 10, 'RELATÓRIO DE CONTRATOS - Pactum', new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
             
             # Data de geração
             pdf.set_font('helvetica', '', 10)
@@ -403,7 +403,7 @@ class RelatorioContratosGenerateView(LoginRequiredMixin, View):
             
             # Cabeçalho da tabela
             pdf.set_font('helvetica', 'B', 8)
-            pdf.set_fill_color(8, 149, 97)  # Verde FUNETEC
+            pdf.set_fill_color(8, 149, 97)  # Verde Pactum
             pdf.set_text_color(255, 255, 255)  # Texto branco
             
             # Larguras das colunas
@@ -490,7 +490,7 @@ class RelatorioContratosGenerateView(LoginRequiredMixin, View):
         elements = []
         
         # Título
-        title = Paragraph("RELATÓRIO DE CONTRATOS - FUNETEC", title_style)
+        title = Paragraph("RELATÓRIO DE CONTRATOS - Pactum", title_style)
         elements.append(title)
         
         # Data de geração
@@ -592,7 +592,7 @@ class RelatorioContratosGenerateView(LoginRequiredMixin, View):
         
         # Título
         ws.merge_cells('A1:H1')
-        ws['A1'] = "RELATÓRIO DE CONTRATOS - FUNETEC"
+        ws['A1'] = "RELATÓRIO DE CONTRATOS - Pactum"
         ws['A1'].font = Font(bold=True, size=16)
         ws['A1'].alignment = Alignment(horizontal="center")
         
@@ -766,7 +766,7 @@ class RelatorioFinanceiroGenerateView(LoginRequiredMixin, View):
             
             # Título
             pdf.set_font('helvetica', 'B', 16)
-            pdf.cell(0, 10, 'RELATÓRIO FINANCEIRO - FUNETEC', new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
+            pdf.cell(0, 10, 'RELATÓRIO FINANCEIRO - Pactum', new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
             
             # Data de geração
             pdf.set_font('helvetica', '', 10)
@@ -799,7 +799,7 @@ class RelatorioFinanceiroGenerateView(LoginRequiredMixin, View):
             
             # Cabeçalho da tabela
             pdf.set_font('helvetica', 'B', 9)
-            pdf.set_fill_color(8, 149, 97)  # Verde FUNETEC
+            pdf.set_fill_color(8, 149, 97)  # Verde Pactum
             pdf.set_text_color(255, 255, 255)  # Texto branco
             
             # Larguras das colunas
@@ -886,7 +886,7 @@ class RelatorioFinanceiroGenerateView(LoginRequiredMixin, View):
         elements = []
         
         # Título
-        title = Paragraph("RELATÓRIO FINANCEIRO - FUNETEC", title_style)
+        title = Paragraph("RELATÓRIO FINANCEIRO - Pactum", title_style)
         elements.append(title)
         
         # Data de geração
@@ -977,7 +977,7 @@ class RelatorioFinanceiroGenerateView(LoginRequiredMixin, View):
         total_previsto = todas_parcelas.aggregate(total=Sum('valor_parcela'))['total'] or 0
         total_pendente = total_previsto - total_recebido
         
-        writer.writerow(['RELATÓRIO FINANCEIRO - FUNETEC'])
+        writer.writerow(['RELATÓRIO FINANCEIRO - Pactum'])
         writer.writerow([f'Gerado em: {timezone.now().strftime("%d/%m/%Y às %H:%M")}'])
         writer.writerow([])
         writer.writerow(['RESUMO'])
@@ -1022,7 +1022,7 @@ class RelatorioFinanceiroGenerateView(LoginRequiredMixin, View):
         
         # Título
         ws.merge_cells('A1:F1')
-        ws['A1'] = "RELATÓRIO FINANCEIRO - FUNETEC"
+        ws['A1'] = "RELATÓRIO FINANCEIRO - Pactum"
         ws['A1'].font = Font(bold=True, size=16)
         ws['A1'].alignment = Alignment(horizontal="center")
         
@@ -1125,7 +1125,7 @@ class RelatorioFinanceiroGenerateView(LoginRequiredMixin, View):
             })
         
         data = {
-            'relatorio': 'Financeiro - FUNETEC',
+            'relatorio': 'Financeiro - Pactum',
             'gerado_em': timezone.now().strftime('%d/%m/%Y às %H:%M'),
             'resumo': resumo,
             'pagamentos': pagamentos
@@ -1385,7 +1385,7 @@ class RelatorioCustomGenerateView(LoginRequiredMixin, View):
         
         # Configurar fontes
         pdf.set_font('Arial', 'B', 16)
-        pdf.cell(0, 10, 'FUNETEC - Relatório Customizado', 0, 1, 'C')
+        pdf.cell(0, 10, 'Pactum - Relatório Customizado', 0, 1, 'C')
         pdf.ln(5)
         
         # Informações do filtro
@@ -1543,7 +1543,7 @@ class RelatorioCustomGenerateView(LoginRequiredMixin, View):
         ws.title = "Relatório Customizado"
         
         # Cabeçalho
-        ws['A1'] = 'FUNETEC - Relatório Customizado'
+        ws['A1'] = 'Pactum - Relatório Customizado'
         ws['A1'].font = Font(size=16, bold=True)
         ws['A1'].alignment = Alignment(horizontal='center')
         ws.merge_cells('A1:F1')

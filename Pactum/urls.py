@@ -25,6 +25,6 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-admin.site.site_header = 'FUNETEC - Sistema de Gestão'
-admin.site.site_title = 'FUNETEC Admin'
+admin.site.site_header = 'Pactum - Sistema de Gestão'
+admin.site.site_title = 'Pactum Admin'
 admin.site.index_title = 'Administração do Sistema'

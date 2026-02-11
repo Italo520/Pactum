@@ -1,5 +1,5 @@
 # ================================
-# CONFIGURAÇÃO DO BANCO DE DADOS - SISTEMA FUNETEC
+# CONFIGURAÇÃO DO BANCO DE DADOS - SISTEMA Pactum
 # ================================
 
 # PROBLEMA: sqlite3.OperationalError: no such table: accounts_user
@@ -142,7 +142,7 @@ python manage.py runserver
 # 1. Acesse: http://localhost:8000/accounts/login/
 # 2. Login: admin / admin123
 # 3. Deve redirecionar para: http://localhost:8000/dashboard/
-# 4. Deve mostrar o dashboard do FUNETEC
+# 4. Deve mostrar o dashboard do Pactum
 
 # Se tudo funcionou, você verá:
 # ✅ Página de login

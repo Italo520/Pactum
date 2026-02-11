@@ -105,7 +105,7 @@ class CustomUserCreationForm(UserCreationForm):
     is_cliente_externo = forms.BooleanField(
         required=False,
         label='Cliente Externo',
-        help_text='Marque se for cliente externo da FUNETEC'
+        help_text='Marque se for cliente externo da Pactum'
     )
     
     class Meta:

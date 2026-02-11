@@ -32,7 +32,7 @@ class User(AbstractUser):
 
     role = models.CharField('Função', max_length=20, choices=ROLE_CHOICES, default='analista')
     department = models.CharField('Departamento', max_length=30, choices=DEPARTMENT_CHOICES, blank=True)
-    is_cliente_externo = models.BooleanField('Cliente Externo', default=False, help_text='Indica se é um cliente externo da FUNETEC')
+    is_cliente_externo = models.BooleanField('Cliente Externo', default=False, help_text='Indica se é um cliente externo da Pactum')
 
     last_activity = models.DateTimeField('Última Atividade', null=True, blank=True)
 

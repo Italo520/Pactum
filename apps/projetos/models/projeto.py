@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 class Projeto(models.Model):
     '''
-    Modelo alinhado com o dicionário de dados FUNETEC
+    Modelo alinhado com o dicionário de dados Pactum
     '''
     
     SITUACAO_CHOICES = [

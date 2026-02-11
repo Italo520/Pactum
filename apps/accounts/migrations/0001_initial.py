@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 ('telefone', models.CharField(blank=True, max_length=20, verbose_name='Telefone')),
                 ('role', models.CharField(choices=[('admin', 'Administrador'), ('ti', 'TI'), ('fiscal', 'Fiscal'), ('financeiro', 'Financeiro'), ('analista', 'Analista'), ('cliente', 'Cliente')], default='analista', max_length=20, verbose_name='Função')),
                 ('department', models.CharField(blank=True, choices=[('administrativo', 'Administrativo'), ('financeiro', 'Financeiro'), ('ti', 'Tecnologia da Informação'), ('fiscal', 'Fiscal'), ('operacional', 'Operacional'), ('diretoria', 'Diretoria')], max_length=30, verbose_name='Departamento')),
-                ('is_cliente_externo', models.BooleanField(default=False, help_text='Indica se é um cliente externo da FUNETEC', verbose_name='Cliente Externo')),
+                ('is_cliente_externo', models.BooleanField(default=False, help_text='Indica se é um cliente externo da Pactum', verbose_name='Cliente Externo')),
                 ('last_activity', models.DateTimeField(blank=True, null=True, verbose_name='Última Atividade')),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.group', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.permission', verbose_name='user permissions')),

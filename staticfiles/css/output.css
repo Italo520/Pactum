@@ -1197,6 +1197,10 @@ h1, h2, h3, h4, h5, h6 {
   display: table;
 }
 
+.table-cell{
+  display: table-cell;
+}
+
 .grid{
   display: grid;
 }
@@ -1481,6 +1485,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .flex-row{
   flex-direction: row;
+}
+
+.flex-row-reverse{
+  flex-direction: row-reverse;
 }
 
 .flex-col{
@@ -2137,6 +2145,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .bg-opacity-0{
   --tw-bg-opacity: 0;
+}
+
+.bg-opacity-20{
+  --tw-bg-opacity: 0.2;
 }
 
 .bg-opacity-50{
@@ -2809,6 +2821,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .opacity-0{
   opacity: 0;
+}
+
+.opacity-100{
+  opacity: 1;
 }
 
 .opacity-20{

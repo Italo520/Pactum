@@ -1,4 +1,4 @@
-# apps/core/management/commands/import_funetec_data.py
+# apps/core/management/commands/import_pactum_data.py
 import pandas as pd
 from django.core.management.base import BaseCommand
 from django.db import transaction
@@ -8,7 +8,7 @@ from apps.projetos.models import Projeto, Requisicao, Ordem, ItemOrdem
 from apps.contratos.models import Contrato, ItemContrato
 
 class Command(BaseCommand):
-    help = 'Importa dados dos arquivos Excel do FUNETEC'
+    help = 'Importa dados dos arquivos Excel do Pactum'
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -22,7 +22,7 @@ class Command(BaseCommand):
         path = options['path']
         
         with transaction.atomic():
-            self.stdout.write('Iniciando importação dos dados FUNETEC...')
+            self.stdout.write('Iniciando importação dos dados Pactum...')
             
             # 1. Importar Projetos
             self.import_projetos(f'{path}tb_projetos.xlsx')

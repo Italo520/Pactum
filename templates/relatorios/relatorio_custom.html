@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Relatórios Customizados - FUNETEC{% endblock %}
+{% block title %}Relatórios Customizados - Pactum{% endblock %}
 {% block page_title %}Relatórios Customizados{% endblock %}
 
 {% endblock %}
@@ -10,13 +10,15 @@
 <div class="space-y-6">
     <!-- Seção de Filtros -->
     <div class="bg-gray-50 dark:bg-gray-800 border-l-4 border-green-600 p-6 rounded-r-lg shadow-lg">
-        <h4 class="text-xl font-bold text-gray-800 dark:text-white flex items-center"><i class="fas fa-filter mr-2"></i>Filtros de Pesquisa</h4>
+        <h4 class="text-xl font-bold text-gray-800 dark:text-white flex items-center"><i
+                class="fas fa-filter mr-2"></i>Filtros de Pesquisa</h4>
         <p class="text-gray-600 dark:text-gray-400 mb-4">Configure os filtros para gerar relatórios personalizados</p>
 
         <form method="get" action="{% url 'relatorios:relatorio_custom' %}" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="p-4 border rounded-lg bg-white dark:bg-gray-700">
-                    <h6 class="font-semibold text-gray-800 dark:text-white"><i class="fas fa-cog mr-1"></i>Configurações Básicas</h6>
+                    <h6 class="font-semibold text-gray-800 dark:text-white"><i class="fas fa-cog mr-1"></i>Configurações
+                        Básicas</h6>
                     <div class="mt-4 space-y-4">
                         <div>
                             {{ form.tipo_relatorio.label_tag }}
@@ -24,23 +26,27 @@
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>{{ form.ordenacao.label_tag }}{{ form.ordenacao }}</div>
-                            <div class="flex items-end">{{ form.ordem_desc }}<label for="{{ form.ordem_desc.id_for_label }}" class="ml-2">{{ form.ordem_desc.label }}</label></div>
+                            <div class="flex items-end">{{ form.ordem_desc }}<label
+                                    for="{{ form.ordem_desc.id_for_label }}" class="ml-2">{{ form.ordem_desc.label
+                                    }}</label></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="p-4 border rounded-lg bg-white dark:bg-gray-700">
-                    <h6 class="font-semibold text-gray-800 dark:text-white"><i class="fas fa-calendar mr-1"></i>Período</h6>
+                    <h6 class="font-semibold text-gray-800 dark:text-white"><i class="fas fa-calendar mr-1"></i>Período
+                    </h6>
                     <div class="mt-4 grid grid-cols-2 gap-4">
                         <div>{{ form.data_inicio.label_tag }}{{ form.data_inicio }}</div>
                         <div>{{ form.data_fim.label_tag }}{{ form.data_fim }}</div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="p-4 border rounded-lg bg-white dark:bg-gray-700">
-                    <h6 class="font-semibold text-gray-800 dark:text-white"><i class="fas fa-dollar-sign mr-1"></i>Faixa de Valores</h6>
+                    <h6 class="font-semibold text-gray-800 dark:text-white"><i class="fas fa-dollar-sign mr-1"></i>Faixa
+                        de Valores</h6>
                     <div class="mt-4 grid grid-cols-2 gap-4">
                         <div>{{ form.valor_minimo.label_tag }}{{ form.valor_minimo }}</div>
                         <div>{{ form.valor_maximo.label_tag }}{{ form.valor_maximo }}</div>
@@ -48,16 +54,18 @@
                 </div>
 
                 <div class="p-4 border rounded-lg bg-white dark:bg-gray-700">
-                    <h6 class="font-semibold text-gray-800 dark:text-white"><i class="fas fa-search mr-1"></i>Filtros Específicos</h6>
+                    <h6 class="font-semibold text-gray-800 dark:text-white"><i class="fas fa-search mr-1"></i>Filtros
+                        Específicos</h6>
                     <div class="mt-4 grid grid-cols-2 gap-4">
                         <div class="col-span-2">{{ form.situacao.label_tag }}{{ form.situacao }}</div>
                         <div id="tipo_pessoa_field">{{ form.tipo_pessoa.label_tag }}{{ form.tipo_pessoa }}</div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="p-4 border rounded-lg bg-white dark:bg-gray-700">
-                <h6 class="font-semibold text-gray-800 dark:text-white cursor-pointer" onclick="document.getElementById('filtrosTexto').classList.toggle('hidden')">
+                <h6 class="font-semibold text-gray-800 dark:text-white cursor-pointer"
+                    onclick="document.getElementById('filtrosTexto').classList.toggle('hidden')">
                     <i class="fas fa-chevron-down mr-1"></i>Filtros de Texto (Opcional)
                 </h6>
                 <div id="filtrosTexto" class="hidden mt-4 grid grid-cols-2 gap-4">
@@ -67,18 +75,22 @@
             </div>
 
             <div class="p-4 border rounded-lg bg-white dark:bg-gray-700">
-                <h6 class="font-semibold text-gray-800 dark:text-white"><i class="fas fa-eye mr-1"></i>Opções de Visualização</h6>
+                <h6 class="font-semibold text-gray-800 dark:text-white"><i class="fas fa-eye mr-1"></i>Opções de
+                    Visualização</h6>
                 <div class="mt-4 grid grid-cols-2 gap-4">
                     <div class="flex items-center">{{ form.incluir_totais }}{{ form.incluir_totais.label_tag }}</div>
-                    <div class="flex items-center">{{ form.incluir_graficos }}{{ form.incluir_graficos.label_tag }}</div>
+                    <div class="flex items-center">{{ form.incluir_graficos }}{{ form.incluir_graficos.label_tag }}
+                    </div>
                 </div>
             </div>
 
             <div class="text-center mt-4">
-                <button type="submit" class="px-8 py-3 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 transition-colors">
+                <button type="submit"
+                    class="px-8 py-3 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 transition-colors">
                     <i class="fas fa-chart-bar mr-2"></i>Gerar Relatório
                 </button>
-                <a href="{% url 'relatorios:relatorio_custom' %}" class="ml-4 px-8 py-3 bg-gray-200 text-gray-800 font-bold rounded-full hover:bg-gray-300 transition-colors">
+                <a href="{% url 'relatorios:relatorio_custom' %}"
+                    class="ml-4 px-8 py-3 bg-gray-200 text-gray-800 font-bold rounded-full hover:bg-gray-300 transition-colors">
                     <i class="fas fa-undo mr-2"></i>Limpar Filtros
                 </a>
             </div>
@@ -91,111 +103,154 @@
         <div class="p-6 bg-gradient-to-r from-green-600 to-teal-500 text-white rounded-lg shadow-lg mb-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 {% if results.tipo == 'projetos' or results.tipo == 'contratos' %}
-                    <div><h4 class="text-2xl font-bold">{{ results.total_registros }}</h4><p>{{ results.tipo|capfirst }} Encontrados</p></div>
-                    <div><h4 class="text-2xl font-bold">R$ {{ results.valor_total|floatformat:2 }}</h4><p>Valor Total</p></div>
+                <div>
+                    <h4 class="text-2xl font-bold">{{ results.total_registros }}</h4>
+                    <p>{{ results.tipo|capfirst }} Encontrados</p>
+                </div>
+                <div>
+                    <h4 class="text-2xl font-bold">R$ {{ results.valor_total|floatformat:2 }}</h4>
+                    <p>Valor Total</p>
+                </div>
                 {% elif results.tipo == 'financeiro' %}
-                    <div><h4 class="text-2xl font-bold">{{ results.total_registros }}</h4><p>Parcelas Pagas</p></div>
-                    <div><h4 class="text-2xl font-bold">R$ {{ results.valor_total_pago|floatformat:2 }}</h4><p>Total Pago</p></div>
-                    <div class="col-span-2"><h4 class="text-2xl font-bold">R$ {{ results.valor_total_previsto|floatformat:2 }}</h4><p>Total Previsto</p></div>
+                <div>
+                    <h4 class="text-2xl font-bold">{{ results.total_registros }}</h4>
+                    <p>Parcelas Pagas</p>
+                </div>
+                <div>
+                    <h4 class="text-2xl font-bold">R$ {{ results.valor_total_pago|floatformat:2 }}</h4>
+                    <p>Total Pago</p>
+                </div>
+                <div class="col-span-2">
+                    <h4 class="text-2xl font-bold">R$ {{ results.valor_total_previsto|floatformat:2 }}</h4>
+                    <p>Total Previsto</p>
+                </div>
                 {% elif results.tipo == 'mixto' %}
-                    <div><h4 class="text-2xl font-bold">{{ results.projetos.total_registros }}</h4><p>Projetos</p></div>
-                    <div><h4 class="text-2xl font-bold">{{ results.contratos.total_registros }}</h4><p>Contratos</p></div>
-                    <div><h4 class="text-2xl font-bold">R$ {{ results.projetos.valor_total|floatformat:2 }}</h4><p>Valor Projetos</p></div>
-                    <div><h4 class="text-2xl font-bold">R$ {{ results.contratos.valor_total|floatformat:2 }}</h4><p>Valor Contratos</p></div>
+                <div>
+                    <h4 class="text-2xl font-bold">{{ results.projetos.total_registros }}</h4>
+                    <p>Projetos</p>
+                </div>
+                <div>
+                    <h4 class="text-2xl font-bold">{{ results.contratos.total_registros }}</h4>
+                    <p>Contratos</p>
+                </div>
+                <div>
+                    <h4 class="text-2xl font-bold">R$ {{ results.projetos.valor_total|floatformat:2 }}</h4>
+                    <p>Valor Projetos</p>
+                </div>
+                <div>
+                    <h4 class="text-2xl font-bold">R$ {{ results.contratos.valor_total|floatformat:2 }}</h4>
+                    <p>Valor Contratos</p>
+                </div>
                 {% endif %}
             </div>
         </div>
         {% endif %}
-        
+
         <div class="mb-4">
             <h5 class="font-semibold text-gray-800 dark:text-white">Exportar Resultados:</h5>
             <div class="mt-2 space-x-2">
-                <a href="{% url 'relatorios:relatorio_custom_generate' %}?{{ request.GET.urlencode }}&format=pdf" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                <a href="{% url 'relatorios:relatorio_custom_generate' %}?{{ request.GET.urlencode }}&format=pdf"
+                    class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
                     <i class="fas fa-file-pdf mr-2"></i>PDF
                 </a>
-                <a href="{% url 'relatorios:relatorio_custom_generate' %}?{{ request.GET.urlencode }}&format=excel" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
+                <a href="{% url 'relatorios:relatorio_custom_generate' %}?{{ request.GET.urlencode }}&format=excel"
+                    class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
                     <i class="fas fa-file-excel mr-2"></i>Excel
                 </a>
             </div>
         </div>
-        
+
         <div class="space-y-6">
             {% if results.tipo == 'projetos' or results.tipo == 'mixto' %}
             <div class="overflow-hidden shadow-lg rounded-lg">
-                <h5 class="p-4 bg-gray-100 dark:bg-gray-700 font-bold text-gray-800 dark:text-white"><i class="fas fa-project-diagram mr-2 text-blue-500"></i>Projetos</h5>
-                <div class="overflow-x-auto"><table class="w-full">...</table></div>
+                <h5 class="p-4 bg-gray-100 dark:bg-gray-700 font-bold text-gray-800 dark:text-white"><i
+                        class="fas fa-project-diagram mr-2 text-blue-500"></i>Projetos</h5>
+                <div class="overflow-x-auto">
+                    <table class="w-full">...</table>
+                </div>
             </div>
             {% endif %}
             {% if results.tipo == 'contratos' or results.tipo == 'mixto' %}
             <div class="overflow-hidden shadow-lg rounded-lg">
-                <h5 class="p-4 bg-gray-100 dark:bg-gray-700 font-bold text-gray-800 dark:text-white"><i class="fas fa-file-contract mr-2 text-green-500"></i>Contratos</h5>
-                <div class="overflow-x-auto"><table class="w-full">...</table></div>
+                <h5 class="p-4 bg-gray-100 dark:bg-gray-700 font-bold text-gray-800 dark:text-white"><i
+                        class="fas fa-file-contract mr-2 text-green-500"></i>Contratos</h5>
+                <div class="overflow-x-auto">
+                    <table class="w-full">...</table>
+                </div>
             </div>
             {% endif %}
             {% if results.tipo == 'financeiro' %}
             <div class="overflow-hidden shadow-lg rounded-lg">
-                <h5 class="p-4 bg-gray-100 dark:bg-gray-700 font-bold text-gray-800 dark:text-white"><i class="fas fa-receipt mr-2 text-teal-500"></i>Financeiro</h5>
-                <div class="overflow-x-auto"><table class="w-full">...</table></div>
+                <h5 class="p-4 bg-gray-100 dark:bg-gray-700 font-bold text-gray-800 dark:text-white"><i
+                        class="fas fa-receipt mr-2 text-teal-500"></i>Financeiro</h5>
+                <div class="overflow-x-auto">
+                    <table class="w-full">...</table>
+                </div>
             </div>
             {% endif %}
         </div>
 
-        {% if results.total_registros > 100 or results.projetos.total_registros > 100 or results.contratos.total_registros > 100 %}
+        {% if results.total_registros > 100 or results.projetos.total_registros > 100 or
+        results.contratos.total_registros > 100 %}
         <div class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded-r-lg">
-            <p class="text-blue-700 dark:text-blue-300"><i class="fas fa-info-circle mr-2"></i><strong>Atenção:</strong> Mostrando apenas os primeiros 100 registros. Use filtros mais específicos para refinar os resultados ou exporte para ver todos os dados.</p>
+            <p class="text-blue-700 dark:text-blue-300"><i class="fas fa-info-circle mr-2"></i><strong>Atenção:</strong>
+                Mostrando apenas os primeiros 100 registros. Use filtros mais específicos para refinar os resultados ou
+                exporte para ver todos os dados.</p>
         </div>
         {% endif %}
     </div>
     {% else %}
     <div class="text-center mt-12">
         <i class="fas fa-chart-bar fa-3x text-gray-400 dark:text-gray-500 mb-3"></i>
-        <h4 class="text-lg text-gray-600 dark:text-gray-300">Configure os filtros acima para gerar seu relatório personalizado</h4>
-        <p class="text-gray-500 dark:text-gray-400">Escolha o tipo de relatório, defina os filtros desejados e clique em "Gerar Relatório"</p>
+        <h4 class="text-lg text-gray-600 dark:text-gray-300">Configure os filtros acima para gerar seu relatório
+            personalizado</h4>
+        <p class="text-gray-500 dark:text-gray-400">Escolha o tipo de relatório, defina os filtros desejados e clique em
+            "Gerar Relatório"</p>
     </div>
     {% endif %}
 </div>
 {% endblock %}
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Mostrar/ocultar campos baseado no tipo de relatório
-    const tipoRelatorio = document.getElementById('id_tipo_relatorio');
-    const tipoPessoaField = document.getElementById('tipo_pessoa_field');
-    const nomeProjetoField = document.getElementById('nome_projeto_field');
-    const contratadoField = document.getElementById('contratado_field');
-    
-    function toggleFields() {
-        const tipo = tipoRelatorio.value;
-        
-        // Campos específicos para contratos
-        if (tipo === 'contratos' || tipo === 'financeiro') {
-            tipoPessoaField.style.display = 'block';
-            contratadoField.style.display = 'block';
-        } else {
-            tipoPessoaField.style.display = 'none';
-            contratadoField.style.display = 'none';
+    document.addEventListener('DOMContentLoaded', function () {
+        // Mostrar/ocultar campos baseado no tipo de relatório
+        const tipoRelatorio = document.getElementById('id_tipo_relatorio');
+        const tipoPessoaField = document.getElementById('tipo_pessoa_field');
+        const nomeProjetoField = document.getElementById('nome_projeto_field');
+        const contratadoField = document.getElementById('contratado_field');
+
+        function toggleFields() {
+            const tipo = tipoRelatorio.value;
+
+            // Campos específicos para contratos
+            if (tipo === 'contratos' || tipo === 'financeiro') {
+                tipoPessoaField.style.display = 'block';
+                contratadoField.style.display = 'block';
+            } else {
+                tipoPessoaField.style.display = 'none';
+                contratadoField.style.display = 'none';
+            }
+
+            // Campo específico para projetos
+            if (tipo === 'projetos') {
+                nomeProjetoField.style.display = 'block';
+            } else {
+                nomeProjetoField.style.display = 'none';
+            }
+
+            // Para relatório misto, mostrar ambos
+            if (tipo === 'mixto') {
+                tipoPessoaField.style.display = 'block';
+                contratadoField.style.display = 'block';
+                nomeProjetoField.style.display = 'block';
+            }
         }
-        
-        // Campo específico para projetos
-        if (tipo === 'projetos') {
-            nomeProjetoField.style.display = 'block';
-        } else {
-            nomeProjetoField.style.display = 'none';
-        }
-        
-        // Para relatório misto, mostrar ambos
-        if (tipo === 'mixto') {
-            tipoPessoaField.style.display = 'block';
-            contratadoField.style.display = 'block';
-            nomeProjetoField.style.display = 'block';
-        }
-    }
-    
-    // Executar na carga da página
-    toggleFields();
-    
-    // Executar quando o tipo mudar
-    tipoRelatorio.addEventListener('change', toggleFields);
-});
+
+        // Executar na carga da página
+        toggleFields();
+
+        // Executar quando o tipo mudar
+        tipoRelatorio.addEventListener('change', toggleFields);
+    });
 </script>
 {% endblock %}
